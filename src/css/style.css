@@ -48,3 +48,7 @@ body {
 .carousel-caption {
     color : rgb(69,164,247) !important;
 }
+
+.carousel-indicators > li {
+    background-color: rgb(69,164,247) !important;
+}
