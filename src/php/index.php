@@ -15,6 +15,7 @@
 <body>
 <?php include 'navbar.include.php'; ?><br/>
 <?php include 'carousel.include.php'; ?>
+<?php include 'top_3_evenement.include.php'; ?>
 <script src="../BootStrap/js/bootstrap.min.js"></script>
 </body>
 
