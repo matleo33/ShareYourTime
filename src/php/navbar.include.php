@@ -40,5 +40,6 @@ $page = explode("/", pagencours);
         </div>
     </div>
 </nav>
-<?php include 'modal_connexion.include.php'?>
+<?php include 'modal_connexion.include.php' ?>
+<?php include 'modal_inscription.include.php' ?>
 <script src="../js/jquery-3.2.1.min.js"></script>
