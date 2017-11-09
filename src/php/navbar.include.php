@@ -1,5 +1,8 @@
-<?php define('pagencours', $_SERVER['PHP_SELF'], true)
-echo pagencours?>
+<?php
+define('pagencours', $_SERVER['PHP_SELF'], true);
+$page = explode("/", pagencours);
+echo end($page);
+?>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -14,9 +17,12 @@ echo pagencours?>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="nav-item active"><a href="index.php">Accueil</a></li>
-                <li class="nav-item"><a href="proposer_trajet.php">Proposer trajet</a></li>
-                <li class="nav-item"><a href="creer_evenement.php">Créer événement</a></li>
+                <li class="nav-item <?php if(end($page) == "index.php") { echo 'active' ; }?>">
+                    <a href="index.php">Accueil</a></li>
+                <li class="nav-item <?php if(end($page) == "proposer_trajet.php") { echo 'active' ; }?>">
+                    <a href="proposer_trajet.php">Proposer trajet</a></li>
+                <li class="nav-item <?php if(end($page) == "creer_evenement.php") { echo 'active' ; }?>">
+                    <a href="creer_evenement.php">Créer événement</a></li>
             </ul>
         </div>
     </div>
