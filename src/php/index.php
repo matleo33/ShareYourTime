@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<?php include 'navbar.include.php'; ?>
+<?php include 'navbar.include.php'; ?><br/>
     <?php include 'carousel.include.php'; ?>
 <script src="../BootStrap/js/bootstrap.min.js"></script>
 </body>
