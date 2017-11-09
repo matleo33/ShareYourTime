@@ -37,7 +37,7 @@ $page = explode("/", pagencours);
                         <button class="btn btn-outline-success" type="submit">Rechercher</button>
                     </div>
                 </form>
-                <li class="nav-item"><a href="">Connexion</a></li>
+                <li class="nav-item" data-toggle="modal" data-target="#myModal"><a href="#">Connexion</a></li>
             </ul>
         </div>
     </div>

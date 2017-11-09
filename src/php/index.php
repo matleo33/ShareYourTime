@@ -18,4 +18,6 @@
 <script src="../BootStrap/js/bootstrap.min.js"></script>
 </body>
 
+<?php include 'modal_connexion.include.php'?>
+
 </html>
