@@ -5,22 +5,22 @@
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
     </ol>
     <div class="carousel-inner" role="listbox">
-        <!-- Slide One - Set the background image for this slide in the line below -->
-        <div class="carousel-item active" style="background-image: url('http://placehold.it/1900x1080')">
+        <div class="carousel-item active">
+            <img src="..." alt="...">
             <div class="carousel-caption d-none d-md-block">
                 <h3>Share your time</h3>
-                <p>Description du projet à rédiger</p>
+                <p>Description</p>
             </div>
         </div>
-        <!-- Slide Two - Set the background image for this slide in the line below -->
-        <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+        <div class="carousel-item">
+            <img src="..." alt="...">
             <div class="carousel-caption d-none d-md-block">
                 <h3>Naissance du projet</h3>
-                <p>Description de la naissance du projet (photo damien ou hacke ta fac)</p>
+                <p>Photo de Damien ou de hacke ta fac</p>
             </div>
         </div>
-        <!-- Slide Three - Set the background image for this slide in the line below -->
-        <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+        <div class="carousel-item">
+            <img src="..." alt="...">
             <div class="carousel-caption d-none d-md-block">
                 <h3>Comment l'utiliser ?</h3>
                 <p>Manuel utilisateur mdr</p>
