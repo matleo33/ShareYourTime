@@ -1,7 +1,6 @@
 <?php
 define('pagencours', $_SERVER['PHP_SELF'], true);
 $page = explode("/", pagencours);
-echo end($page);
 ?>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -24,6 +23,11 @@ echo end($page);
                 <li class="nav-item <?php if(end($page) == "creer_evenement.php") { echo 'active' ; }?>">
                     <a href="creer_evenement.php">Créer événement</a></li>
             </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Rechercher">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+            </form>
         </div>
     </div>
 </nav>
+<script src="../js/jquery-3.2.1.min.js"></script>
