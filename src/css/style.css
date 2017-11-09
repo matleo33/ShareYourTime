@@ -31,3 +31,20 @@ body {
 .portfolio-item {
     margin-bottom: 30px;
 }
+
+#myCarousel {
+    min-height: 200px;  
+    max-width: 800px;   
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#myCarousel img {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.carousel-caption {
+    color : rgb(41,60,190) !important;
+}
