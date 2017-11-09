@@ -30,7 +30,7 @@ $page = explode("/", pagencours);
             <ul class="nav navbar-nav navbar-right">
                 <form class="form-inline navbar-form navbar-left">
                     <div class="form-group inline-form col-sm-1 col-md-12">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Rechercher">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Recherche trajet">
                         <button class="btn btn-outline-success" type="submit">Rechercher</button>
                     </div>
                 </form>
