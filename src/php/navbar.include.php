@@ -17,18 +17,15 @@ $page = explode("/", pagencours);
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="nav-item <?php if (end($page) == "index.php") {
-                    echo 'active';
-                } ?>">
-                    <a href="index.php">Accueil</a></li>
-                <li class="nav-item <?php if (end($page) == "proposer_trajet.php") {
-                    echo 'active';
-                } ?>">
-                    <a href="proposer_trajet.php">Proposer trajet</a></li>
-                <li class="nav-item <?php if (end($page) == "creer_evenement.php") {
-                    echo 'active';
-                } ?>">
-                    <a href="creer_evenement.php">Créer événement</a></li>
+                <!-- Vérification si la page index.php est la page active -->
+                <li class="nav-item <?php if (end($page) == "index.php") { echo 'active'; } ?>">
+                    <a href="<?php if (end($page) == "index.php") { echo '#'; } else { echo 'index.php'; } ?>">Accueil</a></li>
+                <!-- Vérification si la page proposer_trajet.php est la page active -->
+                <li class="nav-item <?php if (end($page) == "proposer_trajet.php") {echo 'active'; } ?>">
+                    <a href="<?php if (end($page) == "proposer_trajet.php") { echo '#'; } else { echo 'proposer_trajet.php'; } ?>">Proposer trajet</a></li>
+                <!-- Vérification si la page creer_evenement.php est la page active -->
+                <li class="nav-item <?php if (end($page) == "creer_evenement.php") { echo 'active'; } ?>">
+                    <a href="<?php if (end($page) == "creer_evenement.php") { echo '#'; } else { echo 'creer_evenement.php'; } ?>">Créer événement</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <form class="form-inline navbar-form navbar-left">
@@ -37,9 +34,11 @@ $page = explode("/", pagencours);
                         <button class="btn btn-outline-success" type="submit">Rechercher</button>
                     </div>
                 </form>
-                <li class="nav-item" data-toggle="modal" data-target="#myModal"><a href="#">Connexion</a></li>
+                <li class="nav-item" data-toggle="modal" data-target="#modalConnexion"><a href="#">Connexion</a></li>
+                <li class="nav-item" data-toggle="modal" data-target="#modalInscription"><a href="#">Inscription</a></li>
             </ul>
         </div>
     </div>
 </nav>
+<?php include 'modal_connexion.include.php'?>
 <script src="../js/jquery-3.2.1.min.js"></script>

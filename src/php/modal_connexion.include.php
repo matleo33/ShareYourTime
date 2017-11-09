@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
+<div class="modal fade" id="modalConnexion" role="dialog">
     <div class="modal-dialog modal-sm">
 
         <!-- Modal content-->
