@@ -8,7 +8,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Inscription</h4>
             </div>
-            <form>
+            <form method="post" action="inscription.php">
                 <div class="form-group col-sm-10 col-sm-offset-1" style="margin-top: 20px">
                     <input type="text" class="form-control" id="inputFirstName" placeholder="Prénom">
                 </div>
@@ -25,7 +25,7 @@
                     <input type="password" class="form-control" id="inputCheckPassword" placeholder="Répétez votre mot de passe">
                 </div>
                 <div class="form-group col-sm-10 col-sm-offset-1">
-                    <input type="number" class="form-control" id="inputAge" placeholder="Âge">
+                    <input type="number" min="0" class="form-control" id="inputAge" placeholder="Âge">
                 </div>
                 <div class="form-group col-sm-4 col-sm-offset-1">
                     <input type="text" class="form-control" id="inputNumber" placeholder="N°">
