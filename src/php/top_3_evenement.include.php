@@ -1,6 +1,34 @@
 <?php
 //Faire fonction qui retourne les 3 plus gros évènements
+try
+{
+$bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'root', '');
+}
+catch (Exception $e)
+{
+    die('Erreur : ' . $e->getMessage());
+}
+function get_three_best_event() {
+    $events = array();
+    $reponse = $bdd->query('SELECT * '
+            . 'FROM events '
+            . 'WHERE est_fini=FALSE '
+            . 'ORDER BY '/*Trouver ce qui permet d'ordonner*/.' '
+            . 'LIMIT 0,2');
+while ($donnees = $reponse->fetch())
 
+{
+
+?>
+    <p>
+    <strong>Prenom</strong> : <?php echo $donnees['prenom']; ?><br />
+    <strong>Nom</strong> :  <?php echo $donnees['nom']; ?>
+    </p>
+<?php
+}
+$reponse->closeCursor(); // Termine le traitement de la requête
+?>
+}
 
 //Faire fonction qui, avec les infos en parametre, affiche un évènement 
 function display_event(string $name, int $nb_people, int $price, string $facebook_link, string $ticketing_link) {
