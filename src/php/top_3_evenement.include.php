@@ -25,15 +25,17 @@ get_three_best_event($bdd);
 //Faire fonction qui, avec les infos en parametre, affiche un évènement 
 function display_event(string $name, int $nb_people, int $price, string $facebook_link, string $ticketing_link) {
     echo "<div class='important_event'>"
-    . "<div class='image'>"
-    . "<img src='" . /* Ici mettre code pour avoir image. */ "' />"
+    . "<div class='image col-sm-2'>"
+    . "<img src='" . /* Ici mettre code pour avoir image. */ "' alt='image' />"
     . "</div>"
-    . "<div>"
+    . "<div class=\"col-sm-8\">"
+    . "<div class=\"col-sm-6\">"
     . "<div>"
     . $name
     . "</div>"
     . "<div>Nombre de covoiturages : "
     . $nb_people
+    . "</div>"
     . "</div>"
     . "<div>A partir de "
     . $price
