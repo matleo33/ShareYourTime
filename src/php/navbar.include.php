@@ -76,6 +76,10 @@ $page = explode("/", pagencours);
                     -moz-border-radius: 0px;
                     background-image: none;
                 }
+                .ui-autocomplete .ui-menu-item:hover {
+                    background-color: RGB(69,164,247);
+                    color: white;
+                }
             </style>
             <ul class="nav navbar-nav navbar-right">
                 <form class="form-inline navbar-form navbar-left">
