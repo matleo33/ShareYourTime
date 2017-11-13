@@ -31,7 +31,6 @@ $page = explode("/", pagencours);
             <ul class="nav navbar-nav navbar-right">
                 <form class="form-inline navbar-form navbar-left">
                     <div class="form-group inline-form col-sm-1 col-md-12">
-                        <label for="tags">Tags :</label>
                         <input class="form-control mr-sm-2" type="text" placeholder="Recherche trajet" id="tags">
                         <button class="btn btn-outline-success" type="submit">Rechercher</button>
                     </div>
