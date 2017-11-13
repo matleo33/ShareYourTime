@@ -4,7 +4,7 @@ $page = explode("/", pagencours);
 ?>
 
 <link href="./../css/style.css" rel="stylesheet">
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
@@ -85,7 +85,7 @@ $page = explode("/", pagencours);
                 <form class="form-inline navbar-form navbar-left">
                     <div class="form-group inline-form col-sm-1 col-md-12">
                         <input class="form-control mr-sm-2" type="text" placeholder="Recherche trajet" id="tags">
-                        <button class="btn btn-outline-success" type="submit">Rechercher</button>
+                        <button class="btn btn-primary" type="submit">Rechercher</button>
                     </div>
                 </form>
                 <li class="nav-item" data-toggle="modal" data-target="#modalConnexion"><a href="#">Connexion</a></li>
