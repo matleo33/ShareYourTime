@@ -13,7 +13,12 @@ function get_three_best_event($bdd) {
             . 'WHERE est_fini=FALSE '
             . 'LIMIT 0,2');
     while ($donnees = $reponse->fetch()) {
-        display_event($donnees['nom'], 10, 10, "https://www.facebook.com", "https://www.bg.fr");
+        $reponse2 = $bdd->query('SELECT MIN(prix_tot) FROM `trajet` WHERE evenement= \'' . $donnees['id_events'] . '\'');
+        while($donnees2 = $reponse2->fetch())
+        {
+                $prix_min = $donnees2[0];
+        }
+        display_event($donnees['nom'], 10, $prix_min, $donnees['lien_fb'], $donnees['lien_billet']);
     }
     $reponse->closeCursor(); // Termine le traitement de la requête
 }
@@ -28,7 +33,7 @@ function display_event(string $name, int $nb_people, int $price, string $faceboo
     . "<div class='image col-sm-2'>"
     . "<img src='" . /* Ici mettre code pour avoir image. */ "' alt='image' />"
     . "</div>"
-    . "<div class=\"col-sm-8\">"
+    . "<div class=\"col-sm-12\">"
     . "<div class=\"col-sm-6\">"
     . "<div>"
     . $name
@@ -41,13 +46,12 @@ function display_event(string $name, int $nb_people, int $price, string $faceboo
     . $price
     . " €"
     . "</div>"
-    . "<button>J'y vais"
-    . "</button>"
+    . "<a href=#><button>J'y vais"
+    . "</button></a>"
     . "</div>"
-    . "<div>"
-    . "<ul><li>"
-    . "<a href" . $facebook_link . "><img src='image facebook'/></a></li><li> "
-    . "<a href" . $ticketing_link . "><img src='image billetterie'/></a></li></ul> "
+    . "<div class='icones'>"
+    . "<a href=" . $facebook_link . "><img class='logo' src='../img/facebook.png'/></a> "
+    . "<a href=" . $ticketing_link . "><img class='logo' src='../img/ticket.png'/></a> "
     . "</div>";
 }
 
