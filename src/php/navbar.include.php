@@ -3,6 +3,7 @@ define('pagencours', $_SERVER['PHP_SELF'], true);
 $page = explode("/", pagencours);
 ?>
 
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -30,7 +31,8 @@ $page = explode("/", pagencours);
             <ul class="nav navbar-nav navbar-right">
                 <form class="form-inline navbar-form navbar-left">
                     <div class="form-group inline-form col-sm-1 col-md-12">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Recherche trajet">
+                        <label for="tags">Tags :</label>
+                        <input class="form-control mr-sm-2" type="text" placeholder="Recherche trajet" id="tags">
                         <button class="btn btn-outline-success" type="submit">Rechercher</button>
                     </div>
                 </form>
@@ -42,4 +44,3 @@ $page = explode("/", pagencours);
 </nav>
 <?php include 'modal_connexion.include.php' ?>
 <?php include 'modal_inscription.include.php' ?>
-<script src="../js/jquery-3.2.1.min.js"></script>
