@@ -18,6 +18,8 @@
 <?php include 'navbar.include.php'; ?><br/>
 <?php include 'carousel.include.php'; ?>
 <?php include 'top_3_evenement.include.php'; ?>
+<?php include 'modal_connexion.include.php' ?>
+<?php include 'modal_inscription.include.php' ?>
 <?php
 try
 {
