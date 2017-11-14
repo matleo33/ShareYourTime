@@ -88,14 +88,16 @@ $page = explode("/", pagencours);
                 }
             </style>
             <ul class="nav navbar-nav navbar-right">
-                <form class="form-inline navbar-form navbar-left">
+                <li class="nav-item" data-toggle="modal" data-target="#modalConnexion"><a href="#">Connexion</a></li>
+                <li class="nav-item" data-toggle="modal" data-target="#modalInscription"><a href="#">Inscription</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <form class="form-inline navbar-form">
                     <div class="form-group inline-form col-sm-1 col-md-12">
                         <input class="form-control mr-sm-2" type="text" placeholder="Recherche événement" id="tags">
                         <button class="btn btn-primary" type="submit" onclick="search();">Rechercher</button>
                     </div>
                 </form>
-                <li class="nav-item" data-toggle="modal" data-target="#modalConnexion"><a href="#">Connexion</a></li>
-                <li class="nav-item" data-toggle="modal" data-target="#modalInscription"><a href="#">Inscription</a></li>
             </ul>
         </div>
     </div>
