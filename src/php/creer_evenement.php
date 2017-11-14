@@ -7,7 +7,7 @@
 
     <!-- Bootstrap-->
     <link rel="stylesheet" href="./../BootStrap/css/bootstrap.min.css">
-
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
     <title>Share Your Time</title>
 </head>
