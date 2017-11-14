@@ -30,7 +30,7 @@ $page = explode("/", pagencours);
             </ul>
             <style>
                 .ui-autocomplete {
-                    position: absolute;
+                    position: fixed;
                     top: 100%;
                     left: 0;
                     z-index: 10000;
@@ -58,6 +58,9 @@ $page = explode("/", pagencours);
                     *border-right-width: 2px;
                     *border-bottom-width: 2px;
                 }
+                .ui-autocomplete .ui-menu-item {
+                    padding: 0 10px 0 10px;
+                }
                 .ui-autocomplete .ui-menu-item > a.ui-corner-all {
                     display: block;
                     padding: 3px 15px;
@@ -79,6 +82,9 @@ $page = explode("/", pagencours);
                 .ui-autocomplete .ui-menu-item:hover {
                     background-color: RGB(69,164,247);
                     color: white;
+                }
+                .ui-helper-hidden-accessible {
+                    display: none;
                 }
             </style>
             <ul class="nav navbar-nav navbar-right">

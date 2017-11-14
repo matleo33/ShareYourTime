@@ -1,32 +1,26 @@
 $(function () {
     var availableTags = [
-        "ActionScript",
-        "AppleScript",
-        "Asp",
-        "BASIC",
-        "C",
-        "C++",
-        "Clojure",
-        "COBOL",
-        "ColdFusion",
-        "Erlang",
-        "Fortran",
-        "Groovy",
-        "Haskell",
-        "Java",
-        "JavaScript",
-        "Lisp",
-        "Perl",
-        "PHP",
-        "Python",
-        "Ruby",
-        "Scala",
-        "Scheme"
+        "Reggae Sun Ska",
+        "Electrobeach",
+        "Garorock",
+        "Ferias de Bayonne",
+        "PSG - OM",
+        "Roland Garros",
+        "France - Nouvelle Zélande"
     ];
     $( "#tags" ).autocomplete({
-        source: availableTags
+        source: function (request, response) {
+            var matcher = new RegExp("^"+$.ui.autocomplete.escapeRegex(request.term), "i");
+            response($.grep(availableTags, function (item) {
+                return matcher.test(item);
+            }))
+        }
     });
 } );
+
+window.onresize = function() {
+    $( "#tags" ).autocomplete( "close" );
+}
 
 function search () {
     var event = document.getElementById("tags").value;
