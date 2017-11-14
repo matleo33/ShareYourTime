@@ -8,6 +8,7 @@ $(function () {
         "Roland Garros",
         "France - Nouvelle Zélande"
     ];
+
     $( "#tags" ).autocomplete({
         source: function (request, response) {
             var matcher = new RegExp("^"+$.ui.autocomplete.escapeRegex(request.term), "i");

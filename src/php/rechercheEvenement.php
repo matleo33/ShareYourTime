@@ -8,12 +8,17 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
-$response = $bdd->query('SELECT id_events '
+$reponse = $bdd->query('SELECT id_events '
     . 'FROM events '
-    . 'WHERE nom=\'' .$_POST['eventName'] . '\'');
-if($response != 0)
-{
-    header("Location: evenement.php?id_events=" + $response['id_events']);
+    . 'WHERE nom=\'' .$_GET['eventName'] . '\'');
+while ($donnees = $reponse->fetch()) {
+    $id_event = $donnees[0];
+    echo $id_event;
+    if($id_event != null)
+    {
+        header("Location: evenement.php?id_events=".$id_event);
+    }
+    break;
 }
 
 ?>

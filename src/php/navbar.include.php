@@ -3,6 +3,8 @@ define('pagencours', $_SERVER['PHP_SELF'], true);
 $page = explode("/", pagencours);
 ?>
 
+<?php include 'modal_connexion.include.php' ?>
+<?php include 'modal_inscription.include.php' ?>
 <link href="./../css/style.css" rel="stylesheet">
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
