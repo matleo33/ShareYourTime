@@ -18,7 +18,7 @@
     <h1 style="color: white">CREER EVENEMENT</h1>
     <form>
         <div class="form-group">
-            <input class="form-control" id="eventName" value="Nom de l'événement"/>
+            <input class="form-control" id="eventName" placeholder="Nom de l'événement"/>
         </div>
         <button type="submit" class="btn btn-primary">Suivant</button>
     </form>
