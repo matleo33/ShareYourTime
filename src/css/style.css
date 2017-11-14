@@ -158,3 +158,9 @@ body {
         color: #333;
     }
 }
+
+/*Barre recherche dropdown*/
+.inline-form input {
+    display: inline-block;
+    width: 350px;
+}

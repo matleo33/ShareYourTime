@@ -33,7 +33,7 @@ $page = explode("/", pagencours);
                     position: absolute;
                     top: 100%;
                     left: 0;
-                    z-index: 1000;
+                    z-index: 10000;
                     float: left;
                     display: none;
                     min-width: 160px;
