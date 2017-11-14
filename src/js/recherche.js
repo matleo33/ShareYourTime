@@ -27,3 +27,9 @@ $(function () {
         source: availableTags
     });
 } );
+
+function search () {
+    var event = document.getElementById("tags").value;
+    var link = "../php/" + event + ".php";
+    window.open(event);
+}
