@@ -10,7 +10,7 @@
     <div class="carousel-inner">
 
         <div class="item active">
-            <img src="../img/covoiturage.gif" />
+            <img class="imageCarousel" src="../img/covoiturage.gif" />
             <div class="carousel-caption">
                 <h3>Share your time</h3>
                 <p>
@@ -22,15 +22,15 @@
         </div>
 
         <div class="item">
-            <img src="../img/covoiturage.gif" />
+            <img class="imageCarousel" src="../img/hacketafac.jpg" />
             <div class="carousel-caption">
                 <h3>Naissance du projet</h3>
-                <p>Description avec photo damien ou hacke ta fac</p>
+                <p>Description avec photo Damien ou hacke ta fac</p>
             </div>
         </div>
 
         <div class="item">
-            <img src="../img/covoiturage.gif" />
+            <img class="imageCarousel" src="../img/covoiturage.gif" />
             <div class="carousel-caption">
                 <h3>Comment l'utiliser ?</h3>
                 <p>Manuel utilisation mamene</p>
