@@ -31,16 +31,25 @@
         <div class="form-group">
             <input class="form-control" placeholder="Nom de l'événement"/>
         </div>
-        <input type="submit" class="btn btn-primary" value="Suivant"/>
+        <input type="submit" class="btn btn-primary" value="Créer"/>
     </form>
 </div>
 
 <script>
     $(document).ready(function(e) {
-        e.preventDefault();
+        //e.preventDefault();
         $("#formRecherche").submit(function () {
             $.get("rechercheEvenement.php",$(this).serialize(),function(texte){
-                $("#containerCreation").css("visibility", "visible");
+                if(texte != '')
+                {
+                    window.location.href = 'http://localhost:63342/ShareYourTime/src/php/evenement.php?id_events=' + texte;
+                }
+                else
+                {
+                    $("#containerCreation").css("visibility", "visible");
+                    $("#eventName").attr("disabled","disabled");
+                }
+
             });
             return false; // permet de ne pas recharger la page
         });
