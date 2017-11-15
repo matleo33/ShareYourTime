@@ -33,7 +33,7 @@
             <img class="imageCarousel" src="../img/covoiturage.gif" />
             <div class="carousel-caption">
                 <h3>Comment l'utiliser ?</h3>
-                <p>Manuel utilisation mamene</p>
+                <p>Manuel utilisation</p>
             </div>
         </div>
     </div>

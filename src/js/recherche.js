@@ -6,7 +6,8 @@ $(function () {
         "Ferias de Bayonne",
         "PSG - OM",
         "Roland Garros",
-        "France - Nouvelle Zélande"
+        "France - Nouvelle Zélande",
+        "Alonzo Concert Nantes"
     ];
 
     $( "#tags" ).autocomplete({
