@@ -10,6 +10,7 @@ and open the template in the editor.
 
 body {
     padding-top: 54px;
+    padding-bottom: 100px;
 }
 
 @media (min-width: 992px) {
@@ -85,8 +86,11 @@ body {
 }
 
 .important_event {
+    border: solid black 1px;
     margin-left: auto;
     margin-right:auto;
+    margin-bottom: 100px;
+    margin-top:5px;
 }
 
 /* navbar */
@@ -229,4 +233,23 @@ body {
 .imageCarousel
 {
     height: 600px !important;
+}
+
+.image_top_3_event {
+    border: solid black 1px;
+    height : 100px;
+}
+
+.informations_event {
+    border : solid black 1px;
+    padding-bottom: 5px;
+    padding-top:10px;
+}
+
+.text_left {
+    text-align : left;
+}
+
+.text_right {
+    text-align: right;
 }

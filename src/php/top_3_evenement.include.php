@@ -18,7 +18,7 @@ function get_three_best_event($bdd) {
         {
                 $prix_min = $donnees2[0];
         }
-        display_event($donnees['nom'], 10, $prix_min, $donnees['lien_fb'], $donnees['lien_billet']);
+        display_event($donnees['nom'], 10, $prix_min, $donnees['lien_fb'], $donnees['lien_billet'], $donnees['id_events']);
     }
     $reponse->closeCursor(); // Termine le traitement de la requête
 }
@@ -28,35 +28,31 @@ get_three_best_event($bdd);
 <?php
 
 //Faire fonction qui, avec les infos en parametre, affiche un évènement 
-function display_event(string $name, int $nb_people, int $price, string $facebook_link, string $ticketing_link) {
+function display_event(string $name, int $nb_people, int $price, string $facebook_link, string $ticketing_link, string $id_event) {
     echo "<div class='important_event'>"
-    . "<div class='image col-sm-2'>"
+    . "<div class='image_top_3_event col-sm-4'>"
     . "<img src='" . /* Ici mettre code pour avoir image. */ "' alt='image' />"
     . "</div>"
-    . "<div class=\"col-sm-12\">"
-    . "<div class=\"col-sm-6\">"
-    . "<div>"
+    . "<div class=\"informations_event col-sm-8\">"
+    . "<p class=\"text_left\">"
     . $name
-    . "</div>"
-    . "<div>Nombre de covoiturages : "
-    . $nb_people
-    . "</div>"
-    . "</div>"
-    . "<div>A partir de "
+    . "</p>"
+    . "<p class=\"text_right\">A partir de "
     . $price
     . " €"
-    . "</div>"
-    . "<a href=#><button>J'y vais"
+    . "</p>"
+    . "<p class=\"text_left\">Nombre de covoiturages : "
+    . $nb_people
+    . "</p>"
+    . "<div class=\"text-right\""
+    . "<a class=\"bouton_fixe_droite\" href=./evenement?id_events=".$id_event."><button>J'y vais"
     . "</button></a>"
+    . "</div>"
+    . "</div>"
     . "</div>"
     . "<div class='icones'>"
     . "<a href=" . $facebook_link . "><img class='logo' src='../img/facebook.png'/></a> "
     . "<a href=" . $ticketing_link . "><img class='logo' src='../img/ticket.png'/></a> "
     . "</div>";
-}
-
-//Appeler la fonction trois fois
-for ($int = 0; $int < 3; $int++) {
-    //display_event($name, $int, $price, $facebook_link, $ticketing_link);
 }
 ?>

@@ -19,29 +19,6 @@
 <?php include 'carousel.include.php'; ?>
 <?php include 'top_3_evenement.include.php'; ?>
 <?php include 'footer.include.php'; ?>
-<?php
-try
-{
-$bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'root', '');
-}
-catch (Exception $e)
-{
-    die('Erreur : ' . $e->getMessage());
-}
-$reponse = $bdd->query('SELECT * FROM users');
-while ($donnees = $reponse->fetch())
-
-{
-
-?>
-    <p>
-    <strong>Prenom</strong> : <?php echo $donnees['prenom']; ?><br />
-    <strong>Nom</strong> :  <?php echo $donnees['nom']; ?>
-    </p>
-<?php
-}
-$reponse->closeCursor(); // Termine le traitement de la requête
-?>
 
 <script src="../BootStrap/js/bootstrap.min.js"></script>
 </body>
