@@ -10,7 +10,7 @@ and open the template in the editor.
 
 body {
     padding-top: 54px;
-    padding-bottom: 100px;
+    padding-bottom: 150px;
 }
 
 @media (min-width: 992px) {
@@ -75,6 +75,8 @@ body {
 }
 
 .logo {
+    margin-left: 20px;
+    margin-top : 20px;
     height : 50px;
     width : auto;
     border-radius: 5px;
@@ -86,11 +88,8 @@ body {
 }
 
 .important_event {
-    border: solid black 1px;
-    margin-left: auto;
-    margin-right:auto;
-    margin-bottom: 100px;
-    margin-top:5px;
+    margin-top:50px;
+    min-height: 250px;
 }
 
 /* navbar */
@@ -237,11 +236,10 @@ body {
 
 .image_top_3_event {
     border: solid black 1px;
-    height : 100px;
+    min-height: 250px;
 }
 
 .informations_event {
-    border : solid black 1px;
     padding-bottom: 5px;
     padding-top:10px;
 }
@@ -252,4 +250,12 @@ body {
 
 .text_right {
     text-align: right;
+}
+
+.border {
+    border: solid black 1px; 
+}
+
+.border p, .border button {
+    margin: 10px;
 }

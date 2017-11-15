@@ -30,10 +30,14 @@ get_three_best_event($bdd);
 //Faire fonction qui, avec les infos en parametre, affiche un évènement 
 function display_event(string $name, int $nb_people, int $price, string $facebook_link, string $ticketing_link, string $id_event) {
     echo "<div class='important_event'>"
-    . "<div class='image_top_3_event col-sm-4'>"
+    . "<div class=\"col-sm-1\"></div>"
+    . "<div class='image_top_3_event col-sm-3'>"
     . "<img src='" . /* Ici mettre code pour avoir image. */ "' alt='image' />"
     . "</div>"
-    . "<div class=\"informations_event col-sm-8\">"
+    . "<div class=\"col-sm-1\"></div>"
+    . "<div class=\"informations_event col-sm-6\">"
+    . "<div>"
+    . "<div class=\"border\">"
     . "<p class=\"text_left\">"
     . $name
     . "</p>"
@@ -44,7 +48,7 @@ function display_event(string $name, int $nb_people, int $price, string $faceboo
     . "<p class=\"text_left\">Nombre de covoiturages : "
     . $nb_people
     . "</p>"
-    . "<div class=\"text-right\""
+    . "<div class=\"text-right\">"
     . "<a class=\"bouton_fixe_droite\" href=./evenement?id_events=".$id_event."><button>J'y vais"
     . "</button></a>"
     . "</div>"
@@ -53,6 +57,9 @@ function display_event(string $name, int $nb_people, int $price, string $faceboo
     . "<div class='icones'>"
     . "<a href=" . $facebook_link . "><img class='logo' src='../img/facebook.png'/></a> "
     . "<a href=" . $ticketing_link . "><img class='logo' src='../img/ticket.png'/></a> "
+    . "</div>"
+    . "</div>"
+    . "<div class=\"col-sm-1\"></div>"
     . "</div>";
 }
 ?>
