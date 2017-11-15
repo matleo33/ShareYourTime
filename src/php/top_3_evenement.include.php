@@ -41,10 +41,10 @@ function display_event(string $name, int $nb_people, int $price, string $faceboo
     . "<p class=\"text_left\">"
     . $name
     . "</p>"
-    . "<p class=\"text_right\">A partir de "
+    . "<h2 class=\"text_right\">A partir de "
     . $price
     . " €"
-    . "</p>"
+    . "</h2>"
     . "<p class=\"text_left\">Nombre de covoiturages : "
     . $nb_people
     . "</p>"
@@ -55,8 +55,8 @@ function display_event(string $name, int $nb_people, int $price, string $faceboo
     . "</div>"
     . "</div>"
     . "<div class='icones'>"
-    . "<a href=" . $facebook_link . "><img class='logo' src='../img/facebook.png'/></a> "
-    . "<a href=" . $ticketing_link . "><img class='logo' src='../img/ticket.png'/></a> "
+    . "<a href=" . $facebook_link . "target=\"_blank\" rel=\"noopener noreferrer\"><img class='logo' src='../img/facebook.png'/></a> "
+    . "<a href=" . $ticketing_link . "target=\"_blank\" rel=\"noopener noreferrer\"><img class='logo' src='../img/ticket.png'/></a> "
     . "</div>"
     . "</div>"
     . "<div class=\"col-sm-1\"></div>"

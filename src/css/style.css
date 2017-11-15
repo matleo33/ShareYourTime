@@ -254,8 +254,9 @@ body {
 
 .border {
     border: solid black 1px; 
+    border-radius: 2px;
 }
 
-.border p, .border button {
+.border p, .border button, .border h2 {
     margin: 10px;
 }
