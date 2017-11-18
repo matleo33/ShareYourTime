@@ -1,30 +1,33 @@
 $(function () {
-    var availableTags = [
-        "Reggae Sun Ska",
-        "Electrobeach",
-        "Garorock",
-        "Ferias de Bayonne",
-        "PSG - OM",
-        "Roland Garros",
-        "France - Nouvelle Zélande",
-        "Alonzo Concert Nantes"
-    ];
 
-    $( "#tags" ).autocomplete({
+    var availableTags = [];
+
+    $(document).ready(function () {
+        //e.preventDefault();
+        $.get("get_events.php", $(this).serialize(), function (texte) {
+            var arrayOfStrings = texte.split(",");
+            for (var i = 0; i < arrayOfStrings.length-1; i++) {
+                availableTags.push(arrayOfStrings[i]);
+            }
+        });
+        return false; // permet de ne pas recharger la page
+    });
+
+    $("#tags").autocomplete({
         source: function (request, response) {
-            var matcher = new RegExp("^"+$.ui.autocomplete.escapeRegex(request.term), "i");
+            var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(request.term), "i");
             response($.grep(availableTags, function (item) {
                 return matcher.test(item);
             }))
         }
     });
-} );
+});
 
-window.onresize = function() {
-    $( "#tags" ).autocomplete( "close" );
+window.onresize = function () {
+    $("#tags").autocomplete("close");
 }
 
-function search () {
+function search() {
     var event = document.getElementById("tags").value;
     var link = "../php/" + event + ".php";
     window.open(event);
