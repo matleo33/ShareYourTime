@@ -14,6 +14,7 @@ function get_three_best_event($bdd) {
             . 'LIMIT 0,2');
     while ($donnees = $reponse->fetch()) {
         $reponse2 = $bdd->query('SELECT MIN(prix_tot) FROM `trajet` WHERE evenement= \'' . $donnees['id_events'] . '\'');
+        $prix_min = "unknown";
         while($donnees2 = $reponse2->fetch())
         {
                 $prix_min = $donnees2[0];
@@ -28,7 +29,7 @@ get_three_best_event($bdd);
 <?php
 
 //Faire fonction qui, avec les infos en parametre, affiche un évènement 
-function display_event(string $name, int $nb_people, int $price, string $facebook_link, string $ticketing_link, string $id_event) {
+function display_event(string $name, int $nb_people, $price, string $facebook_link, string $ticketing_link, string $id_event) {
     echo "<div class='important_event'>"
     . "<div class=\"col-sm-1\"></div>"
     . "<div class='image_top_3_event col-sm-3'>"
@@ -41,7 +42,7 @@ function display_event(string $name, int $nb_people, int $price, string $faceboo
     . "<p class=\"text_left\">"
     . $name
     . "</p>";
-    if ($price != NULL) {
+    if ($price != NULL && $price != "unknown") {
     echo "<h2 class=\"text_right\">A partir de "
     . $price
     . " €";
