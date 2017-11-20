@@ -10,9 +10,8 @@
     <div class="carousel-inner">
 
         <div class="item active">
-            <img class="imageCarousel" src="../img/covoiturage.gif" />
-            <div class="carousel-caption">
-                <h3>Share your time</h3>
+            <div class="carousel-text">
+                <h1>Share your time</h1>
                 <p>
                     Bienvenue sur Share your time ! <br/>
                     Ce site web vous permet de vous mettre en relation afin de covoiturer en vue d'aller à un événement ! <br/>
@@ -22,17 +21,15 @@
         </div>
 
         <div class="item">
-            <img class="imageCarousel" src="../img/hacketafac.jpg" />
-            <div class="carousel-caption">
-                <h3>Naissance du projet</h3>
+            <div class="carousel-text">
+                <h1>Naissance du projet</h1>
                 <p>Description avec photo Damien ou hacke ta fac</p>
             </div>
         </div>
 
         <div class="item">
-            <img class="imageCarousel" src="../img/covoiturage.gif" />
-            <div class="carousel-caption">
-                <h3>Comment l'utiliser ?</h3>
+            <div class="carousel-text">
+                <h1>Comment l'utiliser ?</h1>
                 <p>Manuel utilisation</p>
             </div>
         </div>

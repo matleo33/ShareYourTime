@@ -8,18 +8,19 @@ try {
 }
 
 function get_three_best_event($bdd) {
-    $reponse = $bdd->query('SELECT * '
-            . 'FROM events '
-            . 'WHERE est_fini=FALSE '
+    $reponse = $bdd->query('SELECT * FROM events '
+            . 'WHERE events.est_fini=FALSE '
             . 'LIMIT 0,2');
     while ($donnees = $reponse->fetch()) {
-        $reponse2 = $bdd->query('SELECT MIN(prix_tot) FROM `trajet` WHERE evenement= \'' . $donnees['id_events'] . '\'');
+        $reponse2 = $bdd->query('SELECT MIN(prix_tot), count(*) FROM `trajet` WHERE evenement= \'' . $donnees['id_events'] . '\'');
         $prix_min = "unknown";
+        $nb_covoit = 0;
         while($donnees2 = $reponse2->fetch())
         {
                 $prix_min = $donnees2[0];
+                $nb_covoit = $donnees2[1];
         }
-        display_event($donnees['nom'], 10, $prix_min, $donnees['lien_fb'], $donnees['lien_billet'], $donnees['id_events']);
+        display_event($donnees['nom'], $nb_covoit, $prix_min, $donnees['lien_fb'], $donnees['lien_billet'], $donnees['id_events']);
     }
     $reponse->closeCursor(); // Termine le traitement de la requête
 }
@@ -60,9 +61,20 @@ function display_event(string $name, int $nb_people, $price, string $facebook_li
     . "</div>"
     . "</div>"
     . "<div class='icones'>"
-    . "<a href=" . $facebook_link . "target=\"_blank\" rel=\"noopener noreferrer\"><img class='logo' src='../img/facebook.png'/></a> "
-    . "<a href=" . $ticketing_link . "target=\"_blank\" rel=\"noopener noreferrer\"><img class='logo' src='../img/ticket.png'/></a> "
-    . "</div>"
+    . "<a href=";
+    if ($facebook_link != NULL)
+    {
+        echo $facebook_link . "\" target=\"_blank\" rel=\"noopener noreferrer\"><img class='logo' src='../img/facebook.png'/></a><a href=\"";
+    } else {
+        echo "#\" target=\"_blank\" rel=\"noopener noreferrer\"><img class='logo' src='../img/facebook.png'/></a><a href=\" ";
+    }
+    if ($ticketing_link != NULL)
+    {
+        echo $ticketing_link . "\" target=\"_blank\" rel=\"noopener noreferrer\"><img class='logo' src='../img/ticket.png'/></a> ";
+    } else {
+        echo "#\" target=\"_blank\" rel=\"noopener noreferrer\"><img class='logo' src='../img/ticket.png'/></a> ";
+    }
+    echo "</div>"
     . "</div>"
     . "<div class=\"col-sm-1\"></div>"
     . "</div>";
