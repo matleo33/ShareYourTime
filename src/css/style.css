@@ -65,6 +65,10 @@ body {
     color: rgb(69, 164, 247) !important;
 }
 
+.carousel-indicators {
+    z-index: auto;
+}
+
 .carousel-indicators > li {
     background-color: rgb(69, 164, 247) !important;
 }
