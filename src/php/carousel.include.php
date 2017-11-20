@@ -23,14 +23,19 @@
         <div class="item">
             <div class="carousel-text">
                 <h1>Naissance du projet</h1>
-                <p>Description avec photo Damien ou hacke ta fac</p>
+                <p>Ce projet est né. <br/>Description avec photo Damien ou hacke ta fac</p>
             </div>
         </div>
 
         <div class="item">
             <div class="carousel-text">
                 <h1>Comment l'utiliser ?</h1>
-                <p>Manuel utilisation</p>
+                <p>
+                    Pour l'utiliser, il vous suffit de vous inscrire, de rechercher un évévement,
+                    de trouver le trajet le plus proche de chez vous pour y aller et d'y souscrire.
+                    <br />
+                    Enfin, présentez-vous le jour et l'heure pour ce covoiturage et amusez-vous !
+                </p>
             </div>
         </div>
     </div>
