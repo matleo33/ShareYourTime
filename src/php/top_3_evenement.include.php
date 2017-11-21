@@ -34,7 +34,7 @@ function display_event(string $name, int $nb_people, $price, string $facebook_li
     echo "<div class='important_event'>"
     . "<div class=\"col-sm-1\"></div>"
     . "<div class='image_top_3_event col-sm-3'>"
-    . "<img src='" . /* Ici mettre code pour avoir image. */ "' alt='image' />"
+    . "<img src='" . /* Ici mettre code pour avoir image. */ "' alt='image' />" //TODO
     . "</div>"
     . "<div class=\"col-sm-1\"></div>"
     . "<div class=\"informations_event col-sm-6\">"

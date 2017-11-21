@@ -18,18 +18,18 @@
 <div class="container col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 col-xs-12" style="text-align: center;background-color: RGB(69,164,247)">
     <h1 style="color: white">PROPOSER UN TRAJET</h1>
     <form action="proposer_trajet_envoi.php" method="post" id="formTrajet">
-        <!--
+        
             <table class="table-bordered">
 
                 <tr>
-                    <td></td>
-                    <td rowspan="2"></td>
+                    <td>Ville de depart</td>
+                    <td rowspan="2">Date + heure</td>
                 </tr>
                 <tr>
-                    <td></td>
+                    <td>Lieu du rdv</td>
                 </tr>
             </table>
-        -->
+        
             <input type="submit" id="submitEventName" class="btn btn-primary" value="Suivant"/>
         </form>
 </div>
