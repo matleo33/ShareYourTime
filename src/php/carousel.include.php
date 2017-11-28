@@ -23,7 +23,10 @@
         <div class="item">
             <div class="carousel-text">
                 <h1>Naissance du projet</h1>
-                <p>Ce projet est né. <br/>Description avec photo Damien ou hacke ta fac</p>
+                <p>
+                    Ce projet est né suite au concours Hacke Ta Fac organisé par l'université de Bordeaux. <br/>
+                    Il est l'oeuvre de Damien Berrouet, étudiant en Licence MIAGE et répond à l'exigence de modification de la vie du campus bordelais universitaire.
+                </p>
             </div>
         </div>
 

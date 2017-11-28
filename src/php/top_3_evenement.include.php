@@ -8,9 +8,12 @@ try {
 }
 
 function get_three_best_event($bdd) {
-    $reponse = $bdd->query('SELECT * FROM events '
+    $reponse = $bdd->query('SELECT COUNT(trajet.evenement), events.id_events, events.nom, events.lien_fb, events.lien_billet '
+            . 'FROM trajet RIGHT OUTER JOIN events ON trajet.evenement = events.id_events '
             . 'WHERE events.est_fini=FALSE '
-            . 'LIMIT 0,2');
+            . 'GROUP BY evenement '
+            . 'ORDER BY COUNT(trajet.evenement) DESC '
+            . 'LIMIT 0,3');
     while ($donnees = $reponse->fetch()) {
         $reponse2 = $bdd->query('SELECT MIN(prix_tot), count(*) FROM `trajet` WHERE evenement= \'' . $donnees['id_events'] . '\'');
         $prix_min = "unknown";
@@ -46,12 +49,13 @@ function display_event(string $name, int $nb_people, $price, string $facebook_li
     if ($price != NULL && $price != "unknown") {
     echo "<h2 class=\"text_right\">A partir de "
     . $price
-    . " €";
+    . " €</h2>";
     } else {
-    echo "<h2 class=\"text_right\">Prix inconnu ";
+    echo "<div class=\"text_right\">Pas de covoiturage </br>"
+        . "<a href=\"./proposer_trajet.php?id_events=".$id_event."\">(Proposez le votre ?)</a>"
+        . "</div>";
     }
-    echo "</h2>"
-    . "<p class=\"text_left\">Nombre de covoiturages : "
+    echo "<p class=\"text_left\">Nombre de covoiturages : "
     . $nb_people
     . "</p>"
     . "<div class=\"text-right\">"
