@@ -94,13 +94,17 @@ $page = explode("/", pagencours);
                 <li class="nav-item" data-toggle="modal" data-target="#modalInscription"><a href="#">Inscription</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <form class="form-inline navbar-form">
+                <form class="form-inline navbar-form" id="formRechercheNavbar">
                     <div class="form-group inline-form col-sm-1 col-md-12">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Recherche événement" id="tags">
-                        <button class="btn btn-primary" type="submit" onclick="search();">Rechercher</button>
+                        <input name="eventName" class="form-control mr-sm-2" type="text" placeholder="Recherche événement" id="tags">
+                        <button class="btn btn-primary" type="submit">Rechercher</button>
                     </div>
                 </form>
             </ul>
         </div>
     </div>
 </nav>
+
+<script>
+
+</script>

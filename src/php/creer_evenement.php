@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -36,7 +39,7 @@
 </div>
 
 <div class="container col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 col-xs-12" id="containerCreation" style="text-align: center;background-color: RGB(69,164,247);visibility: hidden">
-    <form id="formRechercheSuite">
+    <form id="formRechercheSuite" method="get" action="inserer_evenement_BD.php">
         <div class="form-group">
             <div class="input-group image-preview">
                 <input type="text" class="form-control image-preview-filename" required="required" placeholder="Photo de l'événement" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
@@ -49,7 +52,7 @@
                     <div class="btn btn-default image-preview-input">
                         <span class="glyphicon glyphicon-folder-open"></span>
                         <span class="image-preview-input-title">Parcourir</span>
-                        <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/> <!-- rename it -->
+                        <input type="file" id="lien_photo" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/> <!-- rename it -->
                     </div>
                 </span>
             </div>
@@ -81,24 +84,28 @@
 <script type="text/javascript">
     $(function () {
         $('.datetimepicker').datetimepicker({
-            locale: 'fr'
+            //language : 'fr' //TODO Insertion ne marche pas si la date est au format FR
         });
     });
 </script>
 
 <script>
+    function goToEvent(id)
+    {
+        var currentLocation =  document.location.href;
+        currentLocation = currentLocation.substring( 0 ,currentLocation.lastIndexOf( "src" ) );
+        currentLocation += 'src/php/evenement.php?id_events=' + id;
+        window.location.href = currentLocation ;
+    }
+
     var eventName;
     $(document).ready(function(e) {
         //e.preventDefault();
         $("#formRecherche").submit(function () {
-            $.get("rechercheEvenement.php",$(this).serialize(),function(texte){
-                if(texte != '')
+            $.get("rechercheEvenement.php",$(this).serialize(),function(id){
+                if(id != '')
                 {
-                    //TODO Changer l'adresse en utilisant les variables PHP pour récupérer le chemin complet
-                    var currentLocation =  document.location.href;
-                    currentLocation = currentLocation.substring( 0 ,currentLocation.lastIndexOf( "src" ) );
-                    currentLocation += 'src/php/evenement.php?id_events=' + texte;
-                    window.location.href = currentLocation ;
+                    goToEvent(id);
                     //window.location.href = 'http://localhost:63342/ShareYourTime/src/php/evenement.php?id_events=' + texte;
                 }
                 else
@@ -112,7 +119,7 @@
             return false; // permet de ne pas recharger la page
         });
     });
-    $(document).ready(function(e) {
+    /*$(document).ready(function(e) {
         //e.preventDefault();
         $("#formRechercheSuite").submit(function () {
             $.ajax({
@@ -120,14 +127,17 @@
                 type : 'GET',//Impossible à faire marcher en POST
                 data : 'nom=' + eventName +
                 '&description=' + $("#description").val() +
+                '&lien_photo=' + 'modifneeded' +
                 '&date_debut=' + $("#date_debut").val() +
                 '&date_fin=' + $("#date_fin").val() +
                 '&lien_fb=' + $("#lien_fb").val() +
                 '&lien_billet=' + $("#lien_billet").val() +
                 '&adresse=' + $("#adressAutoComplete").val(),
                 dataType : 'html',
-                success : function(){
+                success : function(id){
+                    goToEvent(id);
                     //TODO Creer le pop-up indiquant la création de l'event et permettant d'y accéder
+                    //TODO afficher message d'erreur si id est = ''
                 },
                 error : function () {
                     //TODO Faire ce qu'il faut lorsque qu'il y a une erreur dans la réponse du PHP
@@ -135,7 +145,7 @@
             });
             return false;
         });
-    });
+    });*/
 </script>
 
 <script>
@@ -179,7 +189,7 @@
             trigger:'manual',
             html:true,
             title: "<strong>Aperçu</strong>"+$(closebtn)[0].outerHTML,
-            content: "There's no image",
+            content: "Il n'y a pas d'image",
             placement:'bottom'
         });
         // Clear event
@@ -207,6 +217,7 @@
                 img.attr('src', e.target.result);
                 $(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
             }
+
             reader.readAsDataURL(file);
         });
     });

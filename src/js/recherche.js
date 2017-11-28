@@ -27,8 +27,15 @@ window.onresize = function () {
     $("#tags").autocomplete("close");
 }
 
-function search() {
-    var event = document.getElementById("tags").value;
-    var link = "../php/" + event + ".php";
-    window.open(event);
-}
+$(document).ready(function(e) {
+    //e.preventDefault();
+    $("#formRechercheNavbar").submit(function () {
+        $.get("rechercheEvenement.php",$(this).serialize(),function(id){
+            var currentLocation =  document.location.href;
+            currentLocation = currentLocation.substring( 0 ,currentLocation.lastIndexOf( "src" ) );
+            currentLocation += 'src/php/evenement.php?id_events=' + id;
+            window.location.href = currentLocation ;
+        });
+        return false; // permet de ne pas recharger la page
+    });
+});
