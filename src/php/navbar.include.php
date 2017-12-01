@@ -16,7 +16,7 @@ $page = explode("/", pagencours);
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Share Your Time</a>
+            <a class="navbar-brand" href="<?php if (end($page) == "index.php") { echo '#'; } else { echo 'index.php'; } ?>"><img src="../img/logo.png" class="iconeNavbar" alt="Share Your Time" /></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">

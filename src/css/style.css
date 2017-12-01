@@ -48,7 +48,7 @@ body {
 }
 
 #myCarousel {
-    min-height: 500px;
+    min-height: 250px;
     max-width: 1000px;
     text-align: center;
     margin-left: auto;
@@ -303,4 +303,23 @@ body {
 }
 .image-preview-input-title {
     margin-left:2px;
+}
+
+.iconeNavbar {
+    height: inherit;
+    vertical-align: middle;
+}
+
+.navbar-brand {
+    padding-top: 0px !important;
+}
+
+.descriptionEvenement {
+    border: solid rgb(69, 164, 247) 1px;
+    background-color: rgba(255,255,255,0.9);
+    border-radius: 5px;
+}
+
+.logoAutoroute {
+    height: 50px;
 }
