@@ -51,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-        <div class="col-sm-12" style="margin-top: 50px;">
+                <div class="col-sm-12" style="margin-top: 50px;">
 
                     <?php
                 }
@@ -60,7 +60,7 @@
                     $reponseTrajets = $bdd->query('SELECT nom,prenom,ville_depart,lieu_depart,prix_tot,personnalite, autoroute FROM trajet INNER JOIN users on trajet.chauffeur = users.id_users WHERE evenement=\'' . $id_event . '\'');
                     while ($donneesTrajet = $reponseTrajets->fetch()) {
                         ?>
-            <div class="col-sm-12" style="margin-bottom: 10px;">
+                        <div class="col-sm-12" style="margin-bottom: 10px;">
                             <div class="col-sm-2">
                                 IMAGECHAUFFEUR
                             </div>
@@ -90,7 +90,7 @@
                                     <?php
                                     if ($donneesTrajet['autoroute']) {
                                         echo "<img class=\"logoAutoroute\" src=\"../img/autoroute.png\" alt=\"autouroute : oui\"/ />";
-                                    } 
+                                    }
                                     ?>
                                 </div>
                                 <div class="col-sm-1">
@@ -110,8 +110,14 @@
             ?>
             <?php /* inclure menu nav */ ?>
             <div class="col-sm-12">
-                <a href="./recherche.php"><button>Recherche détaillée</button></a>
-                <button>Evénement terminé</button>
+                <div class="col-sm-4">
+                </div>
+                <div class="col-sm-4">
+                    <a href="./recherche.php"><button>Recherche détaillée</button></a>
+                    <button>Evénement terminé</button>
+                </div>
+                <div class="col-sm-4">
+                </div>
             </div>
         </div>
         <?php include 'footer.include.php'; ?>
