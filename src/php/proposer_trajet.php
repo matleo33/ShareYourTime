@@ -23,32 +23,86 @@
                 if (isset($_GET['id_events']))
                     $idEvenement = $_GET['id_events'];
                 else
-                   $idEvenement = NULL;
+                    $idEvenement = NULL;
                 try {
                     $bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'root', '');
                 } catch (Exception $e) {
                     die('Erreur : ' . $e->getMessage());
                 }
                 if ($idEvenement != NULL) {
-                $reponse = $bdd->query('SELECT nom '
-                        . 'FROM events '
-                        . 'WHERE id_events=' . $idEvenement);
-                while ($donnees = $reponse->fetch()) {
-                    $nomEvenement = $donnees['nom'];
-                }
-                $reponse->closeCursor(); // Termine le traitement de la requête
+                    $reponse = $bdd->query('SELECT nom '
+                            . 'FROM events '
+                            . 'WHERE id_events=' . $idEvenement);
+                    while ($donnees = $reponse->fetch()) {
+                        $nomEvenement = $donnees['nom'];
+                    }
+                    $reponse->closeCursor(); // Termine le traitement de la requête
                 }
                 ?>
+                <div class="col-sm-12">
+                    <div class="col-sm-3">
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="col-sm-6">
+                            ville de départ
+                        </div>
+                        <div class="col-sm-6">
+                            heure du depart
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="col-sm-3">
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="col-sm-6">
+                            lieu de rdv
+                        </div>
+                        <div class="col-sm-6">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="col-sm-3">
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="col-sm-6">
+                            ville d'arrivée
+                        </div>
+                        <div class="col-sm-6">
+                            heure d'arrivée
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="col-sm-3">
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="col-sm-6">
+                            lieu d'arrivée
+                        </div>
+                        <div class="col-sm-6">
+
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                    </div>
+                </div>
                 <table class="table-bordered">
                     <tr>
                         <td>
                             Nom événement : 
                         </td>
                         <td>
-                        <?php 
-                        if ($nomEvenement != NULL)
-                            echo $nomEvenement;
-                        ?>    
+                            <?php
+                            if ($nomEvenement != NULL)
+                                echo $nomEvenement;
+                            ?>    
                         </td>
                     </tr>
                     <tr>
@@ -74,7 +128,7 @@
         </div>
 
 
-        <?php include('footer.include.php');?>
+        <?php include('footer.include.php'); ?>
         <script src="../BootStrap/js/bootstrap.min.js"></script>
     </body>
 
