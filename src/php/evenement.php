@@ -57,7 +57,7 @@
                 }
 
                 function getTrajets($bdd, string $id_event) {
-                    $reponseTrajets = $bdd->query('SELECT nom,prenom,ville_depart,lieu_depart,prix_tot,personnalite, autoroute FROM trajet INNER JOIN users on trajet.chauffeur = users.id_users WHERE evenement=\'' . $id_event . '\'');
+                    $reponseTrajets = $bdd->query('SELECT id_trajet, nom, prenom, ville_depart, lieu_depart, prix_tot, personnalite, autoroute FROM trajet INNER JOIN users on trajet.chauffeur = users.id_users WHERE evenement=\'' . $id_event . '\'');
                     while ($donneesTrajet = $reponseTrajets->fetch()) {
                         ?>
                         <div class="col-sm-12" style="margin-bottom: 10px;">
@@ -66,13 +66,13 @@
                             </div>
                             <div class="col-sm-1">
                             </div>
-                            <div class="col-sm-8" style="background-color: rgba(255,255,255,0.5); border-radius: 5px; padding-top: 10px;">
+                            <div class="col-sm-8 trajetEvenement">
                                 <div class="col-sm-6">
-                                    <p>
+                                    <h3 class="nomChauffeurTrajetEvenement">
                                         <?php
-                                        echo $donneesTrajet['nom'] . ' ';
-                                        echo $donneesTrajet['prenom'];
-                                        ?></p>
+                                        echo $donneesTrajet['nom'] . ' ' . $donneesTrajet['prenom'];
+                                        ?>
+                                    </h3>
                                     <p>Depart : <?php echo $donneesTrajet['ville_depart'] . ', ' . $donneesTrajet['lieu_depart']; ?></p>
                                     <p>Prix : <?php echo $donneesTrajet['prix_tot'] . ' €'; ?></p>
                                     <p>Note chauffeur : <?php
@@ -96,7 +96,7 @@
                                 <div class="col-sm-1">
                                 </div>
                                 <div class="col-sm-2">
-                                    <a href="#"><button>Voir détails</button></a>
+                                    <a href="./trajet.php?id_trajet=<?php echo $donneesTrajet['id_trajet'] ?>"><button>Voir détails</button></a>
                                 </div>
                             </div>
                         </div>
