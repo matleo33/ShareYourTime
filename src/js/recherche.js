@@ -33,7 +33,14 @@ $(document).ready(function(e) {
         $.get("rechercheEvenement.php",$(this).serialize(),function(id){
             var currentLocation =  document.location.href;
             currentLocation = currentLocation.substring( 0 ,currentLocation.lastIndexOf( "src" ) );
-            currentLocation += 'src/php/evenement.php?id_events=' + id;
+            if(id == '')
+            {
+                currentLocation += 'src/php/recherche.php?nomEvent=' + document.getElementById("tags").value;
+            }
+            else
+            {
+                currentLocation += 'src/php/evenement.php?id_events=' + id;
+            }
             window.location.href = currentLocation ;
         });
         return false; // permet de ne pas recharger la page
