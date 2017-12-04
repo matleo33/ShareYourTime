@@ -26,12 +26,13 @@
             die('Erreur : ' . $e->getMessage());
         }
         if (isset($_GET['id_trajet'])) {
-            $reponse = $bdd->query('SELECT * '
-                    . 'FROM trajet INNER JOIN users on trajet.chauffeur = users.id_users '
-                    . 'WHERE id_trajet = ' . $_GET['id_trajet']);
+            $reponse = $bdd->query('SELECT *, COUNT(*) '
+                    . 'FROM trajet INNER JOIN users on trajet.chauffeur = users.id_users INNER JOIN etape on trajet.id_trajet = etape.trajet '
+                    . 'WHERE id_trajet = ' . $_GET['id_trajet'])
+                    ; ' GROUP BY trajet.id_trajet';
             while ($donnees = $reponse->fetch()) {
                 echo "<div class=\"text-center col-sm-12\">";
-                echo "<h1>" . $donnees['ville_depart'] . " - " . $donnees['ville_arrivee'] . "</h1>";
+                echo "<h1>" . $donnees['ville_depart'] . " - " . $donnees['ville_arrivee'] . ' ' . $donnees['prix_tot'] . " €</h1>";
                 ?>
         <div class="col-sm-3">
         </div>
@@ -51,6 +52,28 @@
                                             echo '☆';
                                         }
                                         ?></p>
+            </div>
+            <div class="col-sm-6">
+                <div class="col-sm-4">
+                    Ville de départ
+                </div>
+                <div class="col-sm-8">
+                    <p>Lieu de rdv</p>
+                    <p>Heure de rdv</p>
+                </div>
+                <?php for($i = 0; $i < $donnees['COUNT(*)']; ++$i) { ?>
+                <div class="col-sm-4">
+                    Ville etape
+                </div>
+                <div class="col-sm-8">
+                    <p>Lieu de rdv</p>
+                    <p>Heure de rdv</p>
+                </div>
+                <?php } ?>
+            </div>
+            <div class="col-sm-6">
+                Retard toléré : 
+                Pensez à me contacter pour plus d'informations !
             </div>
         </div>
         <div class="col-sm-3">
