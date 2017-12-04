@@ -223,7 +223,7 @@ session_start();
     });
 </script>
 
-
+<?php include 'footer.include.php';?>
 <script src="../BootStrap/js/bootstrap.min.js"></script>
 </body>
 

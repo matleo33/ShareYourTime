@@ -20,11 +20,27 @@
         <?php include 'modal_connexion.include.php' ?>
         <?php include 'modal_inscription.include.php' ?>
         <?php
+        if (isset($_GET['nomEvent']))
+        {
+            
+        } else {
+            
+        }
         /*
          * To change this license header, choose License Headers in Project Properties.
          * To change this template file, choose Tools | Templates
          * and open the template in the editor.
          */
         ?>
+        <div class="col-sm-12">
+            <h1 class="text-center">RECHERCHE</h1>
+        </div>
+        <input <?php
+        if (isset($_GET['nomEvent'])) {
+            echo "value=\"".$_GET['nomEvent'] . "\"" ;
+        }
+            ?>
+            ></input>
+        <?php include 'footer.include.php';?>
     </body>
 </html>
