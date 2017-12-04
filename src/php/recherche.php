@@ -20,8 +20,7 @@
         <?php include 'modal_connexion.include.php' ?>
         <?php include 'modal_inscription.include.php' ?>
         <?php
-        if (isset($_GET['nomEvent']))
-        {
+        if (isset($_GET['nomEvent'])) {
             
         } else {
             
@@ -35,12 +34,23 @@
         <div class="col-sm-12">
             <h1 class="text-center">RECHERCHE</h1>
         </div>
-        <input <?php
+        <div class="col-sm-12 text-center">
+            <div class="col-sm-6">
+                <input placeholder="Nom de l'événement"<?php
         if (isset($_GET['nomEvent'])) {
-            echo "value=\"".$_GET['nomEvent'] . "\"" ;
+            echo "value=\"" . $_GET['nomEvent'] . "\"";
         }
-            ?>
-            ></input>
-        <?php include 'footer.include.php';?>
+        ?>
+                       ></input></div>
+            <div class="com-sm-6">
+                <button onclick="rechercheGlobale()">Rechercher</button>
+            </div>
+            <div class="col-sm-3">
+                <p onclick="displayRechercheTotale()">Options avancées</p>
+            </div>
+            <div class="col-sm-9">
+            </div>
+        </div>
+        <?php include 'footer.include.php'; ?>
     </body>
 </html>
