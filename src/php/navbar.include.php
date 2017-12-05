@@ -89,10 +89,20 @@ $page = explode("/", pagencours);
                     display: none;
                 }
             </style>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="nav-item" data-toggle="modal" data-target="#modalConnexion"><a href="#">Connexion</a></li>
-                <li class="nav-item" data-toggle="modal" data-target="#modalInscription"><a href="#">Inscription</a></li>
-            </ul>
+            <?php
+            if (isset($_SESSION["ID_USER"])) {
+                echo '<ul class="nav navbar-nav navbar-right">';
+                echo '<li class="nav-item"><a href="profil.php">Profil</a></li>';
+                echo '<li class="nav-item"><a href="traiter_deconnexion.php">Déconnexion</a></li>';
+                echo '</ul>';
+            }
+            else {
+                echo '<ul class="nav navbar-nav navbar-right">';
+                echo '<li class="nav-item" data-toggle="modal" data-target="#modalConnexion"><a href="#">Connexion</a></li>';
+                echo '<li class="nav-item" data-toggle="modal" data-target="#modalInscription"><a href="#">Inscription</a></li>';
+                echo '</ul>';
+            }
+            ?>
             <ul class="nav navbar-nav navbar-right">
                 <form class="form-inline navbar-form" id="formRechercheNavbar">
                     <div class="form-group inline-form col-sm-1 col-md-12">
