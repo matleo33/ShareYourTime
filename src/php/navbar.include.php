@@ -106,8 +106,8 @@ $page = explode("/", pagencours);
             }
             else {
                 echo '<ul class="nav navbar-nav navbar-right">';
-                echo '<li class="nav-item" data-toggle="modal" data-target="#modalConnexion"><a href="#">Connexion</a></li>';
                 echo '<li class="nav-item" data-toggle="modal" data-target="#modalInscription"><a href="#">Inscription</a></li>';
+                echo '<li class="nav-item" data-toggle="modal" data-target="#modalConnexion"><a href="#">Connexion</a></li>';
                 echo '</ul>';
             }
             ?>
