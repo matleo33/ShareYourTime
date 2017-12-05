@@ -340,3 +340,18 @@ body {
     padding-top: 10px;
     margin-bottom: -25px;
 }
+
+.nomTrajet {
+    min-height: 70px;
+}
+
+.infosTrajet {
+    min-height: 250px; 
+}
+
+.aroundedText {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+    background-image: url('../img/whitecircle.png');
+}
