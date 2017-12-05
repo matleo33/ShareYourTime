@@ -20,6 +20,7 @@ try {
         $url="index.php";
         session_start();
         $_SESSION["ID_USER"] = $res[0];
+        setcookie('NOM_USER', $res[1]);
         $_COOKIE["NOM_USER"] = $res[1];
         $pdo = null;
         header("Location: ".$url);

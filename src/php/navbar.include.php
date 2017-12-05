@@ -92,8 +92,16 @@ $page = explode("/", pagencours);
             <?php
             if (isset($_SESSION["ID_USER"])) {
                 echo '<ul class="nav navbar-nav navbar-right">';
-                echo '<li class="nav-item"><a href="profil.php">Profil</a></li>';
-                echo '<li class="nav-item"><a href="traiter_deconnexion.php">Déconnexion</a></li>';
+                echo '<li class="dropdown">';
+                echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">';
+                echo $_COOKIE["NOM_USER"] .= " ";
+                echo '<span class="caret"></span></a>';
+                echo '<ul class="dropdown-menu">';
+                echo '<li><a href="profil.php">Profil</a></li>';
+                echo '<li><a href="#">Mes trajets</a></li>';
+                echo '<li><a href="traiter_deconnexion.php">Déconnexion</a></li>';
+                echo '</ul>';
+                echo '</li>';
                 echo '</ul>';
             }
             else {
