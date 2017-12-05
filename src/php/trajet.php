@@ -32,6 +32,9 @@
             ;
             ' GROUP BY trajet.id_trajet';
             while ($donnees = $reponse->fetch()) {
+                echo "<div class=\"col-sm-2\">";
+                echo "</div>";
+                echo "<div class=\"col-sm-8 trajet\">";
                 echo "<div class=\"nomTrajet\">";
                 echo "<div class=\"text-center col-sm-12\">";
                 echo "<h1>" . $donnees['ville_depart'] . " - " . $donnees['ville_arrivee'] . ' ' . $donnees['prix_tot'] . " €</h1>";
@@ -39,13 +42,13 @@
                 echo "</div>";
                 ?>
                 <div class="infosTrajet">
-                    <div class="col-sm-2">
-                    </div>
-                    <div class="col-sm-8 text-center">
-                        <div class="col-sm-6">
-                            <img src="ba" alt="photo chauffeur" />
+                    <div class="col-sm-12 text-center">
+                        <div class="col-sm-3">
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-3">
+                            <img src="../img/imageProfil.png" class="photoProfilInconnuTrajet" alt="photo chauffeur" />
+                        </div>
+                        <div class="col-sm-3">
                             <p><?php echo $donnees['prenom'] . ' ' . $donnees['nom']; ?></p>
                             <p><?php echo $donnees['num_telephone']; ?></p>
                             <p><?php echo $donnees['mail']; ?></p>
@@ -58,72 +61,87 @@
                                 }
                                 ?></p>
                         </div>
+
+                        <div class="col-sm-3">
+                        </div>
                         <div class="col-sm-6">
                             <div class="col-sm-12">
-                                <div class="col-sm-4 aroundedText">
-                                    Ville de départ
+                                <h4 style="text-align: left;">Depart :</h4>
+                                <div class="col-sm-4">
+                                    <?php echo $donnees['ville_depart']; ?>
                                 </div>
                                 <div class="col-sm-8">
-                                    <p>Lieu de rdv</p>
-                                    <p>Heure de rdv</p>
+                                    <p><?php echo $donnees['lieu_depart']; ?></p>
+                                    <p><?php echo $donnees['date_depart']; ?></p>
                                 </div>
                             </div>
                             <?php for ($i = 0; $i < $donnees['COUNT(*)']; ++$i) { ?>
                                 <div class="col-sm-12">
-                                    <div class="col-sm-4 aroundedText">
-                                        Ville etape
+                                    <h4 style="text-align: left;">Etape <?php echo $i + 1; ?> :</h4>
+                                    <div class="col-sm-4">
+                                        <p><?php echo $donnees['ville']; ?></p>
                                     </div>
                                     <div class="col-sm-8">
-                                        <p>Lieu de rdv</p>
-                                        <p>Heure de rdv</p>
+                                        <p><?php echo $donnees['lieu']; ?></p>
+                                        <p><?php echo $donnees['date']; ?></p>
                                     </div>
                                 </div>
                             <?php } ?>
                             <div class="col-sm-12">
-                                <div class="col-sm-4 aroundedText">
-                                    Ville d'arrivée
+                                <h4 style="text-align: left;">Arrivee :</h4>
+                                <div class="col-sm-4">
+                                    <?php echo $donnees['ville_arrivee']; ?>
                                 </div>
                                 <div class="col-sm-8">
-                                    <p>Lieu de rdv</p>
-                                    <p>Heure d'arrivée</p>
+                                    <p><?php echo $donnees['lieu_arrive']; ?></p>
+                                    <p><?php echo $donnees['date_arrivee']; ?></p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6" style="height: inherit; border: black solid 1px;">
+                        <div class="col-sm-6 informationsRetard">
                             <p>Retard toléré : <?php echo $donnees['retard']; ?> minutes</p>
                             <p>Pensez à me contacter pour plus d'informations !</p>
                         </div>
                     </div>
-                    <div class="col-sm-2">
-                    </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12" style="padding-top: 25px; padding-bottom: 10px;">
                         <div class="col-sm-2">
-                            Autoroute
+                            <?php
+                            if ($donnees['autoroute'] == true) {
+                                echo '<img src="../img/autoroute.png" class="logo_autoroute" />';
+                            }
+                            ?>
                         </div>
                         <div class="col-sm-4">
-                            Il reste <?php echo $donnees['nb_place']; ?> place<?php if ($donnees['nb_place'] > 1) echo 's'; ?>
+                            Il reste <?php echo $donnees['nb_place']; ?> place<?php
+                            if ($donnees['nb_place'] > 1) {
+                                echo 's';
+                            }
+                            ?>
                         </div>
-                        <div class="col-sm-5">
+                        <div class="col-sm-4">
+                            <form method="post" action="reservationPlacesTrajet.php">
                             <input type="number" min="0" max="<?php echo $donnees['nb_place']; ?>" style="width: 50px;" />
                             <button>Je reserve</button>
+                            </form>
                         </div>
-                        <div class="col-sm-1">
-                            <button>Signaler</button>
+                        <div class="col-sm-2">
+                            <a href="#"><button>Signaler</button></a>
                         </div>
                     </div>
                 </div>
-                <?php
-            }
-        } else {
-            echo "<div class=\"text-center nomTrajet\">";
-            echo "<h2>Désolé, nous n'avons pas pu trouver le trajet en question, merci de vous rediriger "
-            . "vers la page d'accueil.</h2>";
-            echo "<a href=\"index.php\"><button>Cliquez ici</button></a>";
-            echo "</div>";
+            </div>
+            <?php
         }
-        ?>
-        <?php include 'footer.include.php'; ?>
-    </body>
+    } else {
+        echo "<div class=\"text-center nomTrajet\">";
+        echo "<h2>Désolé, nous n'avons pas pu trouver le trajet en question, merci de vous rediriger "
+        . "vers la page d'accueil.</h2>";
+        echo "<a href=\"index.php\"><button>Cliquez ici</button></a>";
+        echo "</div>";
+    }
+    ?>
+    <?php include 'footer.include.php'; ?>
+</body>
 </html>
 <?php
 
