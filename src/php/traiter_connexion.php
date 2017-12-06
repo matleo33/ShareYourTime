@@ -1,4 +1,6 @@
 <?php
+$origin = $_SERVER["HTTP_REFERER"];
+$pageorigin = explode("/", $origin);
 
 $servername = "localhost";
 $dbname = "shareyourtime";
@@ -19,7 +21,7 @@ try {
 
     $res = $stmt->fetch();
     if($res) {
-        $url="index.php";
+        $url = end($pageorigin);
         session_start();
         $_SESSION["ID_USER"] = $res[0];
         setcookie('NOM_USER', $res[1]);
