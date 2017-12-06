@@ -36,12 +36,14 @@
 
                 <!-- Photo de profil -->    
                 <div class="col-sm-4">
-                    <img src="../img/imageProfil.png" alt="photoProfil" />
-                    <?php 
+                    <img class="photoProfil" src="../img/imageProfil2.PNG" alt="photoProfil" />
+                    <?php
                     if (isset($_SESSION['ID_USER']) && ($_SESSION['ID_USER'] == $donnees['id_users'])) {
+                        echo '<form>';
                         echo '<input type="file"></input>';
                         echo '<button>Enregistrer</button>';
-                    } 
+                        echo '</form>';
+                    }
                     ?>
                 </div>
                 <!-- Informations -->    
@@ -77,7 +79,27 @@
                 <!-- Caractéristiques trajets -->    
                 <div class="col-sm-4">
                     <h1>Caractéristiques trajets</h1>
-                    <p>Scrollbar entre timide et bavard</p>
+                    <div class="col-sm-6 col-sm-offset-6 col-sm-pull-6 text-center">
+                        <span style="float : left;">Désagréable</span>
+                        <span>Neutre</span>
+                        <span style="float : right;">Agréable</span>
+                    </div>
+                    <div class="scrollbar col-sm-6 col-sm-offset-6 col-sm-pull-6">
+                        <div style="width: <?php echo $donnees['personnalite'] * 10 ?>%; height:23px; background-color: 
+                        <?php
+                        if ($donnees['personnalite'] * 10 < 25) {
+                            echo "red";
+                        } else if ($donnees['personnalite'] * 10 < 50) {
+                            echo "orange";
+                        } else if ($donnees['personnalite'] * 10 < 75) {
+                            echo "yellow";
+                        } else {
+                            echo "green";
+                        }
+                        ?>">
+
+                        </div>
+                    </div>
                     <p>Animaux autorisés : 
                         <?php
                         if ($donnees['animaux'] == TRUE) {
@@ -88,7 +110,7 @@
                         ?>
                     </p>
                     <p>Fumeurs autorisés : 
-                    <?php
+                        <?php
                         if ($donnees['fumeur'] == TRUE) {
                             echo "Oui";
                         } else {
@@ -97,7 +119,7 @@
                         ?>
                     </p>
                     <p>Musique autorisée :
-                    <?php
+                        <?php
                         if ($donnees['musique'] == TRUE) {
                             echo "Oui";
                         } else {

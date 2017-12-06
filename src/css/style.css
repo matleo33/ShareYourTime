@@ -371,3 +371,16 @@ body {
 #optionAvancee{
     text-decoration: none;
 }
+
+.photoProfil {
+    width: inherit;
+}
+
+.scrollbar {
+    border: 1px solid black;
+    margin-bottom: 10px;
+    height:25px;
+    text-align: left;
+    padding-right: 0;
+    padding-left: 0;
+}
