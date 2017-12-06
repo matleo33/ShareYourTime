@@ -37,6 +37,12 @@
                 <!-- Photo de profil -->    
                 <div class="col-sm-4">
                     <img src="../img/imageProfil.png" alt="photoProfil" />
+                    <?php 
+                    if (isset($_SESSION['ID_USER']) && ($_SESSION['ID_USER'] == $donnees['id_users'])) {
+                        echo '<input type="file"></input>';
+                        echo '<button>Enregistrer</button>';
+                    } 
+                    ?>
                 </div>
                 <!-- Informations -->    
                 <div class="col-sm-4">
@@ -72,9 +78,33 @@
                 <div class="col-sm-4">
                     <h1>Caractéristiques trajets</h1>
                     <p>Scrollbar entre timide et bavard</p>
-                    <p>Animaux autorisés : décision</p>
-                    <p>Fumeurs autorisés : décision</p>
-                    <p>Musique autorisée : décision</p>
+                    <p>Animaux autorisés : 
+                        <?php
+                        if ($donnees['animaux'] == TRUE) {
+                            echo "Oui";
+                        } else {
+                            echo "Non";
+                        }
+                        ?>
+                    </p>
+                    <p>Fumeurs autorisés : 
+                    <?php
+                        if ($donnees['fumeur'] == TRUE) {
+                            echo "Oui";
+                        } else {
+                            echo "Non";
+                        }
+                        ?>
+                    </p>
+                    <p>Musique autorisée :
+                    <?php
+                        if ($donnees['musique'] == TRUE) {
+                            echo "Oui";
+                        } else {
+                            echo "Non";
+                        }
+                        ?>
+                    </p>
                     <h1>Derniers Avis</h1>
                     <img src="" alt="photo utilisateur" />
                     <p>Note sous forme d'étoiles</p>
