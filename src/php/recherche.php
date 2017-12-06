@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -161,7 +162,26 @@
 
     </form>
 </div>
-
+<!--
+<div class="col-sm-12">
+    <div class="col-sm-8 col-sm-offset-2 trajetEvenement">
+        <div class="col-sm-6">
+            <h3 class="nomChauffeurTrajetEvenement">
+                Inconnu Inconnu
+            </h3>
+            <p>Depart : 10 decembre</p>
+            <p>Prix : 4€ </p>
+            <p>Note chauffeur : **********
+        </div>
+        <div class="col-sm-2 col-sm-offset-1">
+            <img class="logoAutoroute" src="../img/autoroute.png" alt="autouroute : oui" />
+        </div>
+        <div class="col-sm-2">
+            <a href="./trajet.php?id_trajet=1"><button>Voir détails</button></a>
+        </div>
+    </div>
+</div>
+-->
 
 
 <?php include 'footer.include.php'; ?>
@@ -177,8 +197,41 @@
                 dataType:"json",
                 url:"recherche_avancee_covoiturage.php",
                 success:function (data) {
-                    alert(data.length)
-                    //alert(data[0][1]);
+                    for($i=0; $i<data.length; $i++)
+                    {
+                        var id_div_trajet ="trajet" + $i;
+                        document.body.innerHTML += '<div class="col-sm-12">' +
+                        '<div class="col-sm-8 col-sm-offset-2 trajetEvenement" id="' + id_div_trajet + '" style="margin-top: 50px">' +
+                        '<div class="col-sm-6">' +
+                        '<h3 class="nomChauffeurTrajetEvenement">' +
+                        data[$i][0] + ' ' + data[$i][1] + '</h3>' +
+                            '<p>Depart : ' + data[$i][2] + ' à ' + data[$i][3] + '</p>' +
+                        '<p>Arrivé : ' + data[$i][4] + ' à ' + data[$i][5] + '</p>' +
+                        '<p>Prix : ' + data[$i][7] + '€</p>' +
+                        '<p id="note' + $i + '">Note du chauffeur : </p></div>';
+
+
+                        for($j=0;$j<10;$j++)
+                        {
+                            if($j<data[$i][8])
+                            {
+                                $("#note"+$i).append('★');
+                            }
+                            else
+                            {
+                                $("#note"+$i).append('☆');
+                            }
+                        }
+                        if(data[$i][6] == 1)
+                        {
+                            $("#"+id_div_trajet).append('<div class="col-sm-2 col-sm-offset-1">' +
+                                '<img class="logoAutoroute" src="../img/autoroute.png" alt="autouroute : oui" />' +
+                            '</div>');
+                        }
+                        $("#"+id_div_trajet).append('<div class="col-sm-2">' +
+                        '<a href="./trajet.php?id_trajet=' + data[$i][9] + '"><button>Voir détails</button></a>' +
+                        '</div> </div> </div>');
+                    }
                 },
                 error:function () {
 
@@ -187,8 +240,6 @@
             return false;
         })
     });
-    /*$.post("recherche_avancee_covoiturage.php", function(data){
-    }, "json");*/
 </script>
 <script>
     function activerOptionAvancee() {

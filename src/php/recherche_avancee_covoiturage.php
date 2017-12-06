@@ -13,7 +13,7 @@ try
 {
     $bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'root', '');
 
-    $requete = "SELECT DISTINCT users.nom, prenom, ville_depart, date_depart, ville_arrivee, date_arrivee, autoroute, prix_tot, personnalite FROM users INNER JOIN trajet INNER JOIN events";
+    $requete = "SELECT DISTINCT users.nom, prenom, ville_depart, date_depart, ville_arrivee, date_arrivee, autoroute, prix_tot, personnalite, id_trajet FROM users INNER JOIN trajet INNER JOIN events";
 
     $reponse = $bdd->query($requete);
 
@@ -27,13 +27,12 @@ try
             $donnees["date_arrivee"],
             $donnees["autoroute"],
             $donnees["prix_tot"],
-            $donnees["personnalite"]);
+            $donnees["personnalite"],
+            $donnees["id_trajet"]);
         array_push($covoit_event,$$compt);
         $compt++;
     }
     echo json_encode(array_values($covoit_event));
-    //var_dump($covoit_event, json_encode($covoit_event));
-
 }
 catch (Exception $e)
 {
