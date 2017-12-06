@@ -11,6 +11,7 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="../js/recherche.js"></script>
+        <script src="../js/editer.js"></script>
 
         <title>Share Your Time</title>
     </head>
@@ -24,9 +25,12 @@
             } catch (Exception $e) {
                 die('Erreur : ' . $e->getMessage());
             }
-            $reponse = $bdd->query('SELECT *, COUNT(*) '
-                    . 'FROM users INNER JOIN trajet on trajet.chauffeur = users.id_users '
+            $reponse = $bdd->query('SELECT *, COUNT(trajet.id_trajet) '
+                    . 'FROM users INNER JOIN trajet ON trajet.chauffeur = users.id_users '
                     . 'WHERE users.id_users=' . $_GET['id_profil']);
+            $reponse2 = $bdd->query('SELECT COUNT(*) '
+                    . 'FROM users INNER JOIN events ON users.id_users = events.createur '
+                    . 'WHERE events.createur=' . $_GET['id_profil']);
             while ($donnees = $reponse->fetch()) {
                 ?>
 
@@ -36,14 +40,33 @@
                 </div>
                 <!-- Informations -->    
                 <div class="col-sm-4">
-                    <h1>Nom Prénom</h1>
-                    <p>Mail : <?php echo $donnees['mail'] ;?></p>
-                    <p>Tel : <?php echo $donnees['num_telephone'] ;?></p>
-                    <p>Nombre de trajets en tant que conducteur : <?php echo $donnees['COUNT(*)'] ?></p>
-                    <p>Nombre de trajets en tant que passager : </p>
-                    <p>Nombre d'événements organisés : </p>
-                    <p>Note sous forme d'étoiles</p>
-                    <p>Description modifiable</p>
+                    <h1><?php echo $donnees['nom'] . ' ' . $donnees['prenom'] ?></h1>
+                    <p>Mail : <?php echo $donnees['mail']; ?></p>
+                    <p>Tel : <?php echo $donnees['num_telephone']; ?></p>
+                    <p>Nombre de trajets en tant que conducteur : <?php echo $donnees['COUNT(trajet.id_trajet)'] ?></p>
+                    <p>Nombre d'événements organisés : <?php
+                        while ($donnees2 = $reponse2->fetch()) {
+                            echo $donnees2['COUNT(*)'];
+                        }
+                        ?></p>
+                    <p><?php
+                        echo 'Note : ';
+                        for ($i = 0; $i < $donnees['personnalite']; ++$i) {
+                            echo '★';
+                        }
+                        for ($j = 0; $j < 10 - $donnees['personnalite']; ++$j) {
+                            echo '☆';
+                        }
+                        ?></p>
+                    <?php
+                    echo "Description : ";
+                    if (isset($_SESSION['ID_USER']) && ($_SESSION['ID_USER'] == $donnees['id_users'])) {
+                        echo '<p id="description">' . $donnees['description'] . '</p>';
+                        echo '<p onclick="editer()">Editer<p>';
+                    } else {
+                        echo '<p>' . $donnees['description'] . '</p>';
+                    }
+                    ?>
                 </div>
                 <!-- Caractéristiques trajets -->    
                 <div class="col-sm-4">
