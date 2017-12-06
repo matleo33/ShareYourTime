@@ -366,3 +366,8 @@ body {
 .trajet {
     background-color: rgb(69, 164, 247);
 }
+
+/* recherche detailées */
+#optionAvancee{
+    text-decoration: none;
+}
