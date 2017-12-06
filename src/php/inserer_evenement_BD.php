@@ -21,7 +21,7 @@ try
         'adresse' => $_GET['adressAutoComplete'],
         'lien_fb' => null,
         'lien_billet' => null,
-        'createur' => 1));//TODO Recupèrer l'id de l'utilisateur connecté
+        'createur' => $_SESSION["ID_USER"]));//TODO Recupèrer l'id de l'utilisateur connecté
 
 
     $reponse = $bdd->query('SELECT id_events '

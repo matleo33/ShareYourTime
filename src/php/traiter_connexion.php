@@ -10,10 +10,12 @@ $pass = htmlspecialchars($_POST["inputPassword"]) ;
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 
-    $stmt = $conn->prepare("SELECT id_users, prenom FROM users WHERE mail = '" . $email . "' AND  mot_de_passe = '". $pass ."'");
+    /*$stmt = $conn->prepare("SELECT id_users, prenom FROM users WHERE mail = '" . $email . "' AND  mot_de_passe = '". $pass ."'");
     $stmt->execute(array(
         ':email' => $_POST['inputEmail'],':pass' => $_POST['inputPassword']
-    ));
+    ));*/
+    $stmt = $conn->prepare("SELECT id_users, prenom FROM users WHERE mail= ? AND  mot_de_passe= ?");
+    $stmt->execute(array($email, $pass));
 
     $res = $stmt->fetch();
     if($res) {

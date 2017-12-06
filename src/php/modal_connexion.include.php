@@ -19,8 +19,7 @@
                            placeholder="Mot de passe">
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" class="btn btn-default center-block" value="Connexion"
-                           style="margin-bottom: 10px" />
+                    <input type="submit" class="btn btn-default center-block" value="Connexion" style="margin-bottom: 10px"/>
                     <a href="#">Mot de passe oublié</a>
                 </div>
             </form>

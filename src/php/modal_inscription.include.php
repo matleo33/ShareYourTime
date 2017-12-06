@@ -45,10 +45,11 @@
                 <div class="form-group col-sm-10 col-sm-offset-1">
                     <input type="tel" class="form-control" id="inputPhoneNumber" name="inputPhoneNumber" placeholder="Numéro de téléphone">
                 </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-default center-block" value="Inscription" style="margin-bottom: 10px"/>
+                </div>
             </form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default center-block" data-dismiss="modal" style="margin-bottom: 10px">Inscription</button>
-            </div>
+
         </div>
 
     </div>

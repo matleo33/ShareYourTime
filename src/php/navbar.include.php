@@ -16,19 +16,41 @@ $page = explode("/", pagencours);
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="<?php if (end($page) == "index.php") { echo '#'; } else { echo 'index.php'; } ?>"><img src="../img/logo.png" class="iconeNavbar" alt="Share Your Time" /></a>
+            <a class="navbar-brand" href="<?php if (end($page) == "index.php") {
+                echo '#';
+            } else {
+                echo 'index.php';
+            } ?>"><img src="../img/logo.png" class="iconeNavbar" alt="Share Your Time"/></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <!-- Vérification si la page index.php est la page active -->
-                <li class="nav-item <?php if (end($page) == "index.php") { echo 'active'; } ?>">
-                    <a href="<?php if (end($page) == "index.php") { echo '#'; } else { echo 'index.php'; } ?>">Accueil</a></li>
+                <li class="nav-item <?php if (end($page) == "index.php") {
+                    echo 'active';
+                } ?>">
+                    <a href="<?php if (end($page) == "index.php") {
+                        echo '#';
+                    } else {
+                        echo 'index.php';
+                    } ?>">Accueil</a></li>
                 <!-- Vérification si la page proposer_trajet.php est la page active -->
-                <li class="nav-item <?php if (end($page) == "proposer_trajet.php") {echo 'active'; } ?>">
-                    <a href="<?php if (end($page) == "proposer_trajet.php") { echo '#'; } else { echo 'proposer_trajet.php'; } ?>">Proposer trajet</a></li>
+                <li class="nav-item <?php if (end($page) == "proposer_trajet.php") {
+                    echo 'active';
+                } ?>">
+                    <a href="<?php if (end($page) == "proposer_trajet.php") {
+                        echo '#';
+                    } else {
+                        echo 'proposer_trajet.php';
+                    } ?>">Proposer trajet</a></li>
                 <!-- Vérification si la page creer_evenement.php est la page active -->
-                <li class="nav-item <?php if (end($page) == "creer_evenement.php") { echo 'active'; } ?>">
-                    <a href="<?php if (end($page) == "creer_evenement.php") { echo '#'; } else { echo 'creer_evenement.php'; } ?>">Créer événement</a></li>
+                <li class="nav-item <?php if (end($page) == "creer_evenement.php") {
+                    echo 'active';
+                } ?>">
+                    <a href="<?php if (end($page) == "creer_evenement.php") {
+                        echo '#';
+                    } else {
+                        echo 'creer_evenement.php';
+                    } ?>">Créer événement</a></li>
             </ul>
             <style>
                 .ui-autocomplete {
@@ -60,9 +82,11 @@ $page = explode("/", pagencours);
                     *border-right-width: 2px;
                     *border-bottom-width: 2px;
                 }
+
                 .ui-autocomplete .ui-menu-item {
                     padding: 0 10px 0 10px;
                 }
+
                 .ui-autocomplete .ui-menu-item > a.ui-corner-all {
                     display: block;
                     padding: 3px 15px;
@@ -72,6 +96,7 @@ $page = explode("/", pagencours);
                     color: #555555;
                     white-space: nowrap;
                 }
+
                 .ui-autocomplete .ui-menu-item > a.ui-corner-all.ui-state-hover, .ui-autocomplete .ui-menu-item > a.ui-corner-all.ui-state-active {
                     color: #ffffff;
                     text-decoration: none;
@@ -81,10 +106,12 @@ $page = explode("/", pagencours);
                     -moz-border-radius: 0px;
                     background-image: none;
                 }
+
                 .ui-autocomplete .ui-menu-item:hover {
-                    background-color: RGB(69,164,247);
+                    background-color: RGB(69, 164, 247);
                     color: white;
                 }
+
                 .ui-helper-hidden-accessible {
                     display: none;
                 }
@@ -97,14 +124,13 @@ $page = explode("/", pagencours);
                 echo $_COOKIE["NOM_USER"] .= " ";
                 echo '<span class="caret"></span></a>';
                 echo '<ul class="dropdown-menu">';
-                echo '<li><a href="profil.php">Profil</a></li>';
+                echo '<li><a href="profil.php?id_profil=' . $_SESSION["ID_USER"] . '">Profil</a></li>';
                 echo '<li><a href="#">Mes trajets</a></li>';
                 echo '<li><a href="traiter_deconnexion.php">Déconnexion</a></li>';
                 echo '</ul>';
                 echo '</li>';
                 echo '</ul>';
-            }
-            else {
+            } else {
                 echo '<ul class="nav navbar-nav navbar-right">';
                 echo '<li class="nav-item" data-toggle="modal" data-target="#modalInscription"><a href="#">Inscription</a></li>';
                 echo '<li class="nav-item" data-toggle="modal" data-target="#modalConnexion"><a href="#">Connexion</a></li>';
@@ -114,7 +140,8 @@ $page = explode("/", pagencours);
             <ul class="nav navbar-nav navbar-right">
                 <form class="form-inline navbar-form" id="formRechercheNavbar">
                     <div class="form-group inline-form col-sm-1 col-md-12">
-                        <input name="eventName" class="form-control mr-sm-2" type="text" placeholder="Recherche événement" id="tags">
+                        <input name="eventName" class="form-control mr-sm-2" type="text"
+                               placeholder="Recherche événement" id="tags">
                         <button class="btn btn-primary" type="submit">Rechercher</button>
                     </div>
                 </form>
