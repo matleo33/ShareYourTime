@@ -12,10 +12,6 @@ $pass = htmlspecialchars($_POST["inputPassword"]) ;
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 
-    /*$stmt = $conn->prepare("SELECT id_users, prenom FROM users WHERE mail = '" . $email . "' AND  mot_de_passe = '". $pass ."'");
-    $stmt->execute(array(
-        ':email' => $_POST['inputEmail'],':pass' => $_POST['inputPassword']
-    ));*/
     $stmt = $conn->prepare("SELECT id_users, prenom FROM users WHERE mail= ? AND  mot_de_passe= ?");
     $stmt->execute(array($email, $pass));
 
@@ -26,7 +22,7 @@ try {
         $_SESSION["ID_USER"] = $res[0];
         setcookie('NOM_USER', $res[1]);
         $_COOKIE["NOM_USER"] = $res[1];
-        $pdo = null;
+        $conn = null;
         header("Location: ".$url);
     } else {
         $url="erreur.php";
