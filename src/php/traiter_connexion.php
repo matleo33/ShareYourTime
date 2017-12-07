@@ -1,13 +1,17 @@
 <?php
+
 $origin = $_SERVER["HTTP_REFERER"];
 $pageorigin = explode("/", $origin);
+if(end($pageorigin) == "") {
+    array_push($pageorigin, "index.php");
+}
 
 $servername = "localhost";
 $dbname = "shareyourtime";
 $username = "root";
 $password = "";
-$email = htmlspecialchars($_POST["inputEmail"]) ;
-$pass = htmlspecialchars($_POST["inputPassword"]) ;
+$email = htmlspecialchars($_POST["inputEmail"]);
+$pass = htmlspecialchars($_POST["inputPassword"]);
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -16,23 +20,21 @@ try {
     $stmt->execute(array($email, $pass));
 
     $res = $stmt->fetch();
-    if($res) {
+    if ($res) {
         $url = end($pageorigin);
         session_start();
         $_SESSION["ID_USER"] = $res[0];
         setcookie('NOM_USER', $res[1]);
         $_COOKIE["NOM_USER"] = $res[1];
         $conn = null;
-        header("Location: ".$url);
+        header("Location: " . $url);
     } else {
-        $url="erreur.php";
-        header("Location: ".$url);
+        $url = "erreur.php";
+        header("Location: " . $url);
     }
-}
-catch(PDOException $e)
-{
-    $url="erreur2.php";
-    header("Location: ".$url);
+} catch (PDOException $e) {
+    $url = "erreur2.php";
+    header("Location: " . $url);
 }
 
 ?>
