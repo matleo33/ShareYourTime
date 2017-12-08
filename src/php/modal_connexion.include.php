@@ -9,7 +9,7 @@
                 <h4 class="modal-title">Connexion</h4>
             </div>
             <form method="post" action="traiter_connexion.php">
-                <div class="form-group col-sm-10 col-sm-offset-1" style="margin-top: 10px">
+                <div class="form-group col-sm-10 col-sm-offset-1" id="divMail">
                     <label for="inputEmail">Adresse mail</label>
                     <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Email">
                 </div>
@@ -19,7 +19,7 @@
                            placeholder="Mot de passe">
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" class="btn btn-default center-block" value="Connexion" style="margin-bottom: 10px"/>
+                    <input type="submit" class="btn btn-default center-block" value="Connexion" id="inputConnexion"/>
                     <a href="#">Mot de passe oublié</a>
                 </div>
             </form>

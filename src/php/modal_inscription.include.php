@@ -9,7 +9,7 @@
                 <h4 class="modal-title">Inscription</h4>
             </div>
             <form method="post" action="inscription.php">
-                <div class="form-group col-sm-10 col-sm-offset-1" style="margin-top: 20px">
+                <div class="form-group col-sm-10 col-sm-offset-1" id="divFirstName">
                     <input type="text" class="form-control" id="inputFirstName" name="inputFirstName" placeholder="Prénom">
                 </div>
                 <div class="form-group col-sm-10 col-sm-offset-1">
@@ -46,7 +46,7 @@
                     <input type="tel" class="form-control" id="inputPhoneNumber" name="inputPhoneNumber" placeholder="Numéro de téléphone">
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" class="btn btn-default center-block" value="Inscription" style="margin-bottom: 10px"/>
+                    <input type="submit" class="btn btn-default center-block" value="Inscription" id="inputInscription"/>
                 </div>
             </form>
 
