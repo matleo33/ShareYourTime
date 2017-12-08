@@ -374,6 +374,8 @@ body {
 
 .photoProfil {
     width: inherit;
+    border: black 1px solid;
+    border-radius: 5px;
 }
 
 .scrollbar {
@@ -467,4 +469,9 @@ body {
 
 .ui-helper-hidden-accessible {
     display: none;
+}
+
+.photoProfilAvis {
+    width: 100px;
+    height: auto;
 }

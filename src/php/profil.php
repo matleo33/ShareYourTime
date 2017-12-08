@@ -19,6 +19,7 @@
     <body>
         <?php include 'navbar.include.php'; ?><br/>
         <?php
+        include 'getNote.php';
         if (isset($_GET['id_profil'])) {
             try {
                 $bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'root', '');
@@ -32,6 +33,7 @@
                     . 'FROM users INNER JOIN events ON users.id_users = events.createur '
                     . 'WHERE events.createur=' . $_GET['id_profil']);
             while ($donnees = $reponse->fetch()) {
+                $note = getNote($bdd, $donnees['id_users']);
                 ?>
 
                 <!-- Photo de profil -->    
@@ -59,20 +61,20 @@
                         ?></p>
                     <p><?php
                         echo 'Note : ';
-                        for ($i = 0; $i < $donnees['personnalite']; ++$i) {
+                        for ($i = 0; $i < $note; ++$i) {
                             echo '★';
                         }
-                        for ($j = 0; $j < 10 - $donnees['personnalite']; ++$j) {
+                        for ($j = 0; $j < 10 - $note; ++$j) {
                             echo '☆';
                         }
                         ?></p>
                     <?php
                     echo "Description : ";
                     if (isset($_SESSION['ID_USER']) && ($_SESSION['ID_USER'] == $donnees['id_users'])) {
-                        echo '<p id="description">' . $donnees['description'] . '</p>';
+                        echo '<p id="description">' . $donnees['biographie'] . '</p>';
                         echo '<p onclick="editer()">Editer<p>';
                     } else {
-                        echo '<p>' . $donnees['description'] . '</p>';
+                        echo '<p>' . $donnees['biographie'] . '</p>';
                     }
                     ?>
                 </div>
@@ -80,23 +82,24 @@
                 <div class="col-sm-4">
                     <h1>Caractéristiques trajets</h1>
                     <div class="col-sm-6 col-sm-offset-6 col-sm-pull-6 text-center">
-                        <span style="float : left;">Désagréable</span>
-                        <span>Neutre</span>
-                        <span style="float : right;">Agréable</span>
+                        <span>Note comportement:</span>
                     </div>
                     <div class="scrollbar col-sm-6 col-sm-offset-6 col-sm-pull-6">
-                        <div style="width: <?php echo $donnees['personnalite'] * 10 ?>%; height:23px; background-color: 
+                        <div style="width: 
                         <?php
-                        if ($donnees['personnalite'] * 10 < 25) {
-                            echo "red";
-                        } else if ($donnees['personnalite'] * 10 < 50) {
-                            echo "orange";
-                        } else if ($donnees['personnalite'] * 10 < 75) {
-                            echo "yellow";
-                        } else {
-                            echo "green";
-                        }
-                        ?>">
+                        echo $note * 10;
+                        ?>%; height:23px; background-color: 
+                             <?php
+                             if ($note * 10 < 25) {
+                                 echo "red";
+                             } else if ($note * 10 < 50) {
+                                 echo "orange";
+                             } else if ($note * 10 < 75) {
+                                 echo "yellow";
+                             } else {
+                                 echo "green";
+                             }
+                             ?>">
 
                         </div>
                     </div>
@@ -128,12 +131,7 @@
                         ?>
                     </p>
                     <h1>Derniers Avis</h1>
-                    <img src="" alt="photo utilisateur" />
-                    <p>Note sous forme d'étoiles</p>
-                    <p>Commentaires</p>
-                    <img src="" alt="photo utilisateur" />
-                    <p>Note sous forme d'étoiles</p>
-                    <p>Commentaires</p>
+        <?php include 'derniers_avis.php'; derniersAvis($bdd, $donnees['id_users']); ?>
                 </div>
 
                 <?php
@@ -145,7 +143,7 @@
         }
         ?>
 
-        <?php include 'footer.include.php'; ?>
+<?php include 'footer.include.php'; ?>
 
         <script src="../BootStrap/js/bootstrap.min.js"></script>
     </body>
