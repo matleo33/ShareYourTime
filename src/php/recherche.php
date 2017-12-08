@@ -1,4 +1,5 @@
-<?php session_start() ?>
+<?php session_start();
+$_POST['ville_dep']=''?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -96,13 +97,13 @@
 
 
 <div class="col-sm-12">
-    <form method="post" id="optionAvanceeForm" style="display: none"><!-- A ne pas mettre dans la feuille de style sinon le JS ne fonctione pas -->
+    <form method="post" action="recherche_avancee_covoiturage.php" id="optionAvanceeForm" style="display: none"><!-- A ne pas mettre dans la feuille de style sinon le JS ne fonctione pas -->
         <div class="col-sm-12">
             <div class="col-sm-6">
-                <input placeholder="Ville de départ"/>
+                <input id="ville_depart" name="ville_depart" value="<?php $_POST['ville_dep']?>" placeholder="Ville de départ"/>
             </div>
             <div class="col-sm-6">
-                <input placeholder="Ville d'arrivée"/>
+                <input id="ville_arrivee" name="ville_arrivee" placeholder="Ville d'arrivée"/>
             </div>
         </div>
         <div class="col-sm-12">
@@ -119,12 +120,21 @@
             <div class="col-sm-3">
                 <label for="date_arrivee">Date d'arrivée</label>
             </div>
+            <!--
             <div class='input-group date datetimepicker col-sm-3'>
                 <input type='text' id="date_arrivee" name="date_arrivee" class="form-control" placeholder="Date d'arrivée + heure"/>
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                     </span>
+            </div>-->
+
+            <div class="input-group date" data-provide="datepicker">
+                <input type="text" class="form-control">
+                <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+                </div>
             </div>
+
         </div>
         <div class="col-sm-12">
             <div class="col-sm-6">
@@ -133,56 +143,26 @@
             </div>
             <div class="col-sm-6">
                         <span class="input-symbol-euro">
-                        <input type="number" value="0" min="0" step="1" class="form-control"  />
+                        <input type="number" name="prix" min="0" step="1" class="form-control"  />
                     </span>
             </div>
         </div>
 
         <div class="col-sm-12">
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="avec_peage_checkbox" id="avec_peage_checkbox" value="avec_peage" checked>
-                    Avec péage
-                </label>
+            <div class="radio">
+                <label><input type="radio" name="optpeageradio" value="avecpeage">Avec péage</label>
             </div>
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="sans_peage_checkbox" id="sans_peage_checkbox" value="sans_peage">
-                    Sans péage
-                </label>
+            <div class="radio">
+                <label><input type="radio" name="optpeageradio" value="sanspeage">Sans péage</label>
             </div>
-            <div class="form-check disabled">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="pas_important_peage_checkbox" id="pas_important_peage_checkbox" value="pas_important" disabled>
-                    Pas d'importance
-                </label>
+            <div class="radio">
+                <label><input type="radio" name="optpeageradio" value="pasimportantpeage" checked>Pas important</label>
             </div>
         </div>
         <input type="submit" value="Rechercher" />
 
     </form>
 </div>
-<!--
-<div class="col-sm-12">
-    <div class="col-sm-8 col-sm-offset-2 trajetEvenement">
-        <div class="col-sm-6">
-            <h3 class="nomChauffeurTrajetEvenement">
-                Inconnu Inconnu
-            </h3>
-            <p>Depart : 10 decembre</p>
-            <p>Prix : 4€ </p>
-            <p>Note chauffeur : **********
-        </div>
-        <div class="col-sm-2 col-sm-offset-1">
-            <img class="logoAutoroute" src="../img/autoroute.png" alt="autouroute : oui" />
-        </div>
-        <div class="col-sm-2">
-            <a href="./trajet.php?id_trajet=1"><button>Voir détails</button></a>
-        </div>
-    </div>
-</div>
--->
-
 
 <?php include 'footer.include.php'; ?>
 </body>
@@ -191,7 +171,7 @@
     $(document).ready(function () {
         $("#optionAvanceeForm").submit(function () {
             $.ajax({
-                type:"POST",
+                type:"GET",
                 data: $(this).serialize(),
                 contentType:"application/json",
                 dataType:"json",
@@ -201,14 +181,14 @@
                     {
                         var id_div_trajet ="trajet" + $i;
                         document.body.innerHTML += '<div class="col-sm-12">' +
-                        '<div class="col-sm-8 col-sm-offset-2 trajetEvenement" id="' + id_div_trajet + '" style="margin-top: 50px">' +
-                        '<div class="col-sm-6">' +
-                        '<h3 class="nomChauffeurTrajetEvenement">' +
-                        data[$i][0] + ' ' + data[$i][1] + '</h3>' +
+                            '<div class="col-sm-8 col-sm-offset-2 trajetEvenement" id="' + id_div_trajet + '" style="margin-top: 50px">' +
+                            '<div class="col-sm-6">' +
+                            '<h3 class="nomChauffeurTrajetEvenement">' +
+                            data[$i][0] + ' ' + data[$i][1] + '</h3>' +
                             '<p>Depart : ' + data[$i][2] + ' à ' + data[$i][3] + '</p>' +
-                        '<p>Arrivé : ' + data[$i][4] + ' à ' + data[$i][5] + '</p>' +
-                        '<p>Prix : ' + data[$i][7] + '€</p>' +
-                        '<p id="note' + $i + '">Note du chauffeur : </p></div>';
+                            '<p>Arrivé : ' + data[$i][4] + ' à ' + data[$i][5] + '</p>' +
+                            '<p>Prix : ' + data[$i][7] + '€</p>' +
+                            '<p id="note' + $i + '">Note du chauffeur : </p></div>';
 
 
                         for($j=0;$j<10;$j++)
@@ -226,15 +206,15 @@
                         {
                             $("#"+id_div_trajet).append('<div class="col-sm-2 col-sm-offset-1">' +
                                 '<img class="logoAutoroute" src="../img/autoroute.png" alt="autouroute : oui" />' +
-                            '</div>');
+                                '</div>');
                         }
                         $("#"+id_div_trajet).append('<div class="col-sm-2">' +
-                        '<a href="./trajet.php?id_trajet=' + data[$i][9] + '"><button>Voir détails</button></a>' +
-                        '</div> </div> </div>');
+                            '<a href="./trajet.php?id_trajet=' + data[$i][9] + '"><button>Voir détails</button></a>' +
+                            '</div> </div> </div>');
                     }
                 },
                 error:function () {
-
+                    alert('error');
                 }
             });
             return false;
@@ -260,4 +240,5 @@
             //language : 'fr' //TODO Insertion ne marche pas si la date est au format FR
         });
     });
+
 </script>
