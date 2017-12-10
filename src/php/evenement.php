@@ -36,12 +36,12 @@
             while ($donnees = $reponse->fetch()) {
                 ?>
                 <div class="col-sm-12">
-                    <div class="col-sm-4">
+                    <div class="col-sm-4 col-sm-offset-1">
                         IMAGEEVENEMENT
                     </div>
-                    <div class="col-sm-6 col-sm-offset-1">
+                    <div class="col-sm-4 col-sm-offset-1">
                         <h1 class="text-center"><?php echo $donnees['nom']; ?></h1>
-                        <p class="text-center descriptionEvenement"><?php echo $donnees['description']; ?></p>
+                        <p class="descriptionEvenement"><?php echo $donnees['description']; ?></p>
                         <div>
                             <p>Adresse : <?php echo $donnees['adresse']; ?></p>
                             <p>Dates : <br /><?php echo $donnees['date_debut'] . ' <br /> ' . $donnees['date_fin']; ?></p>
@@ -65,11 +65,11 @@
                             </div>
                             <div class="col-sm-8 col-sm-offset-1 trajetEvenement">
                                 <div class="col-sm-6">
-                                    <h3 class="nomChauffeurTrajetEvenement">
+                                    <span class="nomChauffeurTrajetEvenement">
                                         <?php
                                         echo $donneesTrajet['nom'] . ' ' . $donneesTrajet['prenom'];
                                         ?>
-                                    </h3>
+                                    </span>
                                     <p>Depart : <?php echo $donneesTrajet['ville_depart'] . ', ' . $donneesTrajet['lieu_depart']; ?></p>
                                     <p>Prix : <?php echo $donneesTrajet['prix_tot'] . ' €'; ?></p>
                                     <p>Note chauffeur : <?php
@@ -90,7 +90,7 @@
                                     ?>
                                 </div>
                                 <div class="col-sm-2 col-sm-offset-1">
-                                    <a href="./trajet.php?id_trajet=<?php echo $donneesTrajet['id_trajet'] ?>"><button>Voir détails</button></a>
+                                    <a class="boutonDetailEvenement" href="./trajet.php?id_trajet=<?php echo $donneesTrajet['id_trajet'] ?>"><button>Voir détails</button></a>
                                 </div>
                             </div>
                         </div>
@@ -106,8 +106,13 @@
             <div class="col-sm-12">
                 <div class="col-sm-4 col-sm-offset-4">
                     <a href="./recherche.php"><button>Recherche détaillée</button></a>
-                    <button>Evénement terminé</button>
-                </div>z
+                    <?php 
+                    if(isset($_SESSION['ID_USER']) && $donnees['createur'] == $_SESSION['ID_USER']){
+                        echo '<button>Evénement terminé</button>';
+                    }
+                        
+                    ?>
+                </div>
             </div>
         </div>
         <?php include 'footer.include.php'; ?>

@@ -315,9 +315,11 @@ body {
 }
 
 .descriptionEvenement {
+    padding: 5px;
     border: solid rgb(69, 164, 247) 1px;
     background-color: rgba(255,255,255,0.9);
     border-radius: 5px;
+    min-height: 100px;
 }
 
 .logoAutoroute {
@@ -333,12 +335,15 @@ body {
 
 .nomChauffeurTrajetEvenement {
     position: relative;
-    bottom : 53px;
+    bottom : 25px;
     background-color: white;
     border-radius: 2px;
     text-align: center;
     padding-top: 10px;
+    padding-left: 5px; 
+    padding-right: 5px; 
     margin-bottom: -25px;
+    font-size: 1.5em;
 }
 
 .nomTrajet {
@@ -537,4 +542,47 @@ body {
 .elementInfoComp {
     margin-top : 5px;
     margin-bottom: 5px;
+}
+
+.note {
+    font-size: 1.4em;
+}
+
+.trajetEvenement div p {
+    margin-left: 50px;
+}
+
+.placesReservees, .boutonReservation {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    border-radius: 4px;
+    overflow: visible;
+}
+
+.boutonReservation:hover {
+    background-color: #ddd;
+    border-color: #ccc;
 }

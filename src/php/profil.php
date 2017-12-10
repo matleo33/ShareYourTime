@@ -60,14 +60,14 @@
                         }
                         ?></p>
                     <p><?php
-                        echo 'Note : ';
+                        echo 'Note : <span class="note">';
                         for ($i = 0; $i < $note; ++$i) {
                             echo '★';
                         }
                         for ($j = 0; $j < 10 - $note; ++$j) {
                             echo '☆';
                         }
-                        ?></p>
+                        ?></span></p>
                     <?php
                     echo "Description : ";
                     if (isset($_SESSION['ID_USER']) && ($_SESSION['ID_USER'] == $donnees['id_users'])) {

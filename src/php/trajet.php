@@ -35,9 +35,7 @@
             ' GROUP BY trajet.id_trajet';
             while ($donnees = $reponse->fetch()) {
                 $placesRestantes = GetPlacesRestantesTrajet($bdd, $_GET['id_trajet']);
-                echo "<div class=\"col-sm-2\">";
-                echo "</div>";
-                echo "<div class=\"col-sm-8 trajet\">";
+                echo "<div class=\"col-sm-8 col-sm-offset-2 trajet\" style=\"color : white;\">";
                 echo "<div class=\"nomTrajet\">";
                 echo "<div class=\"text-center col-sm-12\">";
                 echo "<h1>" . $donnees['ville_depart'] . " - " . $donnees['ville_arrivee'] . ' ' . $donnees['prix_tot'] . " €</h1>";
@@ -117,16 +115,16 @@
                             }
                             ?>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-4" style="color: #333;">
                             <form method="post" action="reservation_places_trajet.php">
-                                <input type="hidden" name="idTrajet" id="idTrajet" value="<?php echo $donnees['id_trajet'];?>" />
-                                <input type="hidden" name="idReservant" id="idReservant" value="<?php echo $_SESSION['ID_USER'];?>" />
-                                <input name="nombrePlacesReservees" id="nombrePlacesReservees" type="number" min="0" max="<?php echo $placesRestantes; ?>" style="width: 50px;" />
-                            <button>Je reserve</button>
+                                <input type="hidden" name="idTrajet" id="idTrajet" value="<?php echo $donnees['id_trajet']; ?>" />
+                                <input type="hidden" name="idReservant" id="idReservant" value="<?php echo $_SESSION['ID_USER']; ?>" />
+                                <input class="placesReservees" name="nombrePlacesReservees" id="nombrePlacesReservees" type="number" min="0" max="<?php echo $placesRestantes; ?>" style="width: 50px;" />
+                                <button class="boutonReservation">Je reserve</button>
                             </form>
                         </div>
                         <div class="col-sm-2">
-                            <a href="#"><button>Signaler</button></a>
+                            <a href="#"><button class="btn btn-default">Signaler</button></a>
                         </div>
                     </div>
                 </div>
