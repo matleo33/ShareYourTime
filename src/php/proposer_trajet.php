@@ -12,6 +12,7 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="../js/recherche.js"></script>
         <script src="../js/trouver_evenement.js"></script>
+        <script src="../js/datetimepicker.js"></script>
 
         <!-- Library DateTimePicker -->
         <link href="../BootStrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
@@ -24,8 +25,8 @@
     <body>
         <?php include 'navbar.include.php'; ?>
 
-        <div class="container col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 col-xs-12" style="text-align: center;background-color: RGB(69,164,247)">
-            <h1 style="color: white">PROPOSER UN TRAJET</h1>
+        <div class="container col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 col-xs-12" id="divProposerTrajet">
+            <h1 id="titreBlanc">PROPOSER UN TRAJET</h1>
             <form action="proposer_trajet_envoi.php" method="post" id="formTrajet">
                 <?php
                 $nomEvenement = NULL;
@@ -121,14 +122,6 @@
                           
         </div>
 
-        <script type="text/javascript">
-            $(function () {
-                $('.datetimepicker').datetimepicker({
-                    autoclose: true
-                            //language : 'fr' //TODO Insertion ne marche pas si la date est au format FR
-                });
-            });
-        </script>
         <?php include('footer.include.php'); ?>
         <script src="../BootStrap/js/bootstrap.min.js"></script>
     </body>

@@ -50,7 +50,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12" style="margin-top: 50px;">
+                <div class="col-sm-12" id="divTrajet">
 
                     <?php
                 }
@@ -59,7 +59,7 @@
                     $reponseTrajets = $bdd->query('SELECT id_trajet, nom, prenom, ville_depart, lieu_depart, prix_tot, personnalite, autoroute FROM trajet INNER JOIN users on trajet.chauffeur = users.id_users WHERE evenement=\'' . $id_event . '\'');
                     while ($donneesTrajet = $reponseTrajets->fetch()) {
                         ?>
-                        <div class="col-sm-12" style="margin-bottom: 50px;">
+                        <div class="col-sm-12" id="divCovoiturage">
                             <div class="col-sm-2">
                                 IMAGECHAUFFEUR
                             </div>

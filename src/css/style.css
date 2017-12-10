@@ -475,3 +475,39 @@ body {
     width: 100px;
     height: auto;
 }
+
+#divRecherche {
+    text-align: center;
+    background-color: RGB(69, 164, 247);
+}
+
+#containerCreation {
+    text-align: center;
+    background-color: RGB(69, 164, 247);
+    visibility: hidden;
+}
+
+#titreBlanc {
+    color: white;
+}
+
+#boutonSupprimer {
+    display: none;
+}
+
+#description {
+    max-width: 650px;
+}
+
+#divTrajet {
+    margin-top: 50px;
+}
+
+#divCovoiturage {
+    margin-bottom: 50px;
+}
+
+#divProposerTrajet {
+    text-align: center;
+    background-color: RGB(69, 164, 247);
+}
