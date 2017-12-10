@@ -119,6 +119,7 @@
                             <form method="post" action="reservation_places_trajet.php">
                                 <input type="hidden" name="idTrajet" id="idTrajet" value="<?php echo $donnees['id_trajet']; ?>" />
                                 <input type="hidden" name="idReservant" id="idReservant" value="<?php echo $_SESSION['ID_USER']; ?>" />
+                                <input type="hidden" name="location" id="location" value="<?php echo $_SERVER['REQUEST_URI']; ?>" />
                                 <input class="placesReservees" name="nombrePlacesReservees" id="nombrePlacesReservees" type="number" min="0" max="<?php echo $placesRestantes; ?>" style="width: 50px;" />
                                 <button class="boutonReservation">Je reserve</button>
                             </form>
