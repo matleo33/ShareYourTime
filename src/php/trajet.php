@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -20,6 +21,7 @@
         <?php include 'modal_connexion.include.php' ?>
         <?php include 'modal_inscription.include.php' ?>
         <?php
+        include 'getPlacesRestantesTrajet.php';
         try {
             $bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'root', '');
         } catch (Exception $e) {
@@ -32,6 +34,7 @@
             ;
             ' GROUP BY trajet.id_trajet';
             while ($donnees = $reponse->fetch()) {
+                $placesRestantes = GetPlacesRestantesTrajet($bdd, $_GET['id_trajet']);
                 echo "<div class=\"col-sm-2\">";
                 echo "</div>";
                 echo "<div class=\"col-sm-8 trajet\">";
@@ -43,9 +46,7 @@
                 ?>
                 <div class="infosTrajet">
                     <div class="col-sm-12 text-center">
-                        <div class="col-sm-3">
-                        </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-sm-offset-3">
                             <img src="../img/imageProfil.png" class="photoProfilInconnuTrajet" alt="photo chauffeur" />
                         </div>
                         <div class="col-sm-3">
@@ -62,8 +63,6 @@
                                 ?></p>
                         </div>
 
-                        <div class="col-sm-3">
-                        </div>
                         <div class="col-sm-6">
                             <div class="col-sm-12">
                                 <h4 style="text-align: left;">Depart :</h4>
@@ -112,15 +111,17 @@
                             ?>
                         </div>
                         <div class="col-sm-4">
-                            Il reste <?php echo $donnees['nb_place']; ?> place<?php
-                            if ($donnees['nb_place'] > 1) {
+                            Il reste <?php echo $placesRestantes; ?> place<?php
+                            if ($placesRestantes > 1) {
                                 echo 's';
                             }
                             ?>
                         </div>
                         <div class="col-sm-4">
-                            <form method="post" action="reservationPlacesTrajet.php">
-                            <input type="number" min="0" max="<?php echo $donnees['nb_place']; ?>" style="width: 50px;" />
+                            <form method="post" action="reservation_places_trajet.php">
+                                <input type="hidden" name="idTrajet" id="idTrajet" value="<?php echo $donnees['id_trajet'];?>" />
+                                <input type="hidden" name="idReservant" id="idReservant" value="<?php echo $_SESSION['ID_USER'];?>" />
+                                <input name="nombrePlacesReservees" id="nombrePlacesReservees" type="number" min="0" max="<?php echo $placesRestantes; ?>" style="width: 50px;" />
                             <button>Je reserve</button>
                             </form>
                         </div>
