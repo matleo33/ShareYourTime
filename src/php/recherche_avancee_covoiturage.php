@@ -13,7 +13,7 @@ try
 {
     $bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'root', '');
 
-    $requete = "SELECT DISTINCT users.nom, prenom, ville_depart, date_depart, ville_arrivee, date_arrivee, autoroute, prix_tot, personnalite, id_trajet FROM trajet INNER JOIN covoiturage INNER JOIN users INNER JOIN events ";
+    $requete = "SELECT DISTINCT chauffeur, ville_depart, date_depart, ville_arrivee, date_arrivee, autoroute, prix_tot, id_trajet FROM trajet INNER JOIN covoiturage ";
 
     if($_GET['optpeageradio'] == 'pasimportantpeage')
     {
@@ -21,11 +21,11 @@ try
     }
     else if ($_GET['optpeageradio'] == 'avecpeage')
     {
-        $requete .= 'WHERE trajet.autoroute == 1 ';
+        $requete .= 'WHERE trajet.autoroute = 1 ';
     }
     else if ($_GET['optpeageradio'] == 'sanspeage')
     {
-        $requete .= 'WHERE trajet.autoroute == 0 ';
+        $requete .= 'WHERE trajet.autoroute = 0 ';
     }
 
     if($_GET['ville_depart'] != '')
@@ -52,15 +52,22 @@ try
 
     while ($donnees = $reponse->fetch()) {
         $$compt = array();
-        array_push($$compt, $donnees["nom"],
-            $donnees["prenom"],
+        $requete2 = "SELECT nom, prenom, personnalite FROM users WHERE id_users = ".$donnees["chauffeur"];
+        $reponse2 = $bdd->query($requete2);
+        while($donnees_user = $reponse2->fetch())
+        {
+            array_push($$compt, $donnees_user["nom"],
+                $donnees_user["prenom"],
+                $donnees_user["personnalite"]);
+        }
+        array_push($$compt,
             $donnees["ville_depart"],
             $donnees["date_depart"],
             $donnees["ville_arrivee"],
             $donnees["date_arrivee"],
             $donnees["autoroute"],
             $donnees["prix_tot"],
-            $donnees["personnalite"],
+            //$donnees["personnalite"],
             $donnees["id_trajet"]);
         array_push($covoit_event,$$compt);
         $compt++;
@@ -69,7 +76,8 @@ try
 }
 catch (Exception $e)
 {
-    die('Erreur : ' . $e->getMessage());
+    //die('Erreur : ' . $e->getMessage());
+    echo $e->getMessage();
 }
 
 
