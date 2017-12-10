@@ -39,8 +39,7 @@ function display_event(string $name, int $nb_people, $price, string $facebook_li
     . "<div class='image_top_3_event col-sm-3'>"
     . "<img src='" . /* Ici mettre code pour avoir image. */ "' alt='image' />" //TODO
     . "</div>"
-    . "<div class=\"col-sm-1\"></div>"
-    . "<div class=\"informations_event col-sm-6\">"
+    . "<div class=\"informations_event col-sm-6 col-sm-offset-1\">"
     . "<div>"
     . "<div class=\"border\">"
     . "<p class=\"text_left\">"

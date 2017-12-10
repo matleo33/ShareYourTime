@@ -39,9 +39,7 @@
                     <div class="col-sm-4">
                         IMAGEEVENEMENT
                     </div>
-                    <div class="col-sm-1" >
-                    </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 col-sm-offset-1">
                         <h1 class="text-center"><?php echo $donnees['nom']; ?></h1>
                         <p class="text-center descriptionEvenement"><?php echo $donnees['description']; ?></p>
                         <div>
@@ -65,9 +63,7 @@
                             <div class="col-sm-2">
                                 IMAGECHAUFFEUR
                             </div>
-                            <div class="col-sm-1">
-                            </div>
-                            <div class="col-sm-8 trajetEvenement">
+                            <div class="col-sm-8 col-sm-offset-1 trajetEvenement">
                                 <div class="col-sm-6">
                                     <h3 class="nomChauffeurTrajetEvenement">
                                         <?php
@@ -85,18 +81,15 @@
                                         }
                                         ?></p>
                                 </div>
-                                <div class="col-sm-1">
-                                </div>
-                                <div class="col-sm-2">
+
+                                <div class="col-sm-2 col-sm-offset-1">
                                     <?php
                                     if ($donneesTrajet['autoroute']) {
                                         echo "<img class=\"logoAutoroute\" src=\"../img/autoroute.png\" alt=\"autouroute : oui\"/ />";
                                     }
                                     ?>
                                 </div>
-                                <div class="col-sm-1">
-                                </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-2 col-sm-offset-1">
                                     <a href="./trajet.php?id_trajet=<?php echo $donneesTrajet['id_trajet'] ?>"><button>Voir détails</button></a>
                                 </div>
                             </div>
@@ -111,14 +104,10 @@
             ?>
             <?php /* inclure menu nav */ ?>
             <div class="col-sm-12">
-                <div class="col-sm-4">
-                </div>
-                <div class="col-sm-4">
+                <div class="col-sm-4 col-sm-offset-4">
                     <a href="./recherche.php"><button>Recherche détaillée</button></a>
                     <button>Evénement terminé</button>
-                </div>
-                <div class="col-sm-4">
-                </div>
+                </div>z
             </div>
         </div>
         <?php include 'footer.include.php'; ?>

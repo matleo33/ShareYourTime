@@ -108,6 +108,7 @@
                         </div>
                         <div class="col-sm-6">
                             <select class="form-control" id="autoroute" >
+                                <option selected disabled>Autoroute</option>
                                 <option>Oui</option>
                                 <option>Non</option>
                             </select>
