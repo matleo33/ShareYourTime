@@ -74,7 +74,7 @@ $_POST['ville_dep']=''?>
 <?php include 'navbar.include.php'; ?><br/>
 <?php include 'modal_connexion.include.php' ?>
 <?php include 'modal_inscription.include.php' ?>
-
+<div class="container-fluid">
 <div class="col-sm-12">
     <h1 class="text-center">RECHERCHE</h1>
 </div>
@@ -166,6 +166,7 @@ $_POST['ville_dep']=''?>
 
 <div class="col-sm-12" id="resultForm">
 
+</div>
 </div>
 
 <?php include 'footer.include.php'; ?>
