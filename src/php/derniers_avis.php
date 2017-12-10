@@ -26,5 +26,4 @@ function derniersAvis($bdd, $id_user) {
         return 0;
     }
     echo "<p>Pas d'avis pour cet utilisateur</p>";
-    
 }
