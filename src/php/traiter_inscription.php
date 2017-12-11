@@ -27,7 +27,7 @@ try {
     $stmt->execute(array($name, $firstName, $email, $pass, $age, $number, $type, $address, $pc, $city, $phoneNumber));
 
     session_start();
-    $pdo = null;
+    $conn = null;
     /*
     $res = $stmt->fetch();
     if ($res) {

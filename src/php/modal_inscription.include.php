@@ -8,7 +8,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Inscription</h4>
             </div>
-            <form method="post" action="inscription.php">
+            <form method="post" action="traiter_inscription.php">
                 <div class="form-group col-sm-10 col-sm-offset-1" id="divFirstName">
                     <input type="text" class="form-control" id="inputFirstName" name="inputFirstName" placeholder="Prénom">
                 </div>
