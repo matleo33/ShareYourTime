@@ -47,7 +47,7 @@
                             <p class="descriptionEvenement"><?php echo $donnees['description']; ?></p>
                             <div>
                                 <p>Adresse : <?php echo $donnees['adresse']; ?></p>
-                                <p>Dates : <br/><?php echo $donnees['date_debut'] . ' <br /> ' . $donnees['date_fin']; ?></p>
+                                <p>Dates : <br/><?php echo strftime("%e / %m / %Y, %H : %M",strtotime($donnees['date_debut'])) . ' <br /> ' . strftime("%e / %m / %Y, %H : %M",strtotime($donnees['date_fin'])); ?></p>
                                 <div class="text_right"><a href="<?php echo $donnees['lien_fb']; ?>"><img class='logo'
                                                                                                           src='../img/facebook.png'/></a>
                                     <a href="<?php echo $donnees['lien_billet']; ?>"><img class='logo' src='../img/ticket.png'/></a>
@@ -137,7 +137,7 @@
                     ?>
                 </div>
                 <div class="col-sm-12">
-                    <div class="col-sm-4 col-sm-offset-4">
+                    <div class="col-sm-6 col-sm-offset-3 text-center">
                         <a href="./proposer_trajet.php?id_events=<?php echo $_GET['id_events']; ?>"><button>Proposez votre trajet</button></a>
                         <a href="./recherche.php"><button>Recherche détaillée</button></a>
                         <?php

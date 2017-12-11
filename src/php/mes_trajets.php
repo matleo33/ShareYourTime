@@ -12,6 +12,10 @@
         <script src="../js/recherche.js"></script>
         <script src="../js/trouver_evenement.js"></script>
         <script src="../js/datetimepicker.js"></script>
+        
+        <meta charset="UTF-8">
+        <link href="./../css/style.css" rel="stylesheet">
+        <script src="../BootStrap/js/bootstrap.min.js"></script>
 
         <!-- Library DateTimePicker -->
         <link href="../BootStrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
@@ -44,7 +48,7 @@
                             <tr class="bg-primary">
                                 <th colspan="2">
                                     <?php
-                                    echo $donnees['ville_depart'] . ' - ' . $donnees['ville_arrivee'] . ' - ' . $donnees['date_depart'] . ' - ';
+                                    echo $donnees['ville_depart'] . ' - ' . $donnees['ville_arrivee'] . ' - ' . strftime("%e / %m / %Y, %H : %M",strtotime($donnees['date_depart'])) . ' - ';
                                     switch ($donnees['est_fini']) {
                                         case 0: {
                                                 echo "Pret";

@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="col-sm-8">
                                     <p><?php echo $donnees['lieu_depart']; ?></p>
-                                    <p><?php echo $donnees['date_depart']; ?></p>
+                                    <p><?php echo strftime("%e / %m / %Y, <br /> %H : %M",strtotime($donnees['date_depart'])); ?></p>
                                 </div>
                             </div>
                             <?php for ($i = 0; $i < $donnees['COUNT(*)']; ++$i) { ?>
@@ -90,7 +90,7 @@
                                     </div>
                                     <div class="col-sm-8">
                                         <p><?php echo $donnees['lieu']; ?></p>
-                                        <p><?php echo $donnees['date']; ?></p>
+                                        <p><?php echo strftime("%e / %m / %Y, <br /> %H : %M",strtotime($donnees['date'])); ?></p>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -101,7 +101,7 @@
                                 </div>
                                 <div class="col-sm-8">
                                     <p><?php echo $donnees['lieu_arrive']; ?></p>
-                                    <p><?php echo $donnees['date_arrivee']; ?></p>
+                                    <p><?php echo strftime("%e / %m / %Y, <br /> %H : %M",strtotime($donnees['date_arrivee'])); ?></p>
                                 </div>
                             </div>
                         </div>
