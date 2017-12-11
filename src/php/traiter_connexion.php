@@ -10,8 +10,8 @@ $servername = "localhost";
 $dbname = "shareyourtime";
 $username = "root";
 $password = "";
-$email = htmlspecialchars($_POST["inputEmail"]);
-$pass = htmlspecialchars($_POST["inputPassword"]);
+$email = htmlspecialchars($_POST["inputEmailConnexion"]);
+$pass = htmlspecialchars($_POST["inputPasswordConnexion"]);
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);

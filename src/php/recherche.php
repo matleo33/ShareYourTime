@@ -1,5 +1,4 @@
-<?php session_start();
-$_POST['ville_dep']=''?>
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -74,13 +73,13 @@ $_POST['ville_dep']=''?>
 <?php include 'navbar.include.php'; ?><br/>
 <?php include 'modal_connexion.include.php' ?>
 <?php include 'modal_inscription.include.php' ?>
-
+<div class="container-fluid">
 <div class="col-sm-12">
     <h1 class="text-center">RECHERCHE</h1>
 </div>
 <div class="col-sm-12 text-center">
     <div class="col-sm-3 col-sm-offset-2">
-        <input placeholder="Nom de l'événement"<?php
+        <input id="nom_event" name="nom_event" placeholder="Nom de l'événement"<?php
         if (isset($_GET['nomEvent'])) {
             echo "value=\"" . $_GET['nomEvent'] . "\"";
         }
@@ -100,7 +99,7 @@ $_POST['ville_dep']=''?>
     <form method="post" action="recherche_avancee_covoiturage.php" id="optionAvanceeForm" style="display: none"><!-- A ne pas mettre dans la feuille de style sinon le JS ne fonctione pas -->
         <div class="col-sm-12">
             <div class="col-sm-6">
-                <input id="ville_depart" name="ville_depart" value="<?php $_POST['ville_dep']?>" placeholder="Ville de départ"/>
+                <input id="ville_depart" name="ville_depart" placeholder="Ville de départ"/>
             </div>
             <div class="col-sm-6">
                 <input id="ville_arrivee" name="ville_arrivee" placeholder="Ville d'arrivée"/>
@@ -110,29 +109,15 @@ $_POST['ville_dep']=''?>
             <div class="col-sm-3">
                 <label for="date_depart">Date de départ</label>
             </div>
-            <div class='input-group date datetimepicker col-sm-3'>
-                <input type='text' id="date_depart" name="date_depart" class="form-control" placeholder="Date de départ + heure"/>
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
+            <div class="input-group date">
+                <input type="date" name="date_depart" class="form-control">
             </div>
 
             <div class="col-sm-3">
                 <label for="date_arrivee">Date d'arrivée</label>
             </div>
-            <!--
-            <div class='input-group date datetimepicker col-sm-3'>
-                <input type='text' id="date_arrivee" name="date_arrivee" class="form-control" placeholder="Date d'arrivée + heure"/>
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-            </div>-->
-
-            <div class="input-group date" data-provide="datepicker">
-                <input type="text" class="form-control">
-                <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-th"></span>
-                </div>
+            <div class="input-group date">
+                <input type="date" name="date_arrivee" class="form-control">
             </div>
 
         </div>
@@ -150,18 +135,23 @@ $_POST['ville_dep']=''?>
 
         <div class="col-sm-12">
             <div class="radio">
-                <label><input type="radio" name="optpeageradio" value="avecpeage">Avec péage</label>
+                <label><input type="radio" class="optpeageradio" name="optpeageradio" value="avecpeage">Avec péage</label>
             </div>
             <div class="radio">
-                <label><input type="radio" name="optpeageradio" value="sanspeage">Sans péage</label>
+                <label><input type="radio" class="optpeageradio" name="optpeageradio" value="sanspeage">Sans péage</label>
             </div>
             <div class="radio">
-                <label><input type="radio" name="optpeageradio" value="pasimportantpeage" checked>Pas important</label>
+                <label><input type="radio" class="optpeageradio" name="optpeageradio" value="pasimportantpeage" checked>Pas important</label>
             </div>
         </div>
-        <input type="submit" value="Rechercher" />
+        <input id="validateForm" type="button" value="Rechercher" />
 
     </form>
+</div>
+
+<div class="col-sm-12" id="resultForm">
+
+</div>
 </div>
 
 <?php include 'footer.include.php'; ?>
@@ -169,31 +159,38 @@ $_POST['ville_dep']=''?>
 </html>
 <script>
     $(document).ready(function () {
-        $("#optionAvanceeForm").submit(function () {
+        $("#validateForm").click(function () {
+            var nom_event = $("#nom_event").val();
+            var data_get = $("#optionAvanceeForm").serialize();
+            if(nom_event != '')
+            {
+                data_get+="&nom_event=" + nom_event;
+            }
+            alert(data_get);
             $.ajax({
                 type:"GET",
-                data: $(this).serialize(),
+                data: data_get,//$("#optionAvanceeForm").serialize() + "&nom_event=" +$("#nom_event").value,
                 contentType:"application/json",
                 dataType:"json",
                 url:"recherche_avancee_covoiturage.php",
                 success:function (data) {
+                    document.getElementById("resultForm").innerHTML = '';
                     for($i=0; $i<data.length; $i++)
                     {
                         var id_div_trajet ="trajet" + $i;
-                        document.body.innerHTML += '<div class="col-sm-12">' +
-                            '<div class="col-sm-8 col-sm-offset-2 trajetEvenement" id="' + id_div_trajet + '" style="margin-top: 50px">' +
+                        document.getElementById("resultForm").innerHTML += '<div class="col-sm-8 col-sm-offset-2 trajetEvenement" id="' + id_div_trajet + '" style="margin-top: 50px">' +
                             '<div class="col-sm-6">' +
                             '<h3 class="nomChauffeurTrajetEvenement">' +
                             data[$i][0] + ' ' + data[$i][1] + '</h3>' +
-                            '<p>Depart : ' + data[$i][2] + ' à ' + data[$i][3] + '</p>' +
-                            '<p>Arrivé : ' + data[$i][4] + ' à ' + data[$i][5] + '</p>' +
-                            '<p>Prix : ' + data[$i][7] + '€</p>' +
+                            '<p>Depart : ' + data[$i][3] + ' à ' + data[$i][4] + '</p>' +
+                            '<p>Arrivé : ' + data[$i][5] + ' à ' + data[$i][6] + '</p>' +
+                            '<p>Prix : ' + data[$i][8] + '€</p>' +
                             '<p id="note' + $i + '">Note du chauffeur : </p></div>';
 
 
                         for($j=0;$j<10;$j++)
                         {
-                            if($j<data[$i][8])
+                            if($j<data[$i][2])
                             {
                                 $("#note"+$i).append('★');
                             }
@@ -202,7 +199,7 @@ $_POST['ville_dep']=''?>
                                 $("#note"+$i).append('☆');
                             }
                         }
-                        if(data[$i][6] == 1)
+                        if(data[$i][7] == 1)
                         {
                             $("#"+id_div_trajet).append('<div class="col-sm-2 col-sm-offset-1">' +
                                 '<img class="logoAutoroute" src="../img/autoroute.png" alt="autouroute : oui" />' +
@@ -210,11 +207,11 @@ $_POST['ville_dep']=''?>
                         }
                         $("#"+id_div_trajet).append('<div class="col-sm-2">' +
                             '<a href="./trajet.php?id_trajet=' + data[$i][9] + '"><button>Voir détails</button></a>' +
-                            '</div> </div> </div>');
+                            '</div> </div>');
                     }
                 },
-                error:function () {
-                    alert('error');
+                error:function (data) {
+                    alert(data);
                 }
             });
             return false;

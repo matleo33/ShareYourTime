@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -20,6 +21,8 @@
         <?php include 'modal_connexion.include.php' ?>
         <?php include 'modal_inscription.include.php' ?>
         <?php
+        include 'getPlacesRestantesTrajet.php';
+        include 'getNote.php';
         try {
             $bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'root', '');
         } catch (Exception $e) {
@@ -32,9 +35,13 @@
             ;
             ' GROUP BY trajet.id_trajet';
             while ($donnees = $reponse->fetch()) {
-                echo "<div class=\"col-sm-2\">";
-                echo "</div>";
-                echo "<div class=\"col-sm-8 trajet\">";
+                $note = 5;
+                        $hasNote = getHasNote($bdd, $donnees['id_users']);
+                        if ($hasNote) {
+                            $note = getNote($bdd, $donnees['id_users']);
+                        }
+                $placesRestantes = GetPlacesRestantesTrajet($bdd, $_GET['id_trajet']);
+                echo "<div class=\"col-sm-8 col-sm-offset-2 trajet\" style=\"color : white;\">";
                 echo "<div class=\"nomTrajet\">";
                 echo "<div class=\"text-center col-sm-12\">";
                 echo "<h1>" . $donnees['ville_depart'] . " - " . $donnees['ville_arrivee'] . ' ' . $donnees['prix_tot'] . " €</h1>";
@@ -43,9 +50,7 @@
                 ?>
                 <div class="infosTrajet">
                     <div class="col-sm-12 text-center">
-                        <div class="col-sm-3">
-                        </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-sm-offset-3">
                             <img src="../img/imageProfil.png" class="photoProfilInconnuTrajet" alt="photo chauffeur" />
                         </div>
                         <div class="col-sm-3">
@@ -53,17 +58,19 @@
                             <p><?php echo $donnees['num_telephone']; ?></p>
                             <p><?php echo $donnees['mail']; ?></p>
                             <p><?php
-                                for ($i = 0; $i < $donnees['personnalite']; ++$i) {
-                                    echo '★';
-                                }
-                                for ($j = 0; $j < 10 - $donnees['personnalite']; ++$j) {
-                                    echo '☆';
-                                }
+                                if ($hasNote) {
+                                            for ($i = 0; $i < $note; ++$i) {
+                                                echo '★';
+                                            }
+                                            for ($j = 0; $j < 10 - $note; ++$j) {
+                                                echo '☆';
+                                            }
+                                        } else {
+                                            echo 'Inconnue';
+                                        }
                                 ?></p>
                         </div>
 
-                        <div class="col-sm-3">
-                        </div>
                         <div class="col-sm-6">
                             <div class="col-sm-12">
                                 <h4 style="text-align: left;">Depart :</h4>
@@ -72,7 +79,7 @@
                                 </div>
                                 <div class="col-sm-8">
                                     <p><?php echo $donnees['lieu_depart']; ?></p>
-                                    <p><?php echo $donnees['date_depart']; ?></p>
+                                    <p><?php echo strftime("%e / %m / %Y, <br /> %H : %M",strtotime($donnees['date_depart'])); ?></p>
                                 </div>
                             </div>
                             <?php for ($i = 0; $i < $donnees['COUNT(*)']; ++$i) { ?>
@@ -83,7 +90,7 @@
                                     </div>
                                     <div class="col-sm-8">
                                         <p><?php echo $donnees['lieu']; ?></p>
-                                        <p><?php echo $donnees['date']; ?></p>
+                                        <p><?php echo strftime("%e / %m / %Y, <br /> %H : %M",strtotime($donnees['date'])); ?></p>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -94,7 +101,7 @@
                                 </div>
                                 <div class="col-sm-8">
                                     <p><?php echo $donnees['lieu_arrive']; ?></p>
-                                    <p><?php echo $donnees['date_arrivee']; ?></p>
+                                    <p><?php echo strftime("%e / %m / %Y, <br /> %H : %M",strtotime($donnees['date_arrivee'])); ?></p>
                                 </div>
                             </div>
                         </div>
@@ -107,25 +114,28 @@
                         <div class="col-sm-2">
                             <?php
                             if ($donnees['autoroute'] == true) {
-                                echo '<img src="../img/autoroute.png" class="logo_autoroute" />';
+                                echo '<img src="../img/autoroute.png" class="logoAutoroute" />';
                             }
                             ?>
                         </div>
                         <div class="col-sm-4">
-                            Il reste <?php echo $donnees['nb_place']; ?> place<?php
-                            if ($donnees['nb_place'] > 1) {
+                            Il reste <?php echo $placesRestantes; ?> place<?php
+                            if ($placesRestantes > 1) {
                                 echo 's';
                             }
                             ?>
                         </div>
-                        <div class="col-sm-4">
-                            <form method="post" action="reservationPlacesTrajet.php">
-                            <input type="number" min="0" max="<?php echo $donnees['nb_place']; ?>" style="width: 50px;" />
-                            <button>Je reserve</button>
+                        <div class="col-sm-4" style="color: #333;">
+                            <form method="post" action="reservation_places_trajet.php">
+                                <input type="hidden" name="idTrajet" id="idTrajet" value="<?php echo $donnees['id_trajet']; ?>" />
+                                <input type="hidden" name="idReservant" id="idReservant" value="<?php echo $_SESSION['ID_USER']; ?>" />
+                                <input type="hidden" name="location" id="location" value="<?php echo $_SERVER['REQUEST_URI']; ?>" />
+                                <input class="placesReservees" name="nombrePlacesReservees" id="nombrePlacesReservees" type="number" min="0" max="<?php echo $placesRestantes; ?>" style="width: 50px;" />
+                                <button class="boutonReservation">Je reserve</button>
                             </form>
                         </div>
                         <div class="col-sm-2">
-                            <a href="#"><button>Signaler</button></a>
+                            <a href="#"><button class="btn btn-default">Signaler</button></a>
                         </div>
                     </div>
                 </div>

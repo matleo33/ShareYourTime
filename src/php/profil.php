@@ -33,8 +33,11 @@
                     . 'FROM users INNER JOIN events ON users.id_users = events.createur '
                     . 'WHERE events.createur=' . $_GET['id_profil']);
             while ($donnees = $reponse->fetch()) {
-                $note = getNote($bdd, $donnees['id_users']);
-                ?>
+                $hasNote = getHasNote($bdd, $donnees['id_users']);
+                if ($hasNote) {
+            $note = getNote($bdd, $donnees['id_users']);
+        }
+?>
 
                 <!-- Photo de profil -->    
                 <div class="col-sm-4">
@@ -53,6 +56,7 @@
                     <h1><?php echo $donnees['nom'] . ' ' . $donnees['prenom'] ?></h1>
                     <p>Mail : <?php echo $donnees['mail']; ?></p>
                     <p>Tel : <?php echo $donnees['num_telephone']; ?></p>
+                    <p>Contact préférentiel : <?php echo $donnees['contact_pref']; ?></p>
                     <p>Nombre de trajets en tant que conducteur : <?php echo $donnees['COUNT(trajet.id_trajet)'] ?></p>
                     <p>Nombre d'événements organisés : <?php
                         while ($donnees2 = $reponse2->fetch()) {
@@ -60,14 +64,18 @@
                         }
                         ?></p>
                     <p><?php
-                        echo 'Note : ';
-                        for ($i = 0; $i < $note; ++$i) {
-                            echo '★';
-                        }
-                        for ($j = 0; $j < 10 - $note; ++$j) {
-                            echo '☆';
-                        }
-                        ?></p>
+                        echo 'Note : <span class="note">';
+                        if ($hasNote) {
+                                            for ($i = 0; $i < $note; ++$i) {
+                                                echo '★';
+                                            }
+                                            for ($j = 0; $j < 10 - $note; ++$j) {
+                                                echo '☆';
+                                            }
+                                        } else {
+                                            echo 'Inconnue';
+                                        }
+                        ?></span></p>
                     <?php
                     echo "Description : ";
                     if (isset($_SESSION['ID_USER']) && ($_SESSION['ID_USER'] == $donnees['id_users'])) {

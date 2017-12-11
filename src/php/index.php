@@ -3,7 +3,7 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="iso-8859-1" />
     <link href="./../css/style.css" rel="stylesheet">
 
     <!-- Bootstrap-->
@@ -11,6 +11,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="../js/recherche.js"></script>
+    <script src="../js/chercher_adresse.js"></script>
 
     <title>Share Your Time</title>
 </head>

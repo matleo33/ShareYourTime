@@ -9,11 +9,12 @@
 session_start();
 $covoit_event = array();
 $compt = 1;
+$nom_event = '';
 try
 {
     $bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'root', '');
 
-    $requete = "SELECT DISTINCT users.nom, prenom, ville_depart, date_depart, ville_arrivee, date_arrivee, autoroute, prix_tot, personnalite, id_trajet FROM trajet INNER JOIN covoiturage INNER JOIN users INNER JOIN events ";
+    $requete = "SELECT DISTINCT evenement, chauffeur, ville_depart, date_depart, ville_arrivee, date_arrivee, autoroute, prix_tot, id_trajet FROM trajet INNER JOIN covoiturage ";
 
     if($_GET['optpeageradio'] == 'pasimportantpeage')
     {
@@ -21,11 +22,11 @@ try
     }
     else if ($_GET['optpeageradio'] == 'avecpeage')
     {
-        $requete .= 'WHERE trajet.autoroute == 1 ';
+        $requete .= 'WHERE trajet.autoroute = 1 ';
     }
     else if ($_GET['optpeageradio'] == 'sanspeage')
     {
-        $requete .= 'WHERE trajet.autoroute == 0 ';
+        $requete .= 'WHERE trajet.autoroute = 0 ';
     }
 
     if($_GET['ville_depart'] != '')
@@ -47,29 +48,55 @@ try
         $requete .= "&& ".  $_GET['nombre_voyageur'] . " <= trajet.nb_place - covoiturage.nb_place_res ";
     }
 
-
     $reponse = $bdd->query($requete);
 
     while ($donnees = $reponse->fetch()) {
         $$compt = array();
-        array_push($$compt, $donnees["nom"],
-            $donnees["prenom"],
-            $donnees["ville_depart"],
-            $donnees["date_depart"],
-            $donnees["ville_arrivee"],
-            $donnees["date_arrivee"],
-            $donnees["autoroute"],
-            $donnees["prix_tot"],
-            $donnees["personnalite"],
-            $donnees["id_trajet"]);
-        array_push($covoit_event,$$compt);
-        $compt++;
+        $requete2 = "SELECT users.nom, prenom, personnalite FROM users WHERE id_users = ".$donnees["chauffeur"];
+        $reponse2 = $bdd->query($requete2);
+
+        $donnees_user = $reponse2->fetch();
+
+        $requete3 = "SELECT nom FROM events WHERE id_events = ".$donnees["evenement"];
+        $reponse3 = $bdd->query($requete3);
+        $donnees_trajet = $reponse3->fetch();
+
+        if(isset($_GET["nom_event"]))
+        {
+            $nom_event = $_GET["nom_event"];
+        }
+
+        if($donnees_trajet)
+        {
+            if($donnees_user && ($donnees_trajet['nom'] == $nom_event || $nom_event == ''))
+            {
+
+                array_push($$compt, $donnees_user[0],
+                    $donnees_user["prenom"],
+                    $donnees_user["personnalite"]);
+
+                array_push($$compt,
+                    $donnees["ville_depart"],
+                    $donnees["date_depart"],
+                    $donnees["ville_arrivee"],
+                    $donnees["date_arrivee"],
+                    $donnees["autoroute"],
+                    $donnees["prix_tot"],
+                    //$donnees["personnalite"],
+                    $donnees["id_trajet"]);
+                array_push($covoit_event,$$compt);
+                $compt++;
+            }
+        }
+
+
     }
     echo json_encode(array_values($covoit_event));
 }
 catch (Exception $e)
 {
-    die('Erreur : ' . $e->getMessage());
+    //die('Erreur : ' . $e->getMessage());
+    echo $e->getMessage();
 }
 
 

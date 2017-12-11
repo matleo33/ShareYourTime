@@ -6,7 +6,7 @@ $(function () {
         //e.preventDefault();
         $.get("get_events.php", $(this).serialize(), function (texte) {
             var arrayOfStrings = texte.split(",");
-            for (var i = 0; i < arrayOfStrings.length-1; i++) {
+            for (var i = 0; i < arrayOfStrings.length - 1; i++) {
                 availableTags.push(arrayOfStrings[i]);
             }
         });

@@ -63,7 +63,7 @@ function display_event(string $name, int $nb_people, $price, string $facebook_li
     . "</div>"
     . "</div>"
     . "<div class='icones'>"
-    . "<a href=";
+    . "<a href=\"";
     if ($facebook_link != NULL)
     {
         echo $facebook_link . "\" target=\"_blank\" rel=\"noopener noreferrer\"><img class='logo' src='../img/facebook.png'/></a><a href=\"";
