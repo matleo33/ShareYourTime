@@ -86,7 +86,7 @@
         ?>
         /></div>
     <div class="col-sm-6">
-        <button onclick="rechercheGlobale()">Rechercher</button>
+        <button id="recherche_evenement">Rechercher</button>
     </div>
     <div class="col-sm-3 col-sm-offset-2">
         <a id="optionAvancee" href="#" onclick="activerOptionAvancee()">Options avancées</a>
@@ -110,14 +110,14 @@
                 <label for="date_depart">Date de départ</label>
             </div>
             <div class="input-group date">
-                <input type="date" name="date_depart" class="form-control">
+                <input type="date" id="date_depart" name="date_depart" class="form-control">
             </div>
 
             <div class="col-sm-3">
                 <label for="date_arrivee">Date d'arrivée</label>
             </div>
             <div class="input-group date">
-                <input type="date" name="date_arrivee" class="form-control">
+                <input type="date" id="date_arrivee" name="date_arrivee" class="form-control">
             </div>
 
         </div>
@@ -152,6 +152,25 @@
 <div class="col-sm-12" id="resultForm">
 
 </div>
+
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Pas d'événement correspondant</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </div>
 
 <?php include 'footer.include.php'; ?>
@@ -231,11 +250,24 @@
 
     }
 </script>
-<script type="text/javascript">
-    $(function () {
-        $('.datetimepicker').datetimepicker({
-            //language : 'fr' //TODO Insertion ne marche pas si la date est au format FR
+<script>
+    $(document).ready(function(e) {
+        //e.preventDefault();
+        $("#recherche_evenement").click(function () {
+            $.get("rechercheEvenement.php","eventName="+$("#nom_event").val(),function(id){
+                if(id != '')
+                {
+                    var currentLocation =  document.location.href;
+                    currentLocation = currentLocation.substring( 0 ,currentLocation.lastIndexOf( "src" ) );
+                    currentLocation += 'src/php/evenement.php?id_events=' + id;
+                    window.location.href = currentLocation ;
+                }
+                else
+                {
+                    $("#myModal").modal('show');
+                }
+            });
+            return false; // permet de ne pas recharger la page
         });
     });
-
 </script>

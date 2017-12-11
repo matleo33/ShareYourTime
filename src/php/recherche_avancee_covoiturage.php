@@ -48,6 +48,20 @@ try
         $requete .= "&& ".  $_GET['nombre_voyageur'] . " <= trajet.nb_place - covoiturage.nb_place_res ";
     }
 
+    if($_GET['date_depart'] != '')
+    {
+        $date_depart_fr = $_GET['date_depart'];
+        $date_depart_us = date('Y-m-d', strtotime(str_replace('/', '-', $date_depart_fr)));
+        $requete.= "&& CAST(date_depart AS DATE) =\"". $date_depart_us . "\" ";
+    }
+
+    if($_GET['date_arrivee'] != '')
+    {
+        $date_arrivee_fr = $_GET['date_arrivee'];
+        $date_arrivee_us = date('Y-m-d', strtotime(str_replace('/', '-', $date_arrivee_fr)));
+        $requete.= "&& CAST(date_arrivee AS DATE) =\"". $date_arrivee_us . "\" ";
+    }
+
     $reponse = $bdd->query($requete);
 
     while ($donnees = $reponse->fetch()) {
