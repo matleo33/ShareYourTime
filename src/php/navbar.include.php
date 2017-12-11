@@ -5,6 +5,7 @@ $page = explode("/", pagencours);
 
 <?php include 'modal_connexion.include.php' ?>
 <?php include 'modal_inscription.include.php' ?>
+<?php include 'modal_mdp_oublie.include.php' ?>
 <link href="./../css/style.css" rel="stylesheet">
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
