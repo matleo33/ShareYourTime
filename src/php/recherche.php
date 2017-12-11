@@ -1,5 +1,4 @@
-<?php session_start();
-$_POST['ville_dep']=''?>
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -80,7 +79,7 @@ $_POST['ville_dep']=''?>
 </div>
 <div class="col-sm-12 text-center">
     <div class="col-sm-3 col-sm-offset-2">
-        <input placeholder="Nom de l'événement"<?php
+        <input id="nom_event" name="nom_event" placeholder="Nom de l'événement"<?php
         if (isset($_GET['nomEvent'])) {
             echo "value=\"" . $_GET['nomEvent'] . "\"";
         }
@@ -100,7 +99,7 @@ $_POST['ville_dep']=''?>
     <form method="post" action="recherche_avancee_covoiturage.php" id="optionAvanceeForm" style="display: none"><!-- A ne pas mettre dans la feuille de style sinon le JS ne fonctione pas -->
         <div class="col-sm-12">
             <div class="col-sm-6">
-                <input id="ville_depart" name="ville_depart" value="<?php $_POST['ville_dep']?>" placeholder="Ville de départ"/>
+                <input id="ville_depart" name="ville_depart" placeholder="Ville de départ"/>
             </div>
             <div class="col-sm-6">
                 <input id="ville_arrivee" name="ville_arrivee" placeholder="Ville d'arrivée"/>
@@ -110,29 +109,15 @@ $_POST['ville_dep']=''?>
             <div class="col-sm-3">
                 <label for="date_depart">Date de départ</label>
             </div>
-            <div class='input-group date datetimepicker col-sm-3'>
-                <input type='text' id="date_depart" name="date_depart" class="form-control" placeholder="Date de départ + heure"/>
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
+            <div class="input-group date">
+                <input type="date" name="date_depart" class="form-control">
             </div>
 
             <div class="col-sm-3">
                 <label for="date_arrivee">Date d'arrivée</label>
             </div>
-            <!--
-            <div class='input-group date datetimepicker col-sm-3'>
-                <input type='text' id="date_arrivee" name="date_arrivee" class="form-control" placeholder="Date d'arrivée + heure"/>
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-            </div>-->
-
-            <div class="input-group date" data-provide="datepicker">
-                <input type="text" class="form-control">
-                <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-th"></span>
-                </div>
+            <div class="input-group date">
+                <input type="date" name="date_arrivee" class="form-control">
             </div>
 
         </div>
@@ -175,9 +160,16 @@ $_POST['ville_dep']=''?>
 <script>
     $(document).ready(function () {
         $("#validateForm").click(function () {
+            var nom_event = $("#nom_event").val();
+            var data_get = $("#optionAvanceeForm").serialize();
+            if(nom_event != '')
+            {
+                data_get+="&nom_event=" + nom_event;
+            }
+            alert(data_get);
             $.ajax({
                 type:"GET",
-                data: $("#optionAvanceeForm").serialize(),
+                data: data_get,//$("#optionAvanceeForm").serialize() + "&nom_event=" +$("#nom_event").value,
                 contentType:"application/json",
                 dataType:"json",
                 url:"recherche_avancee_covoiturage.php",
