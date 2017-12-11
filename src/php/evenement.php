@@ -21,6 +21,8 @@
         <?php include 'modal_connexion.include.php' ?>
         <?php include 'modal_inscription.include.php' ?>
         <?php
+        include 'getNote.php';
+        include 'countTrajet.php';
         if (isset($_GET['id_events'])) {
             $id_event = $_GET['id_events'];
         }
@@ -55,9 +57,23 @@
                     <?php
                 }
 
-                function getTrajets($bdd, string $id_event) {
-                    $reponseTrajets = $bdd->query('SELECT id_trajet, nom, prenom, ville_depart, lieu_depart, prix_tot, personnalite, autoroute FROM trajet INNER JOIN users on trajet.chauffeur = users.id_users WHERE evenement=\'' . $id_event . '\'');
+                function getTrajets($bdd, string $id_event, $page) {
+                    if(isset($_GET['page']))
+                    {
+                        $page = $_GET['page'];
+                    } else {
+                        $page = 0;
+                    }
+                    $reponseTrajets = $bdd->query('SELECT id_trajet, id_users, nom, prenom, ville_depart, lieu_depart, prix_tot, personnalite, autoroute '
+                            . 'FROM trajet INNER JOIN users on trajet.chauffeur = users.id_users '
+                            . 'WHERE evenement=\'' . $id_event . '\' '
+                            . 'LIMIT '. ($page*2) . ',' . (($page*2)+2));
                     while ($donneesTrajet = $reponseTrajets->fetch()) {
+                        $note = 5;
+                        $hasNote = getHasNote($bdd, $donneesTrajet['id_users']);
+                        if ($hasNote) {
+                            $note = getNote($bdd, $donneesTrajet['id_users']);
+                        }
                         ?>
                         <div class="col-sm-12" id="divCovoiturage">
                             <div class="col-sm-2">
@@ -73,11 +89,15 @@
                                     <p>Depart : <?php echo $donneesTrajet['ville_depart'] . ', ' . $donneesTrajet['lieu_depart']; ?></p>
                                     <p>Prix : <?php echo $donneesTrajet['prix_tot'] . ' €'; ?></p>
                                     <p>Note chauffeur : <?php
-                                        for ($i = 0; $i < $donneesTrajet['personnalite']; ++$i) {
-                                            echo '★';
-                                        }
-                                        for ($j = 0; $j < 10 - $donneesTrajet['personnalite']; ++$j) {
-                                            echo '☆';
+                                        if ($hasNote) {
+                                            for ($i = 0; $i < $note; ++$i) {
+                                                echo '★';
+                                            }
+                                            for ($j = 0; $j < 10 - $note; ++$j) {
+                                                echo '☆';
+                                            }
+                                        } else {
+                                            echo 'Inconnue';
                                         }
                                         ?></p>
                                 </div>
@@ -98,19 +118,27 @@
                     }
                 }
 
-                getTrajets($bdd, $id_event);
+                getTrajets($bdd, $id_event, 0);
                 $reponse->closeCursor(); // Termine le traitement de la requête
             }
             ?>
-            <?php /* inclure menu nav */ ?>
+            <div class="text-center">
+                <?php
+                //Menu Nav entre trajets
+                $nbTrajets = countTrajet($bdd, $id_event);
+                for ($i = 0; $i <= $nbTrajets / 2; ++$i) {
+                    echo "<a href=\"evenement.php?id_events=".$id_event."&page=". $i ."\">".($i+1)."</a> ";
+                }
+                ?>
+            </div>
             <div class="col-sm-12">
                 <div class="col-sm-4 col-sm-offset-4">
+                    <a href="./proposer_trajet.php?id_events=<?php echo $_GET['id_events']; ?>"><button>Proposez votre trajet</button></a>
                     <a href="./recherche.php"><button>Recherche détaillée</button></a>
-                    <?php 
-                    if(isset($_SESSION['ID_USER']) && $donnees['createur'] == $_SESSION['ID_USER']){
+                    <?php
+                    if (isset($_SESSION['ID_USER']) && $donnees['createur'] == $_SESSION['ID_USER']) {
                         echo '<button>Evénement terminé</button>';
                     }
-                        
                     ?>
                 </div>
             </div>

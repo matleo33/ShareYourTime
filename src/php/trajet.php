@@ -22,6 +22,7 @@
         <?php include 'modal_inscription.include.php' ?>
         <?php
         include 'getPlacesRestantesTrajet.php';
+        include 'getNote.php';
         try {
             $bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'root', '');
         } catch (Exception $e) {
@@ -34,6 +35,11 @@
             ;
             ' GROUP BY trajet.id_trajet';
             while ($donnees = $reponse->fetch()) {
+                $note = 5;
+                        $hasNote = getHasNote($bdd, $donnees['id_users']);
+                        if ($hasNote) {
+                            $note = getNote($bdd, $donnees['id_users']);
+                        }
                 $placesRestantes = GetPlacesRestantesTrajet($bdd, $_GET['id_trajet']);
                 echo "<div class=\"col-sm-8 col-sm-offset-2 trajet\" style=\"color : white;\">";
                 echo "<div class=\"nomTrajet\">";
@@ -52,12 +58,16 @@
                             <p><?php echo $donnees['num_telephone']; ?></p>
                             <p><?php echo $donnees['mail']; ?></p>
                             <p><?php
-                                for ($i = 0; $i < $donnees['personnalite']; ++$i) {
-                                    echo '★';
-                                }
-                                for ($j = 0; $j < 10 - $donnees['personnalite']; ++$j) {
-                                    echo '☆';
-                                }
+                                if ($hasNote) {
+                                            for ($i = 0; $i < $note; ++$i) {
+                                                echo '★';
+                                            }
+                                            for ($j = 0; $j < 10 - $note; ++$j) {
+                                                echo '☆';
+                                            }
+                                        } else {
+                                            echo 'Inconnue';
+                                        }
                                 ?></p>
                         </div>
 
@@ -104,7 +114,7 @@
                         <div class="col-sm-2">
                             <?php
                             if ($donnees['autoroute'] == true) {
-                                echo '<img src="../img/autoroute.png" class="logo_autoroute" />';
+                                echo '<img src="../img/autoroute.png" class="logoAutoroute" />';
                             }
                             ?>
                         </div>

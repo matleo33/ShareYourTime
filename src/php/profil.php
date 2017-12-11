@@ -33,8 +33,11 @@
                     . 'FROM users INNER JOIN events ON users.id_users = events.createur '
                     . 'WHERE events.createur=' . $_GET['id_profil']);
             while ($donnees = $reponse->fetch()) {
-                $note = getNote($bdd, $donnees['id_users']);
-                ?>
+                $hasNote = getHasNote($bdd, $donnees['id_users']);
+                if ($hasNote) {
+            $note = getNote($bdd, $donnees['id_users']);
+        }
+?>
 
                 <!-- Photo de profil -->    
                 <div class="col-sm-4">
@@ -61,12 +64,16 @@
                         ?></p>
                     <p><?php
                         echo 'Note : <span class="note">';
-                        for ($i = 0; $i < $note; ++$i) {
-                            echo '★';
-                        }
-                        for ($j = 0; $j < 10 - $note; ++$j) {
-                            echo '☆';
-                        }
+                        if ($hasNote) {
+                                            for ($i = 0; $i < $note; ++$i) {
+                                                echo '★';
+                                            }
+                                            for ($j = 0; $j < 10 - $note; ++$j) {
+                                                echo '☆';
+                                            }
+                                        } else {
+                                            echo 'Inconnue';
+                                        }
                         ?></span></p>
                     <?php
                     echo "Description : ";
