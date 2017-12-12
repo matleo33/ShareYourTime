@@ -81,8 +81,10 @@
                     <?php
                     echo "Description : ";
                     if (isset($_SESSION['ID_USER']) && ($_SESSION['ID_USER'] == $donnees['id_users'])) {
-                        echo '<p id="description">' . $donnees['biographie'] . '</p>';
-                        echo '<p onclick="editer()">Editer<p>';
+                        ?>
+                        <p id="description"><?php echo $donnees['biographie'] ;?></p>
+                        <p onclick="editer()">Editer<p>
+                            <?php
                     } else {
                         echo '<p>' . $donnees['biographie'] . '</p>';
                     }
