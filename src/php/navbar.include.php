@@ -63,7 +63,7 @@ $page = explode("/", pagencours);
                 echo '<span class="caret"></span></a>';
                 echo '<ul class="dropdown-menu">';
                 echo '<li><a href="profil.php?id_profil=' . $_SESSION["ID_USER"] . '">Profil</a></li>';
-                echo '<li><a href="#">Mes trajets</a></li>';
+                echo '<li><a href="mes_trajets.php">Mes trajets</a></li>';
                 echo '<li><a href="traiter_deconnexion.php">Déconnexion</a></li>';
                 echo '</ul>';
                 echo '</li>';

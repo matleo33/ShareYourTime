@@ -12,7 +12,7 @@
         <script src="../js/recherche.js"></script>
         <script src="../js/trouver_evenement.js"></script>
         <script src="../js/datetimepicker.js"></script>
-        
+
         <meta charset="UTF-8">
         <link href="./../css/style.css" rel="stylesheet">
         <script src="../BootStrap/js/bootstrap.min.js"></script>
@@ -48,7 +48,7 @@
                             <tr class="bg-primary">
                                 <th colspan="2">
                                     <?php
-                                    echo $donnees['ville_depart'] . ' - ' . $donnees['ville_arrivee'] . ' - ' . strftime("%e / %m / %Y, %H : %M",strtotime($donnees['date_depart'])) . ' - ';
+                                    echo $donnees['ville_depart'] . ' - ' . $donnees['ville_arrivee'] . ' - ' . strftime("%e / %m / %Y, %H : %M", strtotime($donnees['date_depart'])) . ' - ';
                                     switch ($donnees['est_fini']) {
                                         case 0: {
                                                 echo "Pret";
@@ -61,31 +61,40 @@
                                     }
                                     ?>
                                 </th>
-                                <th>
-                                    <input onclick="" type="button" class="btn btn-primary" value="Terminer" />
-                                    <input onclick="" type="button" class="btn btn-primary" value="+" />
+                                <th style="text-align: right;">
+                                    <?php if ($donnees['est_fini'] == FALSE) { ?>
+                                        <form method="post" action="trajetFini.php" style="display:inline">
+                                            <input hidden name="id_trajet" id="id_trajet" value="<?php echo $donnees['id_trajet']; ?>" />
+                                            <input type="submit" class="btn btn-primary" value="Trajet terminé" />
+                                        </form>
+                                    <?php } ?>
+                                    <button type="button" aria-expanded="false" aria-controls="tabody" data-toggle="collapse" data-target="#tabody" class="btn btn-primary">
+                                        +
+                                    </button>
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <?php for ($i = 0; $i < getNbReservants($bdd, $donnees["id_trajet"]); $i++) { 
+                        <tbody id="tabody">
+                            <?php
+                            for ($i = 0; $i < getNbReservants($bdd, $donnees["id_trajet"]); $i++) {
                                 $reponseParticipants = $bdd->query('SELECT * '
                                         . 'FROM covoiturage INNER JOIN users on covoiturage.users = users.id_users '
-                                        . 'WHERE trajet='.$donnees['id_trajet']);
-                                while($donneesParticipants = $reponseParticipants->fetch()) {
-                                ?>
-                                <tr>
-                                    <td>
-                                        <img src="../img/imageProfil.png" alt="photoProfil" />
-                                    </td>
-                                    <td colspan="2">
-                                        <p><?php echo $donneesParticipants['nom'].' '.$donneesParticipants['prenom'];?></p>
-                                        <p>Nombre places réservées : <?php echo $donneesParticipants['nb_place_res'];?></p>
-                                    </td>
-                                </tr>
-                            <?php }
-                            
-                            }?>
+                                        . 'WHERE trajet=' . $donnees['id_trajet']);
+                                while ($donneesParticipants = $reponseParticipants->fetch()) {
+                                    ?>
+                                    <tr>
+                                        <td>
+                                            <img src="../img/imageProfil.png" alt="photoProfil" />
+                                        </td>
+                                        <td colspan="2">
+                                            <p><?php echo $donneesParticipants['nom'] . ' ' . $donneesParticipants['prenom']; ?></p>
+                                            <p>Nombre places réservées : <?php echo $donneesParticipants['nb_place_res']; ?></p>
+                                        </td>
+                                    </tr>
+                                <?php
+                                }
+                            }
+                            ?>
                         </tbody>
                     </table>    
                     <?php
@@ -94,6 +103,6 @@
             ?>
         </div>
 
-        <?php include 'footer.include.php'; ?>
+<?php include 'footer.include.php'; ?>
     </body>
 </html>
