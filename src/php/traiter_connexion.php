@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 $origin = $_SERVER["HTTP_REFERER"];
 $pageorigin = explode("/", $origin);
 if(end($pageorigin) == "") {
@@ -10,8 +10,8 @@ $servername = "localhost";
 $dbname = "shareyourtime";
 $username = "root";
 $password = "";
-$email = htmlspecialchars($_POST["inputEmailConnexion"]);
-$pass = htmlspecialchars($_POST["inputPasswordConnexion"]);
+$email = htmlspecialchars($_GET["inputEmailConnexion"]);
+$pass = htmlspecialchars($_GET["inputPasswordConnexion"]);
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -21,21 +21,22 @@ try {
 
     $res = $stmt->fetch();
     if ($res) {
-        $url = end($pageorigin);
-        session_start();
+        //$url = end($pageorigin);
         $_SESSION["ID_USER"] = $res[0];
         setcookie('NOM_USER', $res[1]);
         $_COOKIE["NOM_USER"] = $res[1];
-        $conn = null;
-        header("Location: " . $url);
+        echo $res[0];
+        //header("Location: " . $url);
     } else {
-        $url = "erreur.php";
-        header("Location: " . $url);
+        echo "0";
+        //$url = end($pageorigin);
+        //header("Location: " . $url);
     }
 } catch (PDOException $e) {
     $url = "erreur2.php";
     header("Location: " . $url);
 }
+$conn = null;
 
 ?>
 

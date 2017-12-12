@@ -30,7 +30,7 @@ try {
 
 
 } catch (PDOException $e) {
-    $url = "erreur2.php";
+    $url = end($pageorigin);
     header("Location: " . $url);
 }
 
