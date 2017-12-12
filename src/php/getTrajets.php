@@ -1,12 +1,13 @@
 <?php
 include 'getEtapes.php';
+
 function getTrajets($bdd, string $id_event, $page) {
     if (isset($_GET['page'])) {
         $page = $_GET['page'];
     } else {
         $page = 0;
     }
-    $reponseTrajets = $bdd->query('SELECT id_trajet, id_users, nom, prenom, ville_depart, lieu_depart, prix_tot, personnalite, autoroute '
+    $reponseTrajets = $bdd->query('SELECT id_trajet, lien_photo, id_users, nom, prenom, ville_depart, lieu_depart, prix_tot, personnalite, autoroute '
             . 'FROM trajet INNER JOIN users on trajet.chauffeur = users.id_users '
             . 'WHERE evenement=\'' . $id_event . '\' '
             . 'LIMIT ' . ($page * 2) . ',' . (($page * 2) + 2));
@@ -19,7 +20,15 @@ function getTrajets($bdd, string $id_event, $page) {
         ?>
         <div class="col-sm-12" id="divCovoiturage">
             <div class="col-sm-2">
-                IMAGECHAUFFEUR
+                <?php if ($donneesTrajet['lien_photo'] == NULL) { ?>
+                    <img class="photoProfil" src="../img/imageProfil2.PNG" alt="photoProfil" />
+                    <?php
+                } else {
+                    ?> 
+                    <img class="photoProfil" src="../../images/<?php echo $donnees['lien_photo'] ?>" alt="photoProfil" />
+                    <?php
+                }
+                ?>
             </div>
             <div class="col-sm-8 col-sm-offset-1 trajetEvenement">
                 <div class="col-sm-6">
@@ -45,11 +54,11 @@ function getTrajets($bdd, string $id_event, $page) {
                 </div>
 
                 <div class="col-sm-2 col-sm-offset-1">
-        <?php
-        if ($donneesTrajet['autoroute']) {
-            echo "<img class=\"logoAutoroute\" src=\"../img/autoroute.png\" alt=\"autouroute : oui\"/ />";
-        }
-        ?>
+                    <?php
+                    if ($donneesTrajet['autoroute']) {
+                        echo "<img class=\"logoAutoroute\" src=\"../img/autoroute.png\" alt=\"autouroute : oui\"/ />";
+                    }
+                    ?>
                 </div>
                 <div class="col-sm-2 col-sm-offset-1">
                     <a class="boutonDetailEvenement"

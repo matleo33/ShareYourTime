@@ -1,5 +1,4 @@
 <?php
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,11 +9,19 @@ function derniersAvis($bdd, $id_user) {
     $reponse = $bdd->query('SELECT * '
             . 'FROM avis INNER JOIN users ON avis.emetteur = users.id_users '
             . 'WHERE recepteur=' . $id_user
-            .' LIMIT 0,2');
+            . ' LIMIT 0,2');
     while ($donnees = $reponse->fetch()) {
-        echo "<div class=\"col-sm-12\">"
-        . "<img class=\"photoProfilAvis col-sm-6\" src=\"../img/imageProfil2.PNG\" alt=\"photo utilisateur\" />";
-        echo "<h4 class=\"col-qm-6\">". $donnees['nom'] . ' ' . $donnees['prenom'] ."</h4>";
+        echo "<div class=\"col-sm-12\">";
+        if ($donnees['lien_photo'] == NULL) {
+            ?>
+            <img class="photoProfil" src="../img/imageProfil2.PNG" alt="photoProfil" />
+            <?php
+        } else {
+            ?> 
+            <img class="photoProfil" src="../../images/<?php echo $donnees['lien_photo'] ?>" alt="photoProfil" />
+            <?php
+        }
+        echo "<h4 class=\"col-qm-6\">" . $donnees['nom'] . ' ' . $donnees['prenom'] . "</h4>";
         for ($i = 0; $i < $donnees['note']; ++$i) {
             echo '★';
         }

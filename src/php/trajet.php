@@ -36,10 +36,10 @@
             ' GROUP BY trajet.id_trajet';
             while ($donnees = $reponse->fetch()) {
                 $note = 5;
-                        $hasNote = getHasNote($bdd, $donnees['id_users']);
-                        if ($hasNote) {
-                            $note = getNote($bdd, $donnees['id_users']);
-                        }
+                $hasNote = getHasNote($bdd, $donnees['id_users']);
+                if ($hasNote) {
+                    $note = getNote($bdd, $donnees['id_users']);
+                }
                 $placesRestantes = GetPlacesRestantesTrajet($bdd, $_GET['id_trajet']);
                 echo "<div class=\"col-sm-8 col-sm-offset-2 trajet\" style=\"color : white;\">";
                 echo "<div class=\"nomTrajet\">";
@@ -51,23 +51,32 @@
                 <div class="infosTrajet">
                     <div class="col-sm-12 text-center">
                         <div class="col-sm-3 col-sm-offset-3">
-                            <img src="../img/imageProfil.png" class="photoProfilInconnuTrajet" alt="photo chauffeur" />
+                            <?php if ($donnees['lien_photo'] == NULL) { ?>
+                                <img class="photoProfil" src="../img/imageProfil2.PNG" alt="photoProfil" />
+                                <?php
+                            } else {
+                                ?> 
+                                <img class="photoProfilInconnuTrajet" src="../../images/<?php echo $donnees['lien_photo'] ?>" alt="photoProfil" />
+                                <?php
+                            }
+                            ?>
                         </div>
-                        <div class="col-sm-3">
-                            <p><?php echo $donnees['prenom'] . ' ' . $donnees['nom']; ?></p>
+                        <div class = "col-sm-3">
+                            <p><?php echo $donnees['prenom'] . ' ' . $donnees['nom'];
+                            ?></p>
                             <p><?php echo $donnees['num_telephone']; ?></p>
                             <p><?php echo $donnees['mail']; ?></p>
                             <p><?php
                                 if ($hasNote) {
-                                            for ($i = 0; $i < $note; ++$i) {
-                                                echo '★';
-                                            }
-                                            for ($j = 0; $j < 10 - $note; ++$j) {
-                                                echo '☆';
-                                            }
-                                        } else {
-                                            echo 'Inconnue';
-                                        }
+                                    for ($i = 0; $i < $note; ++$i) {
+                                        echo '★';
+                                    }
+                                    for ($j = 0; $j < 10 - $note; ++$j) {
+                                        echo '☆';
+                                    }
+                                } else {
+                                    echo 'Inconnue';
+                                }
                                 ?></p>
                         </div>
 
@@ -79,10 +88,12 @@
                                 </div>
                                 <div class="col-sm-8">
                                     <p><?php echo $donnees['lieu_depart']; ?></p>
-                                    <p><?php echo strftime("%e / %m / %Y, <br /> %H : %M",strtotime($donnees['date_depart'])); ?></p>
+                                    <p><?php echo strftime("%e / %m / %Y, <br /> %H : %M", strtotime($donnees['date_depart'])); ?></p>
                                 </div>
                             </div>
-                            <?php for ($i = 0; $i < $donnees['COUNT(*)']; ++$i) { ?>
+                            <?php
+                            for ($i = 0; $i < $donnees['COUNT(*)']; ++$i) {
+                                ?>
                                 <div class="col-sm-12">
                                     <h4 style="text-align: left;">Etape <?php echo $i + 1; ?> :</h4>
                                     <div class="col-sm-4">
@@ -90,7 +101,7 @@
                                     </div>
                                     <div class="col-sm-8">
                                         <p><?php echo $donnees['lieu']; ?></p>
-                                        <p><?php echo strftime("%e / %m / %Y, <br /> %H : %M",strtotime($donnees['date'])); ?></p>
+                                        <p><?php echo strftime("%e / %m / %Y, <br /> %H : %M", strtotime($donnees['date'])); ?></p>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -101,7 +112,7 @@
                                 </div>
                                 <div class="col-sm-8">
                                     <p><?php echo $donnees['lieu_arrive']; ?></p>
-                                    <p><?php echo strftime("%e / %m / %Y, <br /> %H : %M",strtotime($donnees['date_arrivee'])); ?></p>
+                                    <p><?php echo strftime("%e / %m / %Y, <br /> %H : %M", strtotime($donnees['date_arrivee'])); ?></p>
                                 </div>
                             </div>
                         </div>
@@ -154,8 +165,7 @@
 </body>
 </html>
 <?php
-
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.

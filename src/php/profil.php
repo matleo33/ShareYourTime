@@ -41,8 +41,14 @@
 
                 <!-- Photo de profil -->    
                 <div class="col-sm-4">
-                    <img class="photoProfil" src="../img/imageProfil2.PNG" alt="photoProfil" />
-                    <?php
+                    <?php if ($donnees['lien_photo'] == NULL) { ?>
+                        <img class="photoProfil" src="../img/imageProfil2.PNG" alt="photoProfil" />
+                        <?php
+                    } else {
+                        ?> 
+                        <img class="photoProfil" src="../../images/<?php echo $donnees['lien_photo'] ?>" alt="photoProfil" />
+                        <?php
+                    }
                     if (isset($_SESSION['ID_USER']) && ($_SESSION['ID_USER'] == $donnees['id_users'])) {
                         ?>
                         <form method="post" action="upload_photo.php" enctype="multipart/form-data">
@@ -82,7 +88,7 @@
                     <?php
                     if (isset($_SESSION['ID_USER']) && ($_SESSION['ID_USER'] == $donnees['id_users'])) {
                         ?>
-                    <form method="post" action="modifierDescription.php">
+                        <form method="post" action="modifierDescription.php">
                             <textarea maxlength="255" id="description" name="description" class="form-control" placeholder="Description" type="textarea" style="max-width: 90%" ><?php echo $donnees['biographie']; ?></textarea>
                             <button type="submit">Editer</button>
                         </form>
