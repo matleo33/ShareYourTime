@@ -253,10 +253,6 @@ body {
     height: 600px !important;
 }
 
-.image_top_3_event {
-    border: solid black 1px;
-    min-height: 250px;
-}
 
 .informations_event {
     padding-bottom: 5px;
@@ -366,6 +362,29 @@ body {
 .photoProfilTrajet {
     height: 120px;
     width : auto;
+    border: black solid 1px;
+    border-radius: 5px;
+}
+
+.photoProfilEvent {
+    height: 250px;
+    border: black solid 1px;
+    border-radius: 5px;
+}
+
+.photoProfilAvis {
+    width: 100px;
+    height: auto;
+}
+
+.photoProfil {
+    width: inherit;
+    border: black 1px solid;
+    border-radius: 5px;
+}
+
+.photoEvent {
+    height: 250px;
 }
 
 .trajet {
@@ -377,11 +396,7 @@ body {
     text-decoration: none;
 }
 
-.photoProfil {
-    width: inherit;
-    border: black 1px solid;
-    border-radius: 5px;
-}
+
 
 .scrollbar {
     border: 1px solid black;
@@ -476,10 +491,6 @@ body {
     display: none;
 }
 
-.photoProfilAvis {
-    width: 100px;
-    height: auto;
-}
 
 #divRecherche {
     text-align: center;
@@ -629,6 +640,3 @@ label.star:before {
   font-family: FontAwesome;
 }
 
-.photoEvent {
-    height: 250px;
-}

@@ -76,24 +76,30 @@
                         </thead>
                         <tbody id="tabody">
                             <?php
-                            for ($i = 0; $i < getNbReservants($bdd, $donnees["id_trajet"]); $i++) {
-                                $reponseParticipants = $bdd->query('SELECT * '
-                                        . 'FROM covoiturage INNER JOIN users on covoiturage.users = users.id_users '
-                                        . 'WHERE trajet=' . $donnees['id_trajet']);
-                                while ($donneesParticipants = $reponseParticipants->fetch()) {
-                                    ?>
-                                    <tr>
-                                        <td>
-                                            <img src="../img/imageProfil.png" alt="photoProfil" />
-                                        </td>
-                                        <td colspan="2">
-                                            <p><?php echo $donneesParticipants['nom'] . ' ' . $donneesParticipants['prenom']; ?></p>
-                                            <p>Nombre places réservées : <?php echo $donneesParticipants['nb_place_res']; ?></p>
-                                        </td>
-                                    </tr>
-                                    
+                            $reponseParticipants = $bdd->query('SELECT * '
+                                    . 'FROM covoiturage INNER JOIN users on covoiturage.users = users.id_users '
+                                    . 'WHERE trajet=' . $donnees['id_trajet']);
+                            while ($donneesParticipants = $reponseParticipants->fetch()) {
+                                ?>
+                                <tr>
+                                    <td>
+                                        <?php if ($donneesParticipants['lien_photo'] == NULL) { ?>
+                                            <img class="photoProfilTrajet" src="../img/imageProfil2.PNG" alt="photoProfil" />
+                                            <?php
+                                        } else {
+                                            ?> 
+                                            <img class="photoProfilTrajet" src="../../images/<?php echo $donneesParticipants['lien_photo'] ?>" alt="photoProfil" />
+                                            <?php
+                                        }
+                                        ?>
+                                    </td>
+                                    <td colspan="2">
+                                        <p><?php echo $donneesParticipants['nom'] . ' ' . $donneesParticipants['prenom']; ?></p>
+                                        <p>Nombre places réservées : <?php echo $donneesParticipants['nb_place_res']; ?></p>
+                                    </td>
+                                </tr>
+
                                 <?php
-                                }
                             }
                             ?>
                         </tbody>
@@ -104,6 +110,6 @@
             ?>
         </div>
 
-<?php include 'footer.include.php'; ?>
+        <?php include 'footer.include.php'; ?>
     </body>
 </html>

@@ -21,11 +21,11 @@ function getTrajets($bdd, string $id_event, $page) {
         <div class="col-sm-12" id="divCovoiturage">
             <div class="col-sm-2">
                 <?php if ($donneesTrajet['lien_photo'] == NULL) { ?>
-                    <img class="photoProfil" src="../img/imageProfil2.PNG" alt="photoProfil" />
+                    <img class="photoProfilTrajet" src="../img/imageProfil2.PNG" alt="photoProfil" />
                     <?php
                 } else {
                     ?> 
-                    <img class="photoProfil" src="../../images/<?php echo $donnees['lien_photo'] ?>" alt="photoProfil" />
+                    <img class="photoProfilTrajet" src="../../images/<?php echo $donneesTrajet['lien_photo'] ?>" alt="photoProfil" />
                     <?php
                 }
                 ?>

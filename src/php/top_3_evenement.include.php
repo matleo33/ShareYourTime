@@ -7,8 +7,8 @@ try {
 }
 
 function get_three_best_event($bdd) {
-    $reponse = $bdd->query('SELECT COUNT(trajet.evenement), events.id_events, events.lien_photo, events.nom, events.lien_fb, events.lien_billet '
-            . 'FROM trajet RIGHT OUTER JOIN events ON trajet.evenement = events.id_events '
+    $reponse = $bdd->query('SELECT COUNT(trajet.evenement), events.id_events, users.lien_photo, events.nom, events.lien_fb, events.lien_billet '
+            . 'FROM users INNER JOIN trajet ON users.id_users=trajet.chauffeur RIGHT OUTER JOIN events ON trajet.evenement = events.id_events '
             . 'WHERE events.est_fini=FALSE '
             . 'GROUP BY evenement '
             . 'ORDER BY COUNT(trajet.evenement) DESC '
@@ -35,7 +35,7 @@ function display_event(string $name, $lien_photo, int $nb_people, $price, string
     echo "<div class='important_event'>"
     . "<div class='image_top_3_event col-sm-3 col-sm-offset-1'>";
     ?>
-    <img class="photoEvent" src="../../images/<?php echo $lien_photo ?>" alt="Photo Evenement" />
+    <img class="photoProfilEvent" src="../../images/<?php echo $lien_photo ?>" alt="Photo Evenement" />
     <?php
     echo "</div>"
     . "<div class=\"informations_event col-sm-6 col-sm-offset-1\">"

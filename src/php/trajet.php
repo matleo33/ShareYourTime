@@ -52,11 +52,11 @@
                     <div class="col-sm-12 text-center">
                         <div class="col-sm-3 col-sm-offset-3">
                             <?php if ($donnees['lien_photo'] == NULL) { ?>
-                                <img class="photoProfil" src="../img/imageProfil2.PNG" alt="photoProfil" />
+                                <img class="photoProfilTrajet" src="../img/imageProfil2.PNG" alt="photoProfil" />
                                 <?php
                             } else {
                                 ?> 
-                                <img class="photoProfilInconnuTrajet" src="../../images/<?php echo $donnees['lien_photo'] ?>" alt="photoProfil" />
+                                <img class="photoProfilTrajet" src="../../images/<?php echo $donnees['lien_photo'] ?>" alt="photoProfil" />
                                 <?php
                             }
                             ?>
