@@ -78,8 +78,8 @@
                             echo 'Inconnue';
                         }
                         ?></span></p>
+                    <p>Description : </p>
                     <?php
-                    echo "Description : ";
                     if (isset($_SESSION['ID_USER']) && ($_SESSION['ID_USER'] == $donnees['id_users'])) {
                         ?>
                         <p id="description"><?php echo $donnees['biographie'] ;?></p>
