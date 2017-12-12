@@ -144,10 +144,10 @@
                             <input class="form-control elementInfoComp" type="text" name="contactPrivilegie" required="required" id="contactPrivilegie" placeholder="Contact privilégié"/>
                         </div>
                         <div class="col-sm-6">
-                            <select class="form-control elementInfoComp" id="autoroute" >
+                            <select class="form-control elementInfoComp" name="autoroute" id="autoroute" >
                                 <option selected disabled>Autoroute</option>
-                                <option>Oui</option>
-                                <option>Non</option>
+                                <option value="1">Oui</option>
+                                <option value="0">Non</option>
                             </select>
                         </div>
                     </div>
@@ -202,14 +202,7 @@
                     </div>
                     <form id="form_model_choix_prix">
                         <div class="form-group col-sm-12 " style="margin-top: 5px" id="etape_trajet">
-                           <!-- <div class="form-group col-sm-10" style="margin-top: 5px">
-                                <div class="col-sm-8">
-                                <input class="form-control" type="text" name="ville_depart" required="required" id="ville_depart" placeholder="Ville etape"/>
-                                </div>
-                                <div class="col-sm-2">
-                                    <input type="number"/>
-                                </div>
-                            </div>-->
+
                         </div>
                         <div class="modal-footer">
                             <input type="submit" class="btn btn-default center-block"  value="Proposer le trajet" id="proposer_trajet" />
@@ -258,12 +251,11 @@
             document.getElementById("villeDepart").value +'-->'+ document.getElementById("villeArrivee").value +'"/>'+
             '</div>'+
             '<div class="col-sm-2">'+
-            '<input type="text" class="form-control bfh-number" data-min="1" >'+
+            '<input type="text" name="prix_tot" required id="prix_tot" class="form-control bfh-number" data-min="1" >'+
             '</div>'+
             '</div>';
         for(var i =0; i<etape.length; i++)
         {
-            console.log(etape);
             if(!jQuery.isEmptyObject(etape[i]))
             {
                 document.getElementById("etape_trajet").innerHTML +='<div class="form-group col-sm-10" style="margin-top: 5px">'+
@@ -271,7 +263,7 @@
                     '<input class="form-control" type="text" name="trajet" required="required" id="trajet" value="'+etape[i][0]+'-->'+document.getElementById("villeArrivee").value+'"/>'+
                     '</div>'+
                     '<div class="col-sm-2">'+
-                    '<input type="text" class="form-control bfh-number" data-min="1" '+
+                    '<input type="text" required class="form-control bfh-number" data-min="1" '+
                     '</div>'+
                     '</div>';
             }
@@ -316,7 +308,13 @@
             });
         });
     }
-    $("#proposer_trajet")
+    $("#form_model_choix_prix").submit(function () {
+        var idtrajetcree;
+        $.get("ajouter_trajet_BD.php",$("#information_trajet_form").serialize()+"&nom_event="+$("#eventName").val()+"&prix_tot="+$("#prix_tot").val(),function(id_trajet){
+           idtrajetcree = id_trajet;
+        });
+        return false; // permet de ne pas recharger la page
+    });
 
     function reinitialisation_trajet_model() {
         document.getElementById("etape_trajet").innerHTML = '';
