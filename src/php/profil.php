@@ -82,9 +82,11 @@
                     <?php
                     if (isset($_SESSION['ID_USER']) && ($_SESSION['ID_USER'] == $donnees['id_users'])) {
                         ?>
-                        <p id="description"><?php echo $donnees['biographie'] ;?></p>
-                        <p onclick="editer()">Editer<p>
-                            <?php
+                    <form method="post" action="modifierDescription.php" enctype="multipart/form-data">
+                            <textarea maxlength="255" id="description" name="description" class="form-control" placeholder="Description" type="textarea" style="max-width: 90%" ><?php echo $donnees['biographie']; ?></textarea>
+                            <button type="submit">Editer</button>
+                        </form>
+                        <?php
                     } else {
                         echo '<p>' . $donnees['biographie'] . '</p>';
                     }
