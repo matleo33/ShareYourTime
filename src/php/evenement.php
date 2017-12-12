@@ -38,6 +38,8 @@
                         . 'FROM events '
                         . 'WHERE id_events = ' . $id_event);
                 while ($donnees = $reponse->fetch()) {
+                    $est_fini = $donnees['est_fini'];
+                    $createur = $donnees['createur'];
                     ?>
                     <div class="col-sm-12">
                         <div class="col-sm-4 col-sm-offset-1">
@@ -48,7 +50,7 @@
                             <p class="descriptionEvenement"><?php echo $donnees['description']; ?></p>
                             <div>
                                 <p>Adresse : <?php echo $donnees['adresse']; ?></p>
-                                <p>Dates : <br/><?php echo strftime("%e / %m / %Y, %H : %M",strtotime($donnees['date_debut'])) . ' <br /> ' . strftime("%e / %m / %Y, %H : %M",strtotime($donnees['date_fin'])); ?></p>
+                                <p>Dates : <br/><?php echo strftime("%e / %m / %Y, %H : %M", strtotime($donnees['date_debut'])) . ' <br /> ' . strftime("%e / %m / %Y, %H : %M", strtotime($donnees['date_fin'])); ?></p>
                                 <div class="text_right"><a href="<?php echo $donnees['lien_fb']; ?>"><img class='logo'
                                                                                                           src='../img/facebook.png'/></a>
                                     <a href="<?php echo $donnees['lien_billet']; ?>"><img class='logo' src='../img/ticket.png'/></a>
@@ -61,35 +63,46 @@
                         <?php
                     }
 
-                   
+
 
                     getTrajets($bdd, $id_event, 0);
-                    $reponse->closeCursor(); // Termine le traitement de la requête
-                }
-                ?>
-                <div class="text-center">
-                    <?php
-                    //Menu Nav entre trajets
-                    $nbTrajets = countTrajet($bdd, $id_event);
-                    for ($i = 0; $i <= $nbTrajets / 2; ++$i) {
-                        echo "<a href=\"evenement.php?id_events=" . $id_event . "&page=" . $i . "\">" . ($i + 1) . "</a> ";
-                    }
                     ?>
-                </div>
-                <div class="col-sm-12">
-                    <div class="col-sm-6 col-sm-offset-3 text-center">
-                        <a href="./proposer_trajet.php?id_events=<?php echo $_GET['id_events']; ?>"><button>Proposez votre trajet</button></a>
-                        <a href="./recherche.php"><button>Recherche détaillée</button></a>
+                    <div class="text-center">
                         <?php
-                        if (isset($_SESSION['ID_USER']) && $donnees['createur'] == $_SESSION['ID_USER']) {
-                            echo '<button>Evénement terminé</button>';
+                        //Menu Nav entre trajets
+                        $nbTrajets = countTrajet($bdd, $id_event);
+                        for ($i = 0; $i <= $nbTrajets / 2; ++$i) {
+                            echo "<a href=\"evenement.php?id_events=" . $id_event . "&page=" . $i . "\">" . ($i + 1) . "</a> ";
                         }
                         ?>
                     </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-6 col-sm-offset-3 text-center">
+                            <a href="./proposer_trajet.php?id_events=<?php echo $_GET['id_events']; ?>"><button>Proposez votre trajet</button></a>
+                            <a href="./recherche.php"><button>Recherche détaillée</button></a>
+                            <?php
+                            if (isset($_SESSION['ID_USER']) && ($createur == $_SESSION['ID_USER']) && $est_fini==FALSE) {
+                                ?>
+                            </div>
+                            <div class="col-sm-6 col-sm-offset-3 text-center">
+                                <form method="post" action="terminerEvenement.php">
+                                    <input type="hidden" name="idTrajet" id="idTrajet" value="<?php echo $donnees['id_trajet']; ?>" />
+                                    <input type="hidden" name="id_event" id="id_event" value="<?php echo $id_event; ?>" />
+                                    <button type="submit">Evénement terminé</button>
+                                </form>
+                            </div>
+                            <?php
+                            $reponse->closeCursor(); // Termine le traitement de la requête
+                        }
+                    } else {
+                        ?>
+                        <h2>Nous sommes désolés, nous n'avons pas pu trouver l'événement recherché. <a href="index.php">Cliquez-ici</a> pour retrouner à la page d'accueil</h2>
+                        <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>
-    </div>
-    <?php include 'footer.include.php'; ?>
-</body>
+        <?php include 'footer.include.php'; ?>
+    </body>
 </html>
