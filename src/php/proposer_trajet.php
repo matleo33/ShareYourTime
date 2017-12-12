@@ -152,7 +152,7 @@
                         </div>
                     </div>
                 </div>
-                <input type="submit" id="submitTrajet" class="btn btn-primary" value="Créer trajet"/>
+                <input type="submit" id="submitInfosTrajet" class="btn btn-primary" value="Suivant"/>
             </form>
 
         </div>
@@ -167,7 +167,7 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Ajout d'une étape</h4>
                     </div>
-                    <form>
+                    <form id="formEtape" >
                         <div class="form-group col-sm-10 col-sm-offset-1" style="margin-top: 5px">
                             <input class="form-control" type="text" name="ville_depart" required="required" id="ville_depart" placeholder="Ville etape"/>
                         </div>
@@ -182,7 +182,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <input type="submit" class="btn btn-default center-block" onclick="ajouterEtape();return false;" value="Ajouter l'étape" id="inputConnexion"/>
+                            <input type="submit" class="btn btn-default center-block" value="Ajouter l'étape"/>
                         </div>
                     </form>
                 </div>
@@ -190,6 +190,35 @@
             </div>
         </div>
 
+
+        <div class="modal fade" id="modalChoixPrixTrajet" role="dialog" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" id="close_modalChoixPrixTrajet" onclick="reinitialisation_trajet_model()" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Choisir les prix du trajet</h4>
+                    </div>
+                    <form id="form_model_choix_prix">
+                        <div class="form-group col-sm-12 " style="margin-top: 5px" id="etape_trajet">
+                           <!-- <div class="form-group col-sm-10" style="margin-top: 5px">
+                                <div class="col-sm-8">
+                                <input class="form-control" type="text" name="ville_depart" required="required" id="ville_depart" placeholder="Ville etape"/>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="number"/>
+                                </div>
+                            </div>-->
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-default center-block"  value="Proposer le trajet" id="proposer_trajet" />
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
         <?php include('footer.include.php'); ?>
         <script src="../BootStrap/js/bootstrap.min.js"></script>
     </body>
@@ -202,22 +231,58 @@
     function afficherModalAjoutEtape() {
         $("#modalAjoutEtape").modal('show');
     }
-    function ajouterEtape() {
+
+    $("#formEtape").submit(function () {
         var newEtape = [];
-        //var id_ligne_tr = "tr"+compteur;
+
         newEtape.push(document.getElementById("ville_depart").value,document.getElementById("lieuPassage").value,document.getElementById("date_passage").value)
         etape.push(newEtape);
         document.getElementById("tableau_etape").innerHTML += '<tr id="tr'+compteur+'"><td>'+document.getElementById("ville_depart").value+
             '</td><td>'+document.getElementById("lieuPassage").value+
             '</td><td>'+document.getElementById("date_passage").value+'</td><td>' +
-             '<input type="button" onclick="supprimer_etape('+compteur+')"/></td></tr>';
+            '<input type="button" onclick="supprimer_etape('+compteur+');"/></td></tr>';
 
-    document.getElementById("ville_depart").value = '';
+        document.getElementById("ville_depart").value = '';
         document.getElementById("lieuPassage").value = '';
         document.getElementById("date_passage").value = '';
         $("#modalAjoutEtape").modal('hide');
         compteur++;
-    }
+
+        return false;
+    });
+
+    $("#information_trajet_form").submit(function () {
+        document.getElementById("etape_trajet").innerHTML +='<div class="form-group col-sm-10" style="margin-top: 5px">'+
+            '<div class="col-sm-8">'+
+            '<input class="form-control" type="text" name="trajet" required="required" id="trajet" value="' +
+            document.getElementById("villeDepart").value +'-->'+ document.getElementById("villeArrivee").value +'"/>'+
+            '</div>'+
+            '<div class="col-sm-2">'+
+            '<input type="text" class="form-control bfh-number" data-min="1" >'+
+            '</div>'+
+            '</div>';
+        for(var i =0; i<etape.length; i++)
+        {
+            console.log(etape);
+            if(!jQuery.isEmptyObject(etape[i]))
+            {
+                document.getElementById("etape_trajet").innerHTML +='<div class="form-group col-sm-10" style="margin-top: 5px">'+
+                    '<div class="col-sm-8">'+
+                    '<input class="form-control" type="text" name="trajet" required="required" id="trajet" value="'+etape[i][0]+'-->'+document.getElementById("villeArrivee").value+'"/>'+
+                    '</div>'+
+                    '<div class="col-sm-2">'+
+                    '<input type="text" class="form-control bfh-number" data-min="1" '+
+                    '</div>'+
+                    '</div>';
+            }
+
+        }
+
+        $("#modalChoixPrixTrajet").modal('show');
+        return false;
+    });
+
+
     function supprimer_etape(id) {
         var obj = document.getElementById("tableau_etape");
         var old = document.getElementById("tr"+id);
@@ -250,7 +315,11 @@
                 return false; // permet de ne pas recharger la page
             });
         });
+    }
+    $("#proposer_trajet")
 
+    function reinitialisation_trajet_model() {
+        document.getElementById("etape_trajet").innerHTML = '';
     }
 
 </script>
