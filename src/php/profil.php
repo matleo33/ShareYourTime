@@ -45,7 +45,7 @@
                     <?php
                     if (isset($_SESSION['ID_USER']) && ($_SESSION['ID_USER'] == $donnees['id_users'])) {
                         ?>
-                        <form method="post" action="upload_photo.php">
+                        <form method="post" action="upload_photo.php" enctype="multipart/form-data">
                             <input name="nouvellePhoto" id="nouvellePhoto" type="file" />
                             <button type="submit">Enregistrer</button>
                         </form>
@@ -82,7 +82,7 @@
                     <?php
                     if (isset($_SESSION['ID_USER']) && ($_SESSION['ID_USER'] == $donnees['id_users'])) {
                         ?>
-                    <form method="post" action="modifierDescription.php" enctype="multipart/form-data">
+                    <form method="post" action="modifierDescription.php">
                             <textarea maxlength="255" id="description" name="description" class="form-control" placeholder="Description" type="textarea" style="max-width: 90%" ><?php echo $donnees['biographie']; ?></textarea>
                             <button type="submit">Editer</button>
                         </form>
