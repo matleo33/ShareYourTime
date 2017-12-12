@@ -28,11 +28,22 @@
 
 <body>
 <?php include 'navbar.include.php'; ?>
+<?php
+$nomEvenement = NULL;
+if(isset($_GET['nom_event']))
+{
+    $nomEvenement = $_GET['nom_event'];
+}
+?>
+
 <div class="container col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 col-xs-12" id="divRecherche">
     <h1 id="titreBlanc">CREER EVENEMENT</h1>
     <form id="formRecherche">
         <div class="form-group">
-            <input class="form-control" type="text" name="eventName" required="required" id="eventName" placeholder="Nom de l'événement"/>
+            <input class="form-control" type="text" name="eventName" required="required" id="eventName" value="<?php
+            if ($nomEvenement != NULL) {
+                echo $nomEvenement;
+            } ?>" placeholder="Nom de l'événement"/>
         </div>
         <input type="submit" id="submitEventName" class="btn btn-primary" value="Suivant"/>
     </form>
