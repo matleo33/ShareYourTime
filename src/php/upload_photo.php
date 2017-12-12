@@ -5,7 +5,7 @@ session_start();
 
 $dossier = '../../images/';
 $fichier = basename($_FILES['nouvellePhoto']['name']);
-$extensions = array('.png', '.jpg', '.jpeg', '.pdf');
+$extensions = array('.png', '.jpg', '.jpeg', '.PNG', '.JPG', '.JPEG');
 $extension = strrchr($_FILES['nouvellePhoto']['name'], '.');
 $taille_maxi = 1000000;
 $taille = filesize($_FILES['nouvellePhoto']['tmp_name']);
@@ -26,13 +26,21 @@ if (!isset($erreur)) //S'il n'y a pas d'erreur, on upload le fichier
     $password = "";
 
     $nom_fichier = md5(uniqid(rand(), true));
-    $nom_fichier .= '.pdf'; //TODO récupérer la bonne extension
+    $nom_fichier .= $extension;
 
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 
-    $stmt = $conn->prepare("UPDATE users SET lien_photo = ? WHERE id_users = ?");
+    $req = $conn->prepare("SELECT lien_photo FROM users WHERE id_users = ?");
+    $req->execute(array($user));
+    $res = $req->fetch();
 
+    if ($res[0]) {
+        unlink("../../images/" . $res[0] . "");
+    }
+
+    $stmt = $conn->prepare("UPDATE users SET lien_photo = ? WHERE id_users = ?");
     $stmt->execute(array($nom_fichier, $user));
+
 
     if (move_uploaded_file($_FILES['nouvellePhoto']['tmp_name'], $dossier . $nom_fichier)) // Renvoie true en cas de succès
     {
@@ -46,7 +54,6 @@ if (!isset($erreur)) //S'il n'y a pas d'erreur, on upload le fichier
     $pdo = null;
     $url = "profil.php?id_profil=".$user;
     header("Location: " . $url);
-    alert("Insertion réalisée !");
 } else {
     echo $erreur;
 }
