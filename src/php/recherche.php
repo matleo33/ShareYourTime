@@ -144,7 +144,7 @@
                 <label><input type="radio" class="optpeageradio" name="optpeageradio" value="pasimportantpeage" checked>Pas important</label>
             </div>
         </div>
-        <input id="validateForm" type="button" value="Rechercher" />
+        <input id="validateForm" type="button" value="Rechercher" onclick="lancer_recherche()" />
 
     </form>
 </div>
@@ -177,64 +177,67 @@
 </body>
 </html>
 <script>
-    $(document).ready(function () {
-        $("#validateForm").click(function () {
-            var nom_event = $("#nom_event").val();
-            var data_get = $("#optionAvanceeForm").serialize();
-            if(nom_event != '')
-            {
-                data_get+="&nom_event=" + nom_event;
-            }
-            $.ajax({
-                type:"GET",
-                data: data_get,//$("#optionAvanceeForm").serialize() + "&nom_event=" +$("#nom_event").value,
-                contentType:"application/json",
-                dataType:"json",
-                url:"recherche_avancee_covoiturage.php",
-                success:function (data) {
-                    document.getElementById("resultForm").innerHTML = '';
-                    for($i=0; $i<data.length; $i++)
+    function lancer_recherche() {
+        var nom_event = $("#nom_event").val();
+        var data_get = $("#optionAvanceeForm").serialize();
+        if(nom_event != '')
+        {
+            data_get+="&nom_event=" + nom_event;
+        }
+        $.ajax({
+            type:"GET",
+            data: data_get,//$("#optionAvanceeForm").serialize() + "&nom_event=" +$("#nom_event").value,
+            contentType:"application/json",
+            dataType:"json",
+            url:"recherche_avancee_covoiturage.php",
+            success:function (data) {
+                document.getElementById("resultForm").innerHTML = '';
+                for($i=0; $i<data.length; $i++)
+                {
+                    var id_div_trajet ="trajet" + $i;
+                    document.getElementById("resultForm").innerHTML += '<div class="col-sm-8 col-sm-offset-2 trajetEvenement" id="' + id_div_trajet + '" style="margin-top: 50px">' +
+                        '<div class="col-sm-6">' +
+                        '<h3 class="nomChauffeurTrajetEvenement">' +
+                        data[$i][0] + ' ' + data[$i][1] + '</h3>' +
+                        '<p>Depart : ' + data[$i][3] + ' à ' + data[$i][4] + '</p>' +
+                        '<p>Arrivé : ' + data[$i][5] + ' à ' + data[$i][6] + '</p>' +
+                        '<p>Prix : ' + data[$i][8] + '€</p>' +
+                        '<p id="note' + $i + '">Note du chauffeur : </p></div>';
+
+
+                    for($j=0;$j<10;$j++)
                     {
-                        var id_div_trajet ="trajet" + $i;
-                        document.getElementById("resultForm").innerHTML += '<div class="col-sm-8 col-sm-offset-2 trajetEvenement" id="' + id_div_trajet + '" style="margin-top: 50px">' +
-                            '<div class="col-sm-6">' +
-                            '<h3 class="nomChauffeurTrajetEvenement">' +
-                            data[$i][0] + ' ' + data[$i][1] + '</h3>' +
-                            '<p>Depart : ' + data[$i][3] + ' à ' + data[$i][4] + '</p>' +
-                            '<p>Arrivé : ' + data[$i][5] + ' à ' + data[$i][6] + '</p>' +
-                            '<p>Prix : ' + data[$i][8] + '€</p>' +
-                            '<p id="note' + $i + '">Note du chauffeur : </p></div>';
-
-
-                        for($j=0;$j<10;$j++)
+                        if($j<data[$i][2])
                         {
-                            if($j<data[$i][2])
-                            {
-                                $("#note"+$i).append('★');
-                            }
-                            else
-                            {
-                                $("#note"+$i).append('☆');
-                            }
+                            $("#note"+$i).append('★');
                         }
-                        if(data[$i][7] == 1)
+                        else
                         {
-                            $("#"+id_div_trajet).append('<div class="col-sm-2 col-sm-offset-1">' +
-                                '<img class="logoAutoroute" src="../img/autoroute.png" alt="autouroute : oui" />' +
-                                '</div>');
+                            $("#note"+$i).append('☆');
                         }
-                        $("#"+id_div_trajet).append('<div class="col-sm-2">' +
-                            '<a href="./trajet.php?id_trajet=' + data[$i][9] + '"><button>Voir détails</button></a>' +
-                            '</div> </div>');
                     }
-                },
-                error:function (data) {
-                    alert(data);
+                    if(data[$i][7] == 1)
+                    {
+                        $("#"+id_div_trajet).append('<div class="col-sm-2 col-sm-offset-1">' +
+                            '<img class="logoAutoroute" src="../img/autoroute.png" alt="autouroute : oui" />' +
+                            '</div>');
+                    }
+                    $("#"+id_div_trajet).append('<div class="col-sm-2">' +
+                        '<a href="./trajet.php?id_trajet=' + data[$i][9] + '"><button>Voir détails</button></a>' +
+                        '</div> </div>');
                 }
-            });
-            return false;
+            },
+            error:function (data) {
+                alert(data);
+            }
+        });
+        return false;
+    }
+    /*$(document).ready(function () {
+        $("#validateForm").click(function () {
+
         })
-    });
+    });*/
 </script>
 <script>
     function activerOptionAvancee() {
