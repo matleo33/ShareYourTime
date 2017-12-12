@@ -91,6 +91,7 @@
                                             <p>Nombre places réservées : <?php echo $donneesParticipants['nb_place_res']; ?></p>
                                         </td>
                                     </tr>
+                                    
                                 <?php
                                 }
                             }

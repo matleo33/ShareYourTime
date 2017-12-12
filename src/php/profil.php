@@ -35,19 +35,21 @@
             while ($donnees = $reponse->fetch()) {
                 $hasNote = getHasNote($bdd, $donnees['id_users']);
                 if ($hasNote) {
-            $note = getNote($bdd, $donnees['id_users']);
-        }
-?>
+                    $note = getNote($bdd, $donnees['id_users']);
+                }
+                ?>
 
                 <!-- Photo de profil -->    
                 <div class="col-sm-4">
                     <img class="photoProfil" src="../img/imageProfil2.PNG" alt="photoProfil" />
                     <?php
                     if (isset($_SESSION['ID_USER']) && ($_SESSION['ID_USER'] == $donnees['id_users'])) {
-                        echo '<form>';
-                        echo '<input type="file"></input>';
-                        echo '<button>Enregistrer</button>';
-                        echo '</form>';
+                        ?>
+                        <form method="post" action="upload_photo.php">
+                            <input name="nouvellePhoto" id="nouvellePhoto" type="file" />
+                            <button type="submit">Enregistrer</button>
+                        </form>
+                        <?php
                     }
                     ?>
                 </div>
@@ -66,15 +68,15 @@
                     <p><?php
                         echo 'Note : <span class="note">';
                         if ($hasNote) {
-                                            for ($i = 0; $i < $note; ++$i) {
-                                                echo '★';
-                                            }
-                                            for ($j = 0; $j < 10 - $note; ++$j) {
-                                                echo '☆';
-                                            }
-                                        } else {
-                                            echo 'Inconnue';
-                                        }
+                            for ($i = 0; $i < $note; ++$i) {
+                                echo '★';
+                            }
+                            for ($j = 0; $j < 10 - $note; ++$j) {
+                                echo '☆';
+                            }
+                        } else {
+                            echo 'Inconnue';
+                        }
                         ?></span></p>
                     <?php
                     echo "Description : ";
@@ -90,7 +92,7 @@
                 <div class="col-sm-4">
                     <h1>Caractéristiques trajets</h1>
                     <div class="col-sm-6 col-sm-offset-6 col-sm-pull-6 text-center">
-                        <span>Note comportement:</span>
+                        <span>Bavardise : </span>
                     </div>
                     <div class="scrollbar col-sm-6 col-sm-offset-6 col-sm-pull-6">
                         <div style="width: 
@@ -139,7 +141,10 @@
                         ?>
                     </p>
                     <h1>Derniers Avis</h1>
-        <?php include 'derniers_avis.php'; derniersAvis($bdd, $donnees['id_users']); ?>
+                    <?php
+                    include 'derniers_avis.php';
+                    derniersAvis($bdd, $donnees['id_users']);
+                    ?>
                 </div>
 
                 <?php
@@ -151,7 +156,7 @@
         }
         ?>
 
-<?php include 'footer.include.php'; ?>
+        <?php include 'footer.include.php'; ?>
 
         <script src="../BootStrap/js/bootstrap.min.js"></script>
     </body>
