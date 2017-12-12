@@ -27,6 +27,7 @@
 
     <body>
         <?php
+        $cpt = 0;
         include 'navbar.include.php';
         if (isset($_SESSION['ID_USER'])) {
             include 'getNbReservants.php';
@@ -67,14 +68,16 @@
                                             <input hidden name="id_trajet" id="id_trajet" value="<?php echo $donnees['id_trajet']; ?>" />
                                             <input type="submit" class="btn btn-primary" value="Trajet terminé" />
                                         </form>
-                                    <?php } ?>
-                                    <button type="button" aria-expanded="false" aria-controls="tabody" data-toggle="collapse" data-target="#tabody" class="btn btn-primary">
+                                    <?php
+                                    }
+                                    ?>
+                                    <button type="button" aria-expanded="false" aria-controls="tabody<?php $cpt++; echo $cpt; ?>" data-toggle="collapse" data-target="#tabody<?php echo $cpt; ?>" class="btn btn-primary">
                                         +
                                     </button>
                                 </th>
                             </tr>
                         </thead>
-                        <tbody id="tabody">
+                        <tbody class="collapse" id="tabody<?php echo $cpt; ?>">
                             <?php
                             $reponseParticipants = $bdd->query('SELECT * '
                                     . 'FROM covoiturage INNER JOIN users on covoiturage.users = users.id_users '
