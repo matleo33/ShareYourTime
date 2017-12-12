@@ -8,12 +8,12 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Connexion</h4>
             </div>
-            <form method="post" action="traiter_connexion.php">
+            <form method="post" id="formConnexion">
                 <div class="form-group col-sm-10 col-sm-offset-1" id="divMail">
                     <label for="inputEmail">Adresse mail</label>
                     <input type="email" class="form-control" id="inputEmailConnexion" name="inputEmailConnexion" placeholder="Email">
                 </div>
-                <div class="form-group col-sm-10 col-sm-offset-1">
+                <div class="form-group col-sm-10 col-sm-offset-1" id="divPassword">
                     <label for="inputPassword">Password</label>
                     <input type="password" class="form-control" id="inputPasswordConnexion" name="inputPasswordConnexion"
                            placeholder="Mot de passe">
