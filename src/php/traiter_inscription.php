@@ -1,5 +1,11 @@
 <?php
 
+$origin = $_SERVER["HTTP_REFERER"];
+$pageorigin = explode("/", $origin);
+if(end($pageorigin) == "") {
+    array_push($pageorigin, "index.php");
+}
+
 $servername = "localhost";
 $dbname = "shareyourtime";
 $username = "root";
@@ -28,6 +34,10 @@ try {
 
     session_start();
     $conn = null;
+
+    $url = end($pageorigin);
+    header("Location: " . $url);
+
     /*
     $res = $stmt->fetch();
     if ($res) {
