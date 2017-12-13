@@ -252,6 +252,23 @@
 
     </div>
 </div>
+
+<div class="modal fade" id="modalProposerRetour" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Trajet créé</h4>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-default center-block" value="Acceuil"
+                       id="redirection_acceuil_button"/>
+            </div>
+        </div>
+
+    </div>
+</div>
 <?php include('footer.include.php'); ?>
 <script src="../BootStrap/js/bootstrap.min.js"></script>
 </body>
@@ -287,7 +304,7 @@
     $("#information_trajet_form").submit(function () {
         document.getElementById("etape_trajet").innerHTML += '<div class="form-group col-sm-10" style="margin-top: 5px">' +
             '<div class="col-sm-8">' +
-            '<input class="form-control" type="text" name="trajet" required="required" id="trajet" value="' +
+            '<input class="form-control" type="text" name="trajet" required="required" readonly id="trajet" value="' +
             document.getElementById("villeDepart").value + '-->' + document.getElementById("villeArrivee").value + '"/>' +
             '</div>' +
             '<div class="col-sm-2">' +
@@ -298,7 +315,7 @@
             if (!jQuery.isEmptyObject(etape[i])) {
                 document.getElementById("etape_trajet").innerHTML += '<div class="form-group col-sm-10" style="margin-top: 5px">' +
                     '<div class="col-sm-8">' +
-                    '<input class="form-control" type="text" name="trajet" required="required" id="trajet" value="' + etape[i][0] + '-->' + document.getElementById("villeArrivee").value + '"/>' +
+                    '<input class="form-control" type="text" name="trajet" required="required" readonly id="trajet" value="' + etape[i][0] + '-->' + document.getElementById("villeArrivee").value + '"/>' +
                     '</div>' +
                     '<div class="col-sm-2">' +
                     '<input type="text" required name="prix' + i + '" id="prix' + i + '" class="form-control bfh-number" data-min="1" ' +
@@ -348,26 +365,29 @@
     $("#form_model_choix_prix").submit(function () {
         $.get("ajouter_trajet_BD.php", $("#information_trajet_form").serialize() + "&nom_event=" + $("#eventName").val() + "&prix_tot=" + $("#prix_tot").val()).done(function (id_trajet) {
             etape.push(new Array(id_trajet));
-            alert("push id trajet");
             for (var i = 0; i < etape.length - 1; i++) {
                 if (!jQuery.isEmptyObject(etape[i])) {
                     etape[i].push(document.getElementById("prix" + i).value);
                 }
             }
-            alert("je commence l'ajax d'etape");
             $.ajax({
                 url: 'ajouter_etape_trajet_BD.php',
                 data: {mesEtapes: JSON.stringify(etape)},
                 type: 'POST',
                 success: function (response) {
-                    alert(response);
+                    $("#modalChoixPrixTrajet").modal('hide');
+                    $("#modalProposerRetour").modal('show');
                 }
             });
         });
-
-        //mefaut id trajet + tableau
-        //$.
         return false; // permet de ne pas recharger la page
+    });
+
+    $("#redirection_acceuil_button").click(function () {
+        var currentLocation = document.location.href;
+        currentLocation = currentLocation.substring(0, currentLocation.lastIndexOf("src"));
+        currentLocation += 'src/php/index.php';
+        window.location.href = currentLocation;
     });
 
     function reinitialisation_trajet_model() {

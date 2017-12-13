@@ -25,7 +25,7 @@ try{
                 'lieu' => $jsondecode[$i][1],
                 'date_etape' => $jsondecode[$i][2],
                 'prix' => $jsondecode[$i][3]));
-            
+
             $compteur_num_etape++;
         }
     }
