@@ -64,7 +64,7 @@ if (isset($_GET['nom_event'])) {
             ?>
         </div>
 
-        <input type="submit" id="submitEventName" class="btn btn-primary" value="Suivant"/>
+        <input disabled="<?php echo isset($_SESSION['ID_USER']); ?>" type="submit" id="submitEventName" class="btn btn-primary" value="Suivant"/>
     </form>
 </div>
 

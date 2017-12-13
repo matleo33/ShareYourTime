@@ -85,7 +85,7 @@
             </div>
 
 
-            <input type="submit" id="submitEventName" class="btn btn-primary" value="Suivant"
+            <input disabled="<?php echo isset($_SESSION['ID_USER']); ?>" type="submit" id="submitEventName" class="btn btn-primary" value="Suivant"
                    onclick="verification_event()"/>
         </form>
     </div>

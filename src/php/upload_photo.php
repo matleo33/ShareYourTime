@@ -13,7 +13,7 @@ $user = $_SESSION["ID_USER"];
 //Début des vérifications de sécurité...
 if (!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
 {
-    $erreur = 'Vous devez uploader un fichier de type pdf';
+    $erreur = 'Vous devez uploader un fichier de type png, jpeg ou jpg';
 }
 if ($taille > $taille_maxi) {
     $erreur = 'Le fichier est trop gros';
