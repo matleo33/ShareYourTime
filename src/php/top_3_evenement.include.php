@@ -7,10 +7,10 @@ try {
 }
 
 function get_three_best_event($bdd) {
-    $reponse = $bdd->query('SELECT COUNT(trajet.evenement), events.id_events, events.lien_photo, events.nom, events.lien_fb, events.lien_billet '
+    $reponse = $bdd->query('SELECT events.id_events, events.lien_photo, events.nom, events.lien_fb, events.lien_billet, COUNT(id_trajet)'
             . 'FROM users INNER JOIN trajet ON users.id_users=trajet.chauffeur RIGHT OUTER JOIN events ON trajet.evenement = events.id_events '
             . 'WHERE events.est_fini=FALSE '
-            . 'GROUP BY evenement '
+            . 'GROUP BY events.id_events '
             . 'ORDER BY COUNT(trajet.evenement) DESC '
             . 'LIMIT 0,3');
     while ($donnees = $reponse->fetch()) {
