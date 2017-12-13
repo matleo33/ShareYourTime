@@ -12,6 +12,7 @@
         <script src="../js/recherche.js"></script>
         <script src="../js/trouver_evenement.js"></script>
         <script src="../js/datetimepicker.js"></script>
+        <script src="../js/connexion.js"></script>
 
         <meta charset="UTF-8">
         <link href="./../css/style.css" rel="stylesheet">

@@ -1,17 +1,3 @@
-/*$(document).ready(function(e) {
-    $("#formConnexion").submit(function () {
-        $.get("traiter_connexion.php", $(this).serialize(), function (id) {
-            if (id != 0) {
-                window.location.replace("index.php");
-            } else {
-                document.getElementById("inputPasswordConnexion");
-
-            }
-        });
-        return false;
-    });
-});*/
-
 $(document).ready(function() {
     $("#formConnexion").submit(function () {
         $.ajax(
@@ -27,7 +13,7 @@ $(document).ready(function() {
                         boutonFermeture.setAttribute("class","close");
                         boutonFermeture.setAttribute("data-dismiss","alert");
                         boutonFermeture.setAttribute("aria-label","close");
-                        var bouton = document.createTextNode("x"); //TODO remplacer par &times;
+                        var bouton = document.createTextNode("x"); //TODO optionnel remplacer par &times;
                         boutonFermeture.appendChild(bouton);
                         node.appendChild(boutonFermeture);
                         var textnode = document.createTextNode("Adresse mail et/ou mot de passe erroné(s)");

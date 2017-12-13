@@ -13,6 +13,7 @@
         <script src="../js/recherche.js"></script>
         <script src="../js/trouver_evenement.js"></script>
         <script src="../js/datetimepicker.js"></script>
+        <script src="../js/connexion.js"></script>
 
         <!-- Library DateTimePicker -->
         <link href="../BootStrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">

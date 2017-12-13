@@ -13,6 +13,7 @@
     <script src="../js/recherche.js"></script>
     <script src="../js/datetimepicker.js"></script>
     <script src="../js/creer_evenement.js"></script>
+    <script src="../js/connexion.js"></script>
 
     <!-- API Google -->
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyC5VG6abk2Aio0RS7MBAbbN8N-FZxTrD84" type="text/javascript"></script>
