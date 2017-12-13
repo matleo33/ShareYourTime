@@ -178,8 +178,8 @@
                                required="required" id="contactPrivilegie" placeholder="Contact privilégié"/>
                     </div>
                     <div class="col-sm-6">
-                        <select class="form-control elementInfoComp" name="autoroute" id="autoroute">
-                            <option selected disabled>Autoroute</option>
+                        <select class="form-control elementInfoComp" name="autoroute" id="autoroute" required>
+                            <option selected disabled value="">Autoroute</option>
                             <option value="1">Oui</option>
                             <option value="0">Non</option>
                         </select>

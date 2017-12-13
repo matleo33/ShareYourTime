@@ -31,7 +31,7 @@ try{
             'contact' => $_GET['contactPrivilegie'],
             'autoroute' => $_GET['autoroute'],
             'prix_tot' => $_GET['prix_tot'],
-            'est_fini' => 'false',
+            'est_fini' => '0',
             'evenement' => $donnees[0],
         'chauffeur' => 1));//TODO Recupèrer l'id de l'utilisateur connecté$_SESSION["ID_USER"]
 
