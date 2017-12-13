@@ -263,11 +263,12 @@
                     '<input class="form-control" type="text" name="trajet" required="required" id="trajet" value="'+etape[i][0]+'-->'+document.getElementById("villeArrivee").value+'"/>'+
                     '</div>'+
                     '<div class="col-sm-2">'+
-                    '<input type="text" required class="form-control bfh-number" data-min="1" '+
+                    '<input type="text" required name="prix'+i+'" id="prix'+i+'" class="form-control bfh-number" data-min="1" '+
                     '</div>'+
                     '</div>';
-            }
 
+                etape[i].push()
+            }
         }
 
         $("#modalChoixPrixTrajet").modal('show');
@@ -309,10 +310,29 @@
         });
     }
     $("#form_model_choix_prix").submit(function () {
-        var idtrajetcree;
-        $.get("ajouter_trajet_BD.php",$("#information_trajet_form").serialize()+"&nom_event="+$("#eventName").val()+"&prix_tot="+$("#prix_tot").val(),function(id_trajet){
-           idtrajetcree = id_trajet;
+        $.get("ajouter_trajet_BD.php",$("#information_trajet_form").serialize()+"&nom_event="+$("#eventName").val()+"&prix_tot="+$("#prix_tot").val()).done(function(id_trajet){
+            etape.push(new Array(id_trajet));
+            alert("push id trajet");
+            for(var i =0; i<etape.length-1; i++)
+            {
+                if(!jQuery.isEmptyObject(etape[i]))
+                {
+                    etape[i].push(document.getElementById("prix"+i).value);
+                }
+            }
+            alert("je commence l'ajax d'etape");
+            $.ajax({
+                url: 'ajouter_etape_trajet_BD.php',
+                data: {mesEtapes: JSON.stringify(etape)},
+                type: 'POST',
+                success: function(response) {
+                    alert(response);
+                }
+            });
         });
+
+        //mefaut id trajet + tableau
+        //$.
         return false; // permet de ne pas recharger la page
     });
 
