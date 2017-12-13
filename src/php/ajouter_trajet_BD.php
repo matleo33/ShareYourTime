@@ -32,7 +32,7 @@ try{
             'prix_tot' => $_GET['prix_tot'],
             'est_fini' => '0',
             'evenement' => $donnees[0],
-        'chauffeur' => 1));//TODO Recupèrer l'id de l'utilisateur connecté$_SESSION["ID_USER"]
+        'chauffeur' => $_SESSION["ID_USER"]));//TODO Recupèrer l'id de l'utilisateur connecté
 
         echo $bdd->lastInsertId();
     }
