@@ -17,8 +17,8 @@ try{
 
     if($donnees)
     {
-        $requete = $bdd->prepare('INSERT INTO trajet(ville_depart, lieu_depart,date_depart,ville_arrivee,lieu_arrive,date_arrivee,nb_place,retard,contact,autoroute,prix_tot,est_fini,evenement,chauffeur)
-              VALUES(:ville_depart, :lieu_depart, :date_depart, :ville_arrivee, :lieu_arrivee, :date_arrivee, :nb_place, :retard, :contact, :autoroute, :prix_tot, :est_fini, :evenement, :chauffeur)');
+        $requete = $bdd->prepare('INSERT INTO trajet(ville_depart, lieu_depart,date_depart,ville_arrivee,lieu_arrive,date_arrivee,nb_place,retard,autoroute,prix_tot,est_fini,evenement,chauffeur)
+              VALUES(:ville_depart, :lieu_depart, :date_depart, :ville_arrivee, :lieu_arrivee, :date_arrivee, :nb_place, :retard, :autoroute, :prix_tot, :est_fini, :evenement, :chauffeur)');
         $requete->execute(array(
             'ville_depart' => $_GET['villeDepart'],
             'lieu_depart' => $_GET['lieuDepart'],
@@ -28,7 +28,6 @@ try{
             'lieu_arrivee' => $_GET['lieuArrivee'],
             'nb_place' => $_GET['nbPlaces'],
             'retard' => $_GET['retardTolere'],
-            'contact' => $_GET['contactPrivilegie'],
             'autoroute' => $_GET['autoroute'],
             'prix_tot' => $_GET['prix_tot'],
             'est_fini' => '0',

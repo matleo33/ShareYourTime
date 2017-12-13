@@ -174,10 +174,6 @@
                                required="required" id="retardTolere" placeholder="Retard toléré"/>
                     </div>
                     <div class="col-sm-6">
-                        <input class="form-control elementInfoComp" type="text" name="contactPrivilegie"
-                               required="required" id="contactPrivilegie" placeholder="Contact privilégié"/>
-                    </div>
-                    <div class="col-sm-6">
                         <select class="form-control elementInfoComp" name="autoroute" id="autoroute" required>
                             <option selected disabled value="">Autoroute</option>
                             <option value="1">Oui</option>
