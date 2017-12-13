@@ -208,6 +208,15 @@ body {
     .navbar-nav>li {
         float: none;
     }
+    .navbar-nav>.dropdown
+    {
+        display: table-cell;
+    }
+    
+    .navbar-nav>.dropdown>.dropdown-menu {
+        position: relative;
+    }
+    
     .navbar-nav>li>a {
         padding-top: 10px;
         padding-bottom: 10px;
