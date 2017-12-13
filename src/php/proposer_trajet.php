@@ -262,6 +262,8 @@
                 <h4 class="modal-title">Trajet créé</h4>
             </div>
             <div class="modal-footer">
+                <input type="submit" class="btn btn-default center-block" value="Proposer un retour"
+                       id="proposer_retour_button"/>
                 <input type="submit" class="btn btn-default center-block" value="Acceuil"
                        id="redirection_acceuil_button"/>
             </div>
@@ -388,6 +390,26 @@
         currentLocation = currentLocation.substring(0, currentLocation.lastIndexOf("src"));
         currentLocation += 'src/php/index.php';
         window.location.href = currentLocation;
+    });
+    $("#proposer_retour_button").click(function () {
+
+        $("#modalProposerRetour").modal('hide');
+
+        var temp = document.getElementById("villeDepart").value;
+        document.getElementById("villeDepart").value = document.getElementById("villeArrivee").value;
+        document.getElementById("villeArrivee").value = temp;
+
+        temp = document.getElementById("lieuDepart").value;
+        document.getElementById("lieuDepart").value = document.getElementById("lieuArrivee").value;
+        document.getElementById("lieuArrivee").value = temp;
+
+        document.getElementById("date_fin").value = '';
+        document.getElementById("date_debut").value = '';
+
+        etape.clear();
+        document.getElementById("tableau_etape").innerHTML = '';
+
+
     });
 
     function reinitialisation_trajet_model() {
