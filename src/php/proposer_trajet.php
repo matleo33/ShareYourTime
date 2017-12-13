@@ -99,7 +99,7 @@
                                placeholder="Ville de départ"/>
                     </div>
                     <div class='col-sm-4 input-group date datetimepicker'>
-                        <input type='text' id="date_fin" name="date_depart" class="form-control" required="required"
+                        <input type='text' id="date_depart" name="date_depart" class="form-control" required="required"
                                placeholder="Date départ + heure"/>
                         <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -120,7 +120,7 @@
                         ?>"/>
                     </div>
                     <div class='col-sm-4 input-group date datetimepicker'>
-                        <input type='text' id="date_fin" name="date_arrivee" class="form-control" required="required"
+                        <input type='text' id="date_arrivee" name="date_arrivee" class="form-control" required="required"
                                placeholder="Date arrivée + heure" value="<?php
                         if ($dateDebut != NULL) {
                             echo $dateDebut;
@@ -395,6 +395,7 @@
 
         $("#modalProposerRetour").modal('hide');
 
+        //On enlève les valeurs qui sont modifiés lorsque l'on va proposer un retour
         var temp = document.getElementById("villeDepart").value;
         document.getElementById("villeDepart").value = document.getElementById("villeArrivee").value;
         document.getElementById("villeArrivee").value = temp;
@@ -403,11 +404,13 @@
         document.getElementById("lieuDepart").value = document.getElementById("lieuArrivee").value;
         document.getElementById("lieuArrivee").value = temp;
 
-        document.getElementById("date_fin").value = '';
-        document.getElementById("date_debut").value = '';
+        document.getElementById("date_depart").value = '';
+        document.getElementById("date_arrivee").value = '';
 
-        etape.clear();
+        //On vide les étapes
+        etape = [];
         document.getElementById("tableau_etape").innerHTML = '';
+        document.getElementById("etape_trajet").innerHTML = '';
 
 
     });
