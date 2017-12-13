@@ -4,7 +4,9 @@ $(document).ready(function() {
             {url: "traiter_connexion.php",
                 success: function (data) {
                     if (data != 0) {
-                        window.location.replace("index.php");
+                        var array = document.referrer.split("/");
+                        var taille = array.length;
+                        window.location.replace(array[taille-1]);
                     } else {
                         var node = document.createElement("div");
                         node.setAttribute("class","alert alert-danger");
