@@ -8,6 +8,22 @@
 session_start();
 try
 {
+    $dossier = '../../images/';
+    $fichier = basename($_FILES['nouvellePhoto']['name']);
+    $extensions = array('.png', '.jpg', '.jpeg', '.PNG', '.JPG', '.JPEG');
+    $extension = strrchr($_FILES['nouvellePhoto']['name'], '.');
+    $taille_maxi = 1000000;
+    $taille = filesize($_FILES['nouvellePhoto']['tmp_name']);
+    $user = $_SESSION["ID_USER"];
+//Début des vérifications de sécurité...
+    if (!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
+    {
+        $erreur = 'Vous devez uploader un fichier de type pdf';
+    }
+    if ($taille > $taille_maxi) {
+        $erreur = 'Le fichier est trop gros';
+    }
+
     $bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'root', '');
 
     $requete = $bdd->prepare('INSERT INTO events(nom, description,lien_photo,date_debut,date_fin,adresse,lien_fb,lien_billet,createur)
@@ -35,7 +51,7 @@ try
         break;
     }
     unset($_SESSION['nom_event']);
-    header('Location: evenement.php?id_events='.$id_event);
+    //header('Location: evenement.php?id_events='.$id_event);
 }
 catch (Exception $e)
 {

@@ -11,12 +11,12 @@
             <form method="post" id="formConnexion">
                 <div class="form-group col-sm-10 col-sm-offset-1" id="divMail">
                     <label for="inputEmail">Adresse mail</label>
-                    <input type="email" class="form-control" id="inputEmailConnexion" name="inputEmailConnexion" placeholder="Email">
+                    <input type="email" class="form-control" id="inputEmailConnexion" name="inputEmailConnexion" placeholder="Email" required>
                 </div>
                 <div class="form-group col-sm-10 col-sm-offset-1" id="divPassword">
                     <label for="inputPassword">Password</label>
                     <input type="password" class="form-control" id="inputPasswordConnexion" name="inputPasswordConnexion"
-                           placeholder="Mot de passe">
+                           placeholder="Mot de passe" required>
                 </div>
                 <div class="modal-footer">
                     <input type="submit" class="btn btn-default center-block" value="Connexion" id="inputConnexion"/>
