@@ -49,16 +49,7 @@ body {
 
 #myCarousel {
     min-height: 250px;
-    max-width: 1000px;
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    vertical-align: middle;
-}
-
-#myCarousel img {
-    margin-left: auto !important;
-    margin-right: auto !important;
 }
 
 .carousel-caption {
