@@ -11,8 +11,6 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="../js/recherche.js"></script>
-    <script src="../js/datetimepicker.js"></script>
-    <script src="../js/creer_evenement.js"></script>
     <script src="../js/connexion.js"></script>
 
     <!-- API Google -->
@@ -96,14 +94,14 @@ if (isset($_GET['nom_event'])) {
             </div>
             <input class="form-control" id="adressAutoComplete" name="adressAutoComplete" required="required"
                    placeholder="Adresse evenement"/>
-            <div class='input-group date datetimepicker'>
+            <div class='input-group date' id="datetimepicker_date_debut">
                 <input type='text' id="date_debut" name="date_debut" class="form-control" required="required"
                        placeholder="Date debut + heure"/>
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
             </div>
-            <div class='input-group date datetimepicker'>
+            <div class='input-group date' id="datetimepicker_date_fin">
                 <input type='text' id="date_fin" name="date_fin" class="form-control" required="required"
                        placeholder="Date fin + heure"/>
                 <span class="input-group-addon">
@@ -134,6 +132,10 @@ if (isset($_GET['nom_event'])) {
         initializeAutocomplete('adressAutoComplete');
     });
 </script>
+
+
+<script src="../js/datetimepicker.js"></script>
+<script src="../js/creer_evenement.js"></script>
 
 <?php include 'footer.include.php'; ?>
 <script src="../BootStrap/js/bootstrap.min.js"></script>

@@ -89,30 +89,3 @@ $(document).ready(function(e) {
         return false; // permet de ne pas recharger la page
     });
 });
-/*$(document).ready(function(e) {
- //e.preventDefault();
- $("#formRechercheSuite").submit(function () {
- $.ajax({
- url : "inserer_evenement_BD.php",
- type : 'GET',//Impossible à faire marcher en POST
- data : 'nom=' + eventName +
- '&description=' + $("#description").val() +
- '&lien_photo=' + 'modifneeded' +
- '&date_debut=' + $("#date_debut").val() +
- '&date_fin=' + $("#date_fin").val() +
- '&lien_fb=' + $("#lien_fb").val() +
- '&lien_billet=' + $("#lien_billet").val() +
- '&adresse=' + $("#adressAutoComplete").val(),
- dataType : 'html',
- success : function(id){
- goToEvent(id);
- //TODO Creer le pop-up indiquant la création de l'event et permettant d'y accéder
- //TODO afficher message d'erreur si id est = ''
- },
- error : function () {
- //TODO Faire ce qu'il faut lorsque qu'il y a une erreur dans la réponse du PHP
- }
- });
- return false;
- });
- });*/
