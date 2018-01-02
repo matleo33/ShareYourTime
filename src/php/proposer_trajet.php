@@ -443,10 +443,24 @@
     $('#datetimepicker_date_depart_trajet').on('changeDate', function (e) {
         $('#datetimepicker_date_arrivee_trajet').datetimepicker('setStartDate', e.date);
         $('#datetimepicker_date_passage_etape').datetimepicker('setStartDate', e.date);
+        for(var i=0;i<etape.length;i++)
+        {
+            if(document.getElementById("date_depart").value>etape[i][2])
+            {
+                supprimer_etape(i);
+            }
+        }
     });
     $('#datetimepicker_date_arrivee_trajet').on('changeDate', function (e) {
         $('#datetimepicker_date_depart_trajet').datetimepicker('setEndDate', e.date);
         $('#datetimepicker_date_passage_etape').datetimepicker('setEndDate', e.date);
+        for(var i=0;i<etape.length;i++)
+        {
+            if(document.getElementById("date_depart").value<etape[i][2])
+            {
+                supprimer_etape(i);
+            }
+        }
     });
 
 </script>
