@@ -102,7 +102,7 @@
                         <input class="form-control" type="text" name="villeDepart" required="required" id="villeDepart"
                                placeholder="Ville de départ"/>
                     </div>
-                    <div class='col-sm-4 input-group date datetimepicker'>
+                    <div class='col-sm-4 input-group date' id="datetimepicker_date_depart_trajet">
                         <input type='text' id="date_depart" name="date_depart" class="form-control" required="required"
                                placeholder="Date départ + heure"/>
                         <span class="input-group-addon">
@@ -123,7 +123,7 @@
                         }
                         ?>"/>
                     </div>
-                    <div class='col-sm-4 input-group date datetimepicker'>
+                    <div class='col-sm-4 input-group date' id="datetimepicker_date_arrivee_trajet">
                         <input type='text' id="date_arrivee" name="date_arrivee" class="form-control" required="required"
                                placeholder="Date arrivée + heure" value="<?php
                         if ($dateDebut != NULL) {
@@ -210,7 +210,7 @@
                     <input class="form-control" type="text" name="lieuPassage" required="required" id="lieuPassage"
                            placeholder="Lieu de passage"/>
                 </div>
-                <div class='form-group col-sm-10 col-sm-offset-1 input-group date datetimepicker'>
+                <div class='form-group col-sm-10 col-sm-offset-1 input-group date' id="datetimepicker_date_passage_etape">
                     <input type='text' id="date_passage" name="date_passage" class="form-control" required="required"
                            placeholder="Heure passage"/>
                     <span class="input-group-addon">
@@ -418,5 +418,35 @@
     function reinitialisation_trajet_model() {
         document.getElementById("etape_trajet").innerHTML = '';
     }
+
+    $(function () {
+        $('#datetimepicker_date_depart_trajet').datetimepicker({
+            autoclose: true,
+            startDate: new Date()
+        });
+    });
+
+    $(function () {
+        $('#datetimepicker_date_arrivee_trajet').datetimepicker({
+            autoclose: true,
+            startDate: new Date()
+        });
+    });
+
+    $(function () {
+        $('#datetimepicker_date_passage_etape').datetimepicker({
+            autoclose: true,
+            startDate: new Date()
+        });
+    });
+
+    $('#datetimepicker_date_depart_trajet').on('changeDate', function (e) {
+        $('#datetimepicker_date_arrivee_trajet').datetimepicker('setStartDate', e.date);
+        $('#datetimepicker_date_passage_etape').datetimepicker('setStartDate', e.date);
+    });
+    $('#datetimepicker_date_arrivee_trajet').on('changeDate', function (e) {
+        $('#datetimepicker_date_depart_trajet').datetimepicker('setEndDate', e.date);
+        $('#datetimepicker_date_passage_etape').datetimepicker('setEndDate', e.date);
+    });
 
 </script>
