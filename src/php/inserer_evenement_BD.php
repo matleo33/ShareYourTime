@@ -18,26 +18,35 @@ try
 //Début des vérifications de sécurité...
     if (!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
     {
-        $erreur = 'Vous devez uploader un fichier de type pdf';
+        $erreur = 'Vous devez uploader un fichier de type png, jpg ou jpeg.';
     }
     if ($taille > $taille_maxi) {
         $erreur = 'Le fichier est trop gros';
     }
-
     $bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'root', '');
 
-    $requete = $bdd->prepare('INSERT INTO events(nom, description,lien_photo,date_debut,date_fin,adresse,lien_fb,lien_billet,createur)
+        $query = 'INSERT INTO events(nom, description,lien_photo,date_debut,date_fin,adresse,lien_fb,lien_billet,createur) '
+                . 'VALUES( \'' . $_SESSION['nom_event'] . '\', \'' . $_POST['description'] . '\', null, \'' . $_POST['date_debut'] . '\', \'' . $_POST['date_fin'] .
+                '\', \'' . $_POST['adressAutoComplete'] . '\', null,null, \'' . $_SESSION['ID_USER'] . '\')';
+        echo $query;
+        try {
+        $bdd->exec($query);
+        } catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+        
+   /* $requete = $bdd->prepare('INSERT INTO events(nom, description,lien_photo,date_debut,date_fin,adresse,lien_fb,lien_billet,createur)
               VALUES(:nom, :description, :lien_photo, :date_debut, :date_fin, :adresse, :lien_fb, :lien_billet, :createur)');
     $requete->execute(array(
         'nom' => $_SESSION['nom_event'],
-        'description' => $_GET['description'],
+        'description' => $_POST['description'],
         'lien_photo' => null,
-        'date_debut' => $_GET['date_debut'],
-        'date_fin' => $_GET['date_fin'],
-        'adresse' => $_GET['adressAutoComplete'],
+        'date_debut' => $_POST['date_debut'],
+        'date_fin' => $_POST['date_fin'],
+        'adresse' => $_POST['adressAutoComplete'],
         'lien_fb' => null,
         'lien_billet' => null,
-        'createur' => $_SESSION["ID_USER"]));//TODO Recupèrer l'id de l'utilisateur connecté
+        'createur' => $_SESSION['ID_USER']));//TODO Recupèrer l'id de l'utilisateur connecté*/
 
 
     $reponse = $bdd->query('SELECT id_events '
