@@ -5,8 +5,8 @@
  * Date: 06/12/2017
  * Time: 10:05
  */
-
 session_start();
+include 'getNote.php';
 $covoit_event = array();
 $compt = 1;
 $nom_event = '';
@@ -65,8 +65,10 @@ try
     $reponse = $bdd->query($requete);
 
     while ($donnees = $reponse->fetch()) {
+
+        $note_chauffeur = 0;
         $$compt = array();
-        $requete2 = "SELECT users.nom, prenom, personnalite FROM users WHERE id_users = ".$donnees["chauffeur"];
+        $requete2 = "SELECT users.nom, prenom, id_users FROM users WHERE id_users = ".$donnees["chauffeur"];
         $reponse2 = $bdd->query($requete2);
 
         $donnees_user = $reponse2->fetch();
@@ -80,6 +82,11 @@ try
             $nom_event = $_GET["nom_event"];
         }
 
+        if(getHasNote($bdd,$donnees_user["id_users"])==TRUE)
+        {
+            $note_chauffeur = getNote($bdd,$donnees_user["id_users"]);
+        }
+
         if($donnees_trajet)
         {
             if($donnees_user && ($donnees_trajet['nom'] == $nom_event || $nom_event == ''))
@@ -87,7 +94,7 @@ try
 
                 array_push($$compt, $donnees_user[0],
                     $donnees_user["prenom"],
-                    $donnees_user["personnalite"]);
+                    $note_chauffeur);
 
                 array_push($$compt,
                     $donnees["ville_depart"],
@@ -96,7 +103,6 @@ try
                     $donnees["date_arrivee"],
                     $donnees["autoroute"],
                     $donnees["prix_tot"],
-                    //$donnees["personnalite"],
                     $donnees["id_trajet"]);
                 array_push($covoit_event,$$compt);
                 $compt++;
@@ -112,6 +118,5 @@ catch (Exception $e)
     //die('Erreur : ' . $e->getMessage());
     echo $e->getMessage();
 }
-
 
 ?>
