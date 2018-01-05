@@ -6,11 +6,13 @@
  */
 
 function derniersAvis($bdd, $id_user) {
+    $vide = TRUE;
     $reponse = $bdd->query('SELECT * '
             . 'FROM avis INNER JOIN users ON avis.emetteur = users.id_users '
             . 'WHERE recepteur=' . $id_user
-            . ' LIMIT 0,2');
-    while ($donnees = $reponse->fetch()) {
+            . ' LIMIT 0,3');
+    while ($donnees = $reponse->fetch())  {
+            $vide = FALSE;
         echo "<div class=\"col-sm-12\">";
         if ($donnees['lien_photo'] == NULL) {
             ?>
@@ -30,7 +32,8 @@ function derniersAvis($bdd, $id_user) {
         }
         echo '</div>';
         echo "<p>" . $donnees['description'] . "</p>";
-        return 0;
     }
-    echo "<p>Pas d'avis pour cet utilisateur</p>";
+    if ($vide == TRUE) {
+        echo "<p>Pas d'avis pour cet utilisateur</p>";
+    }
 }
