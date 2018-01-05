@@ -9,7 +9,7 @@ session_start();
 include 'getNote.php';
 $covoit_event = array();
 $compt = 1;
-$nom_event = '';
+//$nom_event = '';
 try
 {
     $bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'root', '');
@@ -62,6 +62,40 @@ try
         $requete.= "&& CAST(date_arrivee AS DATE) =\"". $date_arrivee_us . "\" ";
     }
 
+    if(isset($_GET["nom_event"]))
+    {
+        $requete.= "&& trajet.evenement = (SELECT events.id_events FROM events WHERE events.nom = '".$_GET["nom_event"]."') ";
+    }
+
+    //Gestion des ORDER BY
+    switch ($_GET["mode_order"])
+    {
+        case "date_dep_ASC":
+            $requete.= "ORDER BY date_depart ASC";
+            break;
+        case "date_dep_DESC":
+            $requete.= "ORDER BY date_depart DESC";
+            break;
+        case "date_arr_DESC":
+            $requete.= "ORDER BY date_arrivee DESC";
+            break;
+        case "date_arr_ASC":
+            $requete.= "ORDER BY date_arrivee ASC";
+            break;
+        case "prix_DESC":
+            $requete.= "ORDER BY prix_tot DESC";
+            break;
+        case "prix_ASC":
+            $requete.= "ORDER BY prix_tot ASC";
+            break;
+        case "note_DESC":
+            $requete.= "ORDER BY (SELECT AVG(avis.note) FROM avis WHERE avis.recepteur=trajet.chauffeur) DESC";
+            break;
+        case "note_ASC":
+            $requete.= "ORDER BY (SELECT AVG(avis.note) FROM avis WHERE avis.recepteur=trajet.chauffeur) ASC";
+            break;
+    }
+
     $reponse = $bdd->query($requete);
 
     while ($donnees = $reponse->fetch()) {
@@ -73,40 +107,27 @@ try
 
         $donnees_user = $reponse2->fetch();
 
-        $requete3 = "SELECT nom FROM events WHERE id_events = ".$donnees["evenement"];
-        $reponse3 = $bdd->query($requete3);
-        $donnees_trajet = $reponse3->fetch();
-
-        if(isset($_GET["nom_event"]))
-        {
-            $nom_event = $_GET["nom_event"];
-        }
-
         if(getHasNote($bdd,$donnees_user["id_users"])==TRUE)
         {
             $note_chauffeur = getNote($bdd,$donnees_user["id_users"]);
         }
 
-        if($donnees_trajet)
+        if($donnees_user)
         {
-            if($donnees_user && ($donnees_trajet['nom'] == $nom_event || $nom_event == ''))
-            {
+            array_push($$compt, $donnees_user[0],
+                $donnees_user["prenom"],
+                $note_chauffeur);
 
-                array_push($$compt, $donnees_user[0],
-                    $donnees_user["prenom"],
-                    $note_chauffeur);
-
-                array_push($$compt,
-                    $donnees["ville_depart"],
-                    $donnees["date_depart"],
-                    $donnees["ville_arrivee"],
-                    $donnees["date_arrivee"],
-                    $donnees["autoroute"],
-                    $donnees["prix_tot"],
-                    $donnees["id_trajet"]);
-                array_push($covoit_event,$$compt);
-                $compt++;
-            }
+            array_push($$compt,
+                $donnees["ville_depart"],
+                $donnees["date_depart"],
+                $donnees["ville_arrivee"],
+                $donnees["date_arrivee"],
+                $donnees["autoroute"],
+                $donnees["prix_tot"],
+                $donnees["id_trajet"]);
+            array_push($covoit_event,$$compt);
+            $compt++;
         }
 
 

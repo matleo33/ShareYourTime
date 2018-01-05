@@ -87,7 +87,7 @@
         ?>
         /></div>
     <div class="col-sm-6">
-        <button id="recherche_evenement">Rechercher</button>
+        <button id="recherche_evenement">Rechercher l'événement</button>
     </div>
     <div class="col-sm-3 col-sm-offset-2">
         <a id="optionAvancee" href="#" onclick="activerOptionAvancee()">Options avancées</a>
@@ -145,10 +145,24 @@
                 <label><input type="radio" class="optpeageradio" name="optpeageradio" value="pasimportantpeage" checked>Pas important</label>
             </div>
         </div>
-        <input id="validateForm" type="button" value="Rechercher" onclick="lancer_recherche()" />
+        <input id="validateForm" type="button" value="Rechercher des trajets" onclick="lancer_recherche()" />
 
     </form>
+
 </div>
+
+    <div class="col-sm-12" id="select_order" style="visibility: hidden">
+        <select id="mode_order" onchange="lancer_recherche()">
+            <option value="date_dep_ASC" selected>Date de départ croissant</option>
+            <option value="date_dep_DESC">Date de départ décroissant</option>
+            <option value="date_arr_DESC">Date d'arrivée décroissant</option>
+            <option value="date_arr_ASC">Date d'arrivée croissant</option>
+            <option value="prix_DESC">Prix décroissant</option>
+            <option value="prix_ASC">Prix croissant</option>
+            <option value="note_DESC">Note chauffeur décroissant</option>
+            <option value="note_ASC">Note chauffeur croissant</option>
+        </select>
+    </div>
 
 <div class="col-sm-12" id="resultForm">
 
@@ -169,6 +183,20 @@
         </div>
     </div>
 
+    <div class="modal fade" id="modal_trajet_empty" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Pas de trajet correspondant</h4>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </div>
 
 <?php include 'footer.include.php'; ?>
@@ -182,6 +210,9 @@
         {
             data_get+="&nom_event=" + nom_event;
         }
+        var select = document.getElementById("mode_order");
+        var value = select.options[select.selectedIndex].value;
+        data_get+="&mode_order=" + value;
         $.ajax({
             type:"GET",
             data: data_get,//$("#optionAvanceeForm").serialize() + "&nom_event=" +$("#nom_event").value,
@@ -189,7 +220,12 @@
             dataType:"json",
             url:"recherche_avancee_covoiturage.php",
             success:function (data) {
+                $("#select_order").css("visibility", "visible");
                 document.getElementById("resultForm").innerHTML = '';
+                if(data.length == 0)
+                {
+                    $("#modal_trajet_empty").modal('show');
+                }
                 for($i=0; $i<data.length; $i++)
                 {
                     var id_div_trajet ="trajet" + $i;
@@ -231,11 +267,7 @@
         });
         return false;
     }
-    /*$(document).ready(function () {
-        $("#validateForm").click(function () {
 
-        })
-    });*/
 </script>
 <script>
     function activerOptionAvancee() {
