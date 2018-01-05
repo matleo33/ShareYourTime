@@ -1,4 +1,11 @@
 <?php
+$origin = $_SERVER["HTTP_REFERER"];
+$pageorigin = explode("/", $origin);
+if(end($pageorigin) == "") {
+    array_push($pageorigin, "index.php");
+}
+$url=end($pageorigin);
+
 session_start();
 
 $servername = "localhost";
@@ -20,12 +27,12 @@ try {
         setcookie('NOM_USER', $res[1]);
         $_COOKIE["NOM_USER"] = $res[1];
         echo $res[0];
+        header("Location: ".$url);
     } else {
         echo "0";
     }
 } catch (PDOException $e) {
-    $url = "erreur2.php";
-    header("Location: " . $url);
+    header("Location: ".$url);
 }
 $conn = null;
 
