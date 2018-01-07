@@ -130,17 +130,18 @@ try
 
     while ($donnees = $reponse->fetch()) {
 
-        $note_chauffeur = 0;
         $$compt = array();
-        $requete2 = "SELECT users.nom, prenom, id_users FROM users WHERE id_users = ".$donnees["chauffeur"];
+        $requete2 = "SELECT users.nom, prenom, id_users, lien_photo FROM users WHERE id_users = ".$donnees["chauffeur"];
         $reponse2 = $bdd->query($requete2);
 
         $donnees_user = $reponse2->fetch();
 
+        $note_chauffeur = "inconnue";
         if(getHasNote($bdd,$donnees_user["id_users"])==TRUE)
         {
             $note_chauffeur = getNote($bdd,$donnees_user["id_users"]);
         }
+
 
         if($donnees_user)
         {
@@ -155,7 +156,8 @@ try
                 $donnees["date_arrivee"],
                 $donnees["autoroute"],
                 $donnees["prix_tot"],
-                $donnees["id_trajet"]);
+                $donnees["id_trajet"],
+                $donnees_user["lien_photo"]);
             array_push($covoit_event,$$compt);
             $compt++;
         }

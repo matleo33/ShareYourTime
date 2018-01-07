@@ -233,28 +233,65 @@
                 }
                 for($i=0; $i<data.length-1; $i++)
                 {
+                    if(data[$i][10] != null)
+                    {
+                        document.getElementById("resultForm").innerHTML += '<div class="col-xs-12 col-sm-12 col-lg-2">'+
+                            '<img class="photoProfilTrajet" src="../../images/'+data[$i][10]+'" alt="photoProfil" /></div>';
+                    }
+                    else
+                    {
+                        document.getElementById("resultForm").innerHTML += '<div class="col-xs-12 col-sm-12 col-lg-2">'+
+                            '<img class="photoProfilTrajet" src="../img/imageProfil2.PNG" alt="photoProfil" /></div>';
+                    }
                     var id_div_trajet ="trajet" + $i;
-                    document.getElementById("resultForm").innerHTML += '<div class="col-sm-8 col-sm-offset-2 trajetEvenement" id="' + id_div_trajet + '" style="margin-top: 50px">' +
+                    document.getElementById("resultForm").innerHTML += '<div class="col-lg-8 col-lg-offset-1 col-sm-12 col-xs-12 trajetEvenement" id="' + id_div_trajet + '" style="margin-top: 50px">' +
                         '<div class="col-sm-6">' +
-                        '<h3 class="nomChauffeurTrajetEvenement">' +
-                        data[$i][0] + ' ' + data[$i][1] + '</h3>' +
+                        '<span class="nomChauffeurTrajetEvenement">' +
+                        data[$i][0] + ' ' + data[$i][1] + '</span>' +
                         '<p>Depart : ' + data[$i][3] + ' à ' + data[$i][4] + '</p>' +
                         '<p>Arrivé : ' + data[$i][5] + ' à ' + data[$i][6] + '</p>' +
                         '<p>Prix : ' + data[$i][8] + '€</p>' +
-                        '<p id="note' + $i + '">Note du chauffeur : </p></div>';
+                        '<p>Note du chauffeur : <span id="note' + $i + '" style="font-size:150%;"></span></p></div>';
 
-
-                    for($j=0;$j<10;$j++)
+                    //Si la note du chauffeur est connue
+                    if(data[$i][2] != "inconnue")
                     {
-                        if($j<data[$i][2])
+                        for($j=0;$j<10;$j++)
                         {
-                            $("#note"+$i).append('★');
+                            if($j<data[$i][2])
+                            {
+                                $("#note"+$i).append('★');
+                            }
+                            else
+                            {
+                                $("#note"+$i).append('☆');
+                            }
+                        }
+                        //On set la couleur des étoiles en fonction de la note
+                        if(data[$i][2]>=9)
+                        {
+                            $("#note"+$i).css('color', 'gold');
+
+                        }
+                        else if(data[$i][2]>=7)
+                        {
+                            $("#note"+$i).css('color', 'silver');
+                        }
+                        else if(data[$i][2]>=5)
+                        {
+                            $("#note"+$i).css('color', '614E1A');
                         }
                         else
                         {
-                            $("#note"+$i).append('☆');
+                            $("#note"+$i).css('color', 'red');
                         }
                     }
+                    else
+                    {
+                        $("#note"+$i).append('Inconnue');
+                    }
+                    
+
                     if(data[$i][7] == 1)
                     {
                         $("#"+id_div_trajet).append('<div class="col-sm-2 col-sm-offset-1">' +
@@ -268,7 +305,7 @@
                 document.getElementById("resultForm").innerHTML += '<ul class="pagination" id="pages"></ul>';
                 for($k=1; $k<data[data.length-1]+1; $k++)
                 {
-                    $('#pages').append('<li><a onclick="lancer_recherche(this.innerHTML)">'+$k+'</a></li>')
+                    $('#pages').append('<li><a onclick="lancer_recherche(this.innerHTML)" style="cursor: pointer">'+$k+'</a></li>')
                 }
             },
             error:function (data) {
