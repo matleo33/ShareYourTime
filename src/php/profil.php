@@ -11,7 +11,7 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="../js/recherche.js"></script>
-        <script src="../js/editer.js"></script>
+        <!-- <script src="../js/editer.js"></script> -->
         <script src="../js/connexion.js"></script>
 
         <title>Share Your Time</title>
