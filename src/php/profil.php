@@ -53,7 +53,7 @@
                     if (isset($_SESSION['ID_USER']) && ($_SESSION['ID_USER'] == $donnees['id_users'])) {
                         ?>
                         <form method="post" action="upload_photo.php" enctype="multipart/form-data">
-                            <input name="nouvellePhoto" id="nouvellePhoto" type="file" />
+                            <input name="nouvellePhoto" id="nouvellePhoto" type="file" accept="image/jpeg, image/png, image/jpg"/>
                             <button type="submit">Enregistrer</button>
                         </form>
                         <?php
