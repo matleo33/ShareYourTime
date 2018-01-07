@@ -18,9 +18,11 @@
 </head>
 
 <body>
-<?php include 'navbar.include.php'; ?><br/>
+<?php include 'navbar.include.php'; ?>
+    <div class="container-fluid">
 <?php include 'carousel.include.php'; ?>
 <?php include 'top_3_evenement.include.php'; ?>
+    </div>
 <?php include 'footer.include.php'; ?>
 
 <script src="../BootStrap/js/bootstrap.min.js"></script>

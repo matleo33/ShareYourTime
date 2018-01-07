@@ -32,54 +32,82 @@ get_three_best_event($bdd);
 
 //Faire fonction qui, avec les infos en parametre, affiche un évènement 
 function display_event(string $name, $lien_photo, int $nb_people, $price, string $facebook_link, string $ticketing_link, string $id_event) {
-    echo "<div class='important_event'>"
-    . "<div class='image_top_3_event col-sm-3 col-sm-offset-1'>";
     ?>
-<img class="<?php    if ($lien_photo != NULL) {
-        echo "photoProfilEvent";
-    }
-    ?>" src="../../images/<?php echo $lien_photo ?>" alt="Photo Evenement" />
-    <?php
-    echo "</div>"
-    . "<div class=\"informations_event col-sm-6 col-sm-offset-1\">"
-    . "<div>"
-    . "<div class=\"border\">"
-    . "<p class=\"text_left\">"
-    . $name
-    . "</p>";
-    if ($price != NULL && $price != "unknown") {
-        echo "<h2 class=\"text_right\">A partir de "
-        . $price
-        . " €</h2>";
-    } else {
-        echo "<div class=\"text_right\">Pas de covoiturage </br>"
-        . "<a href=\"./proposer_trajet.php?id_events=" . $id_event . "\">(Proposez le votre ?)</a>"
-        . "</div>";
-    }
-    echo "<p class=\"text_left\">Nombre de covoiturages : "
-    . $nb_people
-    . "</p>"
-    . "<div class=\"text-right\">"
-    . "<a class=\"bouton_fixe_droite\" href=./evenement?id_events=" . $id_event . "><button>J'y vais"
-    . "</button></a>"
-    . "</div>"
-    . "</div>"
-    . "</div>"
-    . "<div class='icones'>"
-    . "<a href=\"";
-    if ($facebook_link != NULL) {
-        echo $facebook_link . "\" target=\"_blank\" rel=\"noopener noreferrer\"><img class='logo' src='../img/facebook.png'/></a><a href=\"";
-    } else {
-        echo "#\" target=\"_blank\" rel=\"noopener noreferrer\"><img class='logo' src='../img/facebook.png'/></a><a href=\" ";
-    }
-    if ($ticketing_link != NULL) {
-        echo $ticketing_link . "\" target=\"_blank\" rel=\"noopener noreferrer\"><img class='logo' src='../img/ticket.png'/></a> ";
-    } else {
-        echo "#\" target=\"_blank\" rel=\"noopener noreferrer\"><img class='logo' src='../img/ticket.png'/></a> ";
-    }
-    echo "</div>"
-    . "</div>"
-    . "<div class=\"col-sm-1\"></div>"
-    . "</div>";
+    <div class='important_event col-sm-12'>
+        <div class='image_top_3_event col-sm-2 col-sm-offset-2'>
+            <img class="<?php
+            if ($lien_photo != NULL) {
+                echo "photoProfilEvent";
+            }
+            ?>" src="../../images/<?php echo $lien_photo ?>" alt="Photo Evenement" />
+        </div>
+        <div class="informations_event col-sm-6 col-sm-offset-2 col-sm-pull-1">
+            <div>
+                <div class="border">
+                    <p class="text_left">
+                        <?php echo $name; ?>
+                    </p>
+                    <?php
+                    if ($price != NULL && $price != "unknown") {
+                        ?>
+                        <h2 class="text_right">A partir de
+                            <?php
+                            echo $price;
+                            ?>
+                            €</h2>
+                        <?php
+                    } else {
+                        ?>
+                        <div class="text_right">Pas de covoiturage <br />
+                            <a href="./proposer_trajet.php?id_events=<?php echo $id_event; ?>">(Proposez le votre ?)</a>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                    <p class="text_left">Nombre de covoiturages : 
+                        <?php echo $nb_people; ?>
+                    </p>
+                    <div class="text-right">
+                        <a class="bouton_fixe_droite" href=./evenement?id_events=<?php echo $id_event; ?>">
+                            <button>J'y vais</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class='icones'>
+                <a href="<?php
+                if ($facebook_link != NULL) {
+                    echo $facebook_link;
+                    ?>" target=\"_blank\" rel="noopener noreferrer">
+                        <img class='logo' src='../img/facebook.png'/>
+                    </a>
+                    <a href="
+                    <?php
+                } else {
+                    ?>
+                       #" target=\"_blank\" rel="noopener noreferrer">
+                        <img class='logo' src='../img/facebook.png'/>
+                    </a>
+                    <a href="
+                    <?php
+                }
+                if ($ticketing_link != NULL) {
+                    echo $ticketing_link;
+                    ?>
+                       " target="_blank" rel="noopener noreferrer">
+                        <img class='logo' src='../img/ticket.png'/>
+                    </a>
+                    <?php
+                } else {
+                    ?>
+                    #" target="_blank" rel="noopener noreferrer">
+                    <img class='logo' src='../img/ticket.png'/>
+                    </a>
+                    <?php
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+<?php
 }
-?>

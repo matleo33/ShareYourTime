@@ -25,7 +25,7 @@
                 <h1>Naissance du projet</h1>
                 <p>
                     Ce projet est né suite au concours Hacke Ta Fac organisé par l'université de Bordeaux. <br/>
-                    Il est l'oeuvre de Damien Berrouet, étudiant en Licence MIAGE et répond à l'exigence de modification de la vie du campus bordelais universitaire.
+                    Il est l'oeuvre de Damien Berrouet, étudiant en Licence MIAGE, et répond à l'exigence de modification de la vie du campus universitaire bordelais.
                 </p>
             </div>
         </div>
@@ -35,9 +35,9 @@
                 <h1>Comment l'utiliser ?</h1>
                 <p>
                     Pour l'utiliser, il vous suffit de vous inscrire, de rechercher un évévement,
-                    de trouver le trajet le plus proche de chez vous pour y aller et d'y souscrire.
+                    de trouver le trajet le plus proche de chez vous pour y aller et de vous y inscrire.
                     <br />
-                    Enfin, présentez-vous le jour et l'heure pour ce covoiturage et amusez-vous !
+                    Enfin, présentez-vous le bon jour à la bonne heure pour ce covoiturage et amusez-vous !
                 </p>
             </div>
         </div>

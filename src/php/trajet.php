@@ -134,10 +134,17 @@
                                     ?>
                                 </div>
                                 <div class="col-sm-4">
+                                    <?php if ($placesRestantes == 0)
+                                    {
+                                        ?> Il n'y a plus de places
+                                       <?php 
+                                    } else {
+                                    ?>
                                     Il reste <?php echo $placesRestantes; ?> place<?php
                         if ($placesRestantes > 1) {
                             echo 's';
                         }
+                                    }
                                     ?>
                                 </div>
                                 <?php

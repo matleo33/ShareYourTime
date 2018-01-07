@@ -47,11 +47,16 @@
                             IMAGEEVENEMENT
                         </div>
                         <div class="col-sm-4 col-sm-offset-1">
-                            <h1 class="text-center"><?php echo $donnees['nom']; ?></h1>
+                            <h1 class="text-center"><?php echo $donnees['nom'];
+                            if ($donnees['est_fini'] == true) {
+                                            echo "<br/> (Evenement terminé)";
+                                        }
+                                        ?></h1>
                             <p class="descriptionEvenement"><?php echo $donnees['description']; ?></p>
                             <div>
                                 <p>Adresse : <?php echo $donnees['adresse']; ?></p>
-                                <p>Dates : <br/><?php echo strftime("%e / %m / %Y, %H : %M", strtotime($donnees['date_debut'])) . ' <br /> ' . strftime("%e / %m / %Y, %H : %M", strtotime($donnees['date_fin'])); ?></p>
+                                <p>Date debut : <?php echo strftime("%e / %m / %Y, %H : %M", strtotime($donnees['date_debut']))?></p>
+                                <p>Date fin : <?php echo strftime("%e / %m / %Y, %H : %M", strtotime($donnees['date_fin'])); ?></p>
                                 <div class="text_right"><a href="<?php echo $donnees['lien_fb']; ?>"><img class='logo'
                                                                                                           src='../img/facebook.png'/></a>
                                     <a href="<?php echo $donnees['lien_billet']; ?>"><img class='logo' src='../img/ticket.png'/></a>
@@ -72,7 +77,7 @@
                         <?php
                         //Menu Nav entre trajets
                         $nbTrajets = countTrajet($bdd, $id_event);
-                        for ($i = 0; $i <= $nbTrajets / 2; ++$i) {
+                        for ($i = 0; $i < $nbTrajets / 2; ++$i) {
                             echo "<a href=\"evenement.php?id_events=" . $id_event . "&page=" . $i . "\">" . ($i + 1) . "</a> ";
                         }
                         ?>

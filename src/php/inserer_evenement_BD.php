@@ -60,7 +60,7 @@ try
         break;
     }
     unset($_SESSION['nom_event']);
-    //header('Location: evenement.php?id_events='.$id_event);
+    header('Location: evenement.php?id_events='.$id_event);
 }
 catch (Exception $e)
 {

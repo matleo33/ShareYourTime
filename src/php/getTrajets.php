@@ -7,10 +7,10 @@ function getTrajets($bdd, string $id_event, $page) {
     } else {
         $page = 0;
     }
-    $reponseTrajets = $bdd->query('SELECT id_trajet, lien_photo, id_users, nom, prenom, ville_depart, lieu_depart, prix_tot, personnalite, autoroute '
+    $reponseTrajets = $bdd->query('SELECT id_trajet, lien_photo, id_users, nom, prenom, ville_depart, lieu_depart, ville_arrivee, lieu_arrive, prix_tot, personnalite, autoroute '
             . 'FROM trajet INNER JOIN users on trajet.chauffeur = users.id_users '
             . 'WHERE evenement=\'' . $id_event . '\' '
-            . 'LIMIT ' . ($page * 2) . ',' . (($page * 2) + 2));
+            . 'LIMIT ' . ($page * 2) . ',2');
     while ($donneesTrajet = $reponseTrajets->fetch()) {
         $note = 5;
         $hasNote = getHasNote($bdd, $donneesTrajet['id_users']);
@@ -38,6 +38,7 @@ function getTrajets($bdd, string $id_event, $page) {
                         ?>
                     </span>
                     <p>Depart : <?php echo $donneesTrajet['ville_depart'] . ', ' . $donneesTrajet['lieu_depart']; ?></p>
+                    <p>Arrivée : <?php echo $donneesTrajet['ville_arrivee'] . ', ' . $donneesTrajet['lieu_arrive']; ?></p>
                     <p>Prix : <?php echo $donneesTrajet['prix_tot'] . ' €'; ?></p>
                     <p>Note chauffeur : <?php
                         if ($hasNote) {
