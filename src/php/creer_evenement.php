@@ -93,7 +93,7 @@
                             <div class="btn btn-default image-preview-input">
                                 <span class="glyphicon glyphicon-folder-open"></span>
                                 <span class="image-preview-input-title">Parcourir</span>
-                                <input type="file" name="nouvellePhoto"  accept="image/png, image/jpeg, image/gif"/> <!-- rename it -->
+                                <input type="file" name="nouvellePhoto"  accept="image/png, image/jpeg, image/gif"/>
                             </div>
                         </span>
                     </div>
@@ -113,10 +113,9 @@
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
                     </div>
-                    <!-- TODO réparer pattern facebook qui fonctionne pas -->
-                    <input id="lien_fb" name="lien_fb" class="form-control" pattern="[https://www.facebook.com/events/]{1-0}[/]"
+                    <input id="lien_fb" name="lien_fb" class="form-control" type="url" pattern="https://www.facebook.com/events/.+"
                            placeholder="Lien facebook">
-                    <input id="lien_billet" name="lien_billet" class="form-control" placeholder="Lien billeterie">
+                    <input id="lien_billet" name="lien_billet" class="form-control" type="url" placeholder="Lien billeterie">
                     <textarea style="resize: none;" name="description" class="form-control" required="required"
                               placeholder="Description"></textarea>
                 </div>

@@ -17,12 +17,11 @@ try {
 
     $nom_event = $_SESSION["nom_event"];
     $description = $_POST["description"];
-    //photo
     $date_debut = $_POST["date_debut"];
     $date_fin = $_POST["date_fin"];
     $adresse = htmlspecialchars($_POST["adressAutoComplete"]);
-    //event facebook
-    //lien billeterie
+    $adresse_facebook = htmlspecialchars($_POST["lien_fb"]);
+    $lien_billeterie = $_POST["lien_billet"];
     $id_user = $_SESSION["ID_USER"];
 
 //Début des vérifications de sécurité...
@@ -46,22 +45,31 @@ try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 
 
-
         if (move_uploaded_file($_FILES['nouvellePhoto']['tmp_name'], $dossier . $nom_fichier)) // Renvoie true en cas de succès
-        {$stmt = $conn->prepare("INSERT INTO events(nom, description,lien_photo,date_debut,date_fin,adresse,lien_fb,lien_billet,createur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->execute(array($nom_event, $description, $nom_fichier, $date_debut, $date_fin, $adresse, null, null, $id_user));
-            echo 'Upload effectué avec succès !';
-        } else //Sinon la fonction renvoie FALSE
         {
-            echo 'Echec de l\'upload !';
+            $stmt = $conn->prepare("INSERT INTO events(nom, description,lien_photo,date_debut,date_fin,adresse,lien_fb,lien_billet,createur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
         }
+        $stmt->execute(array($nom_event, $description, $nom_fichier, $date_debut, $date_fin, $adresse, $adresse_facebook, $lien_billeterie, $id_user));
+        echo 'Upload effectué avec succès !';
 
-        $pdo = null;
-        //$url = "profil.php?id_profil=" . $user;
-        //header('Location: evenement.php?id_events='.$id_event);
+    } else //Sinon la fonction renvoie FALSE
+    {
+        echo 'Echec de l\'upload !';
+    }
 
-    } else {
-        echo $erreur;
+    $reponse = $conn->query('SELECT id_events '
+        . 'FROM events '
+        . 'WHERE nom=\'' . $_SESSION['nom_event'] . '\'');
+    while ($donnees = $reponse->fetch()) {
+        $id_event = $donnees[0];
+
+        echo $id_event;
+
+        $conn = null;
+        header('Location: evenement.php?id_events=' . $id_event);
+
+        break;
+
     }
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
