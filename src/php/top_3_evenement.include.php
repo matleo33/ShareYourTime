@@ -59,7 +59,7 @@ function display_event(string $name, $lien_photo, int $nb_people, $price, string
                     } else {
                         ?>
                         <div class="text_right">Pas de covoiturage <br />
-                            <a href="./proposer_trajet.php?id_events=<?php echo $id_event; ?>">(Proposez le votre ?)</a>
+                            <a href=./proposer_trajet.php?id_events=<?php echo $id_event; ?>>(Proposez le votre ?)</a>
                         </div>
                         <?php
                     }
@@ -68,7 +68,7 @@ function display_event(string $name, $lien_photo, int $nb_people, $price, string
                         <?php echo $nb_people; ?>
                     </p>
                     <div class="text-right">
-                        <a class="bouton_fixe_droite" href=./evenement?id_events=<?php echo $id_event; ?>">
+                        <a class="bouton_fixe_droite" href=./evenement?id_events=<?php echo $id_event; ?>>
                             <button>J'y vais</button>
                         </a>
                     </div>
