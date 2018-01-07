@@ -47,7 +47,7 @@ try {
 
         if (move_uploaded_file($_FILES['nouvellePhoto']['tmp_name'], $dossier . $nom_fichier)) // Renvoie true en cas de succès
         {
-            $stmt = $conn->prepare("INSERT INTO events(nom, description,lien_photo,date_debut,date_fin,adresse,lien_fb,lien_billet,createur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO events(nom, description,lien_photo,date_debut,date_fin,adresse,lien_fb,lien_billet,est_fini,createur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, ?)");
         }
         $stmt->execute(array($nom_event, $description, $nom_fichier, $date_debut, $date_fin, $adresse, $adresse_facebook, $lien_billeterie, $id_user));
         echo 'Upload effectué avec succès !';
