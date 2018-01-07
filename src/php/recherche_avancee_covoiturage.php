@@ -9,7 +9,8 @@ session_start();
 include 'getNote.php';
 $covoit_event = array();
 $compt = 1;
-//$nom_event = '';
+$evenementParPage=3;
+$conditionsRequete = "";
 try
 {
     $bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'root', '');
@@ -18,83 +19,112 @@ try
 
     if($_GET['optpeageradio'] == 'pasimportantpeage')
     {
-        $requete .= 'WHERE 1 ';
+        $conditionsRequete .='WHERE 1 ';
     }
     else if ($_GET['optpeageradio'] == 'avecpeage')
     {
-        $requete .= 'WHERE trajet.autoroute = 1 ';
+        $conditionsRequete .= 'WHERE trajet.autoroute = 1 ';
     }
     else if ($_GET['optpeageradio'] == 'sanspeage')
     {
-        $requete .= 'WHERE trajet.autoroute = 0 ';
+        $conditionsRequete .= 'WHERE trajet.autoroute = 0 ';
     }
 
     if($_GET['ville_depart'] != '')
     {
-        $requete .= "&& trajet.ville_depart = '". $_GET['ville_depart']. "' ";
+        $conditionsRequete .= "&& trajet.ville_depart = '". $_GET['ville_depart']. "' ";
     }
     if($_GET['ville_arrivee'] != '')
     {
-        $requete .= "&& trajet.ville_arrivee = '". $_GET['ville_arrivee']. "' ";
+        $conditionsRequete .= "&& trajet.ville_arrivee = '". $_GET['ville_arrivee']. "' ";
     }
 
     if($_GET['prix'] != '')
     {
-        $requete .= "&& trajet.prix_tot =". $_GET['prix']. " ";
+        $conditionsRequete .= "&& trajet.prix_tot =". $_GET['prix']. " ";
     }
 
     if($_GET['nombre_voyageur'] != '')
     {
-        $requete .= "&& ".  $_GET['nombre_voyageur'] . " <= trajet.nb_place - covoiturage.nb_place_res ";
+        $conditionsRequete .= "&& ".  $_GET['nombre_voyageur'] . " <= trajet.nb_place - covoiturage.nb_place_res ";
     }
 
     if($_GET['date_depart'] != '')
     {
         $date_depart_fr = $_GET['date_depart'];
         $date_depart_us = date('Y-m-d', strtotime(str_replace('/', '-', $date_depart_fr)));
-        $requete.= "&& CAST(date_depart AS DATE) =\"". $date_depart_us . "\" ";
+        $conditionsRequete.= "&& CAST(date_depart AS DATE) =\"". $date_depart_us . "\" ";
     }
 
     if($_GET['date_arrivee'] != '')
     {
         $date_arrivee_fr = $_GET['date_arrivee'];
         $date_arrivee_us = date('Y-m-d', strtotime(str_replace('/', '-', $date_arrivee_fr)));
-        $requete.= "&& CAST(date_arrivee AS DATE) =\"". $date_arrivee_us . "\" ";
+        $conditionsRequete.= "&& CAST(date_arrivee AS DATE) =\"". $date_arrivee_us . "\" ";
     }
 
     if(isset($_GET["nom_event"]))
     {
-        $requete.= "&& trajet.evenement = (SELECT events.id_events FROM events WHERE events.nom = '".$_GET["nom_event"]."') ";
+        $conditionsRequete.= "&& trajet.evenement = (SELECT events.id_events FROM events WHERE events.nom = '".$_GET["nom_event"]."') ";
     }
 
-    //Gestion des ORDER BY
+    $requete.=$conditionsRequete; // On ajoute les conditions créés précédemement à la requete
+
+    //Gestion des ORDER BY qu'on ajoute à la requete
     switch ($_GET["mode_order"])
     {
         case "date_dep_ASC":
-            $requete.= "ORDER BY date_depart ASC";
+            $requete.= "ORDER BY date_depart ASC ";
             break;
         case "date_dep_DESC":
-            $requete.= "ORDER BY date_depart DESC";
+            $requete.= "ORDER BY date_depart DESC ";
             break;
         case "date_arr_DESC":
-            $requete.= "ORDER BY date_arrivee DESC";
+            $requete.= "ORDER BY date_arrivee DESC ";
             break;
         case "date_arr_ASC":
-            $requete.= "ORDER BY date_arrivee ASC";
+            $requete.= "ORDER BY date_arrivee ASC ";
             break;
         case "prix_DESC":
-            $requete.= "ORDER BY prix_tot DESC";
+            $requete.= "ORDER BY prix_tot DESC ";
             break;
         case "prix_ASC":
-            $requete.= "ORDER BY prix_tot ASC";
+            $requete.= "ORDER BY prix_tot ASC ";
             break;
         case "note_DESC":
-            $requete.= "ORDER BY (SELECT AVG(avis.note) FROM avis WHERE avis.recepteur=trajet.chauffeur) DESC";
+            $requete.= "ORDER BY (SELECT AVG(avis.note) FROM avis WHERE avis.recepteur=trajet.chauffeur) DESC ";
             break;
         case "note_ASC":
-            $requete.= "ORDER BY (SELECT AVG(avis.note) FROM avis WHERE avis.recepteur=trajet.chauffeur) ASC";
+            $requete.= "ORDER BY (SELECT AVG(avis.note) FROM avis WHERE avis.recepteur=trajet.chauffeur) ASC ";
             break;
     }
+
+    $retour_total = "SELECT DISTINCT COUNT(*) AS total FROM trajet ";
+    $retour_total.= $conditionsRequete;
+    $result = $bdd->query($retour_total);
+    $donnees_total = $result->fetch();
+    $total=$donnees_total['total'];
+
+    $nombreDePages=ceil($total/$evenementParPage);
+
+    if(isset($_GET['page'])) // Si la variable $_GET['page'] existe...
+    {
+        $pageActuelle=intval($_GET['page']);
+
+        if($pageActuelle>$nombreDePages) // Si la valeur de $pageActuelle (le numéro de la page) est plus grande que $nombreDePages...
+        {
+            $pageActuelle=$nombreDePages;
+        }
+    }
+    else // Sinon
+    {
+        $pageActuelle=1; // La page actuelle est la n°1
+    }
+
+    $premiereEntree=($pageActuelle-1)*$evenementParPage;
+
+    //On ajoute la LIMIT à la requete pour la pagination
+    $requete.= "LIMIT ".$premiereEntree.", ".$evenementParPage;
 
     $reponse = $bdd->query($requete);
 
@@ -132,6 +162,7 @@ try
 
 
     }
+    array_push($covoit_event,$nombreDePages);
     echo json_encode(array_values($covoit_event));
 }
 catch (Exception $e)

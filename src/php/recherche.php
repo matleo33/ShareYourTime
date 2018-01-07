@@ -203,7 +203,7 @@
 </body>
 </html>
 <script>
-    function lancer_recherche() {
+    function lancer_recherche(innerhtml) {
         var nom_event = $("#nom_event").val();
         var data_get = $("#optionAvanceeForm").serialize();
         if(nom_event != '')
@@ -213,6 +213,11 @@
         var select = document.getElementById("mode_order");
         var value = select.options[select.selectedIndex].value;
         data_get+="&mode_order=" + value;
+
+        if(innerhtml != null)
+        {
+            data_get+="&page="+innerhtml;
+        }
         $.ajax({
             type:"GET",
             data: data_get,//$("#optionAvanceeForm").serialize() + "&nom_event=" +$("#nom_event").value,
@@ -226,7 +231,7 @@
                 {
                     $("#modal_trajet_empty").modal('show');
                 }
-                for($i=0; $i<data.length; $i++)
+                for($i=0; $i<data.length-1; $i++)
                 {
                     var id_div_trajet ="trajet" + $i;
                     document.getElementById("resultForm").innerHTML += '<div class="col-sm-8 col-sm-offset-2 trajetEvenement" id="' + id_div_trajet + '" style="margin-top: 50px">' +
@@ -259,6 +264,11 @@
                     $("#"+id_div_trajet).append('<div class="col-sm-2">' +
                         '<a href="./trajet.php?id_trajet=' + data[$i][9] + '"><button>Voir détails</button></a>' +
                         '</div> </div>');
+                }
+                document.getElementById("resultForm").innerHTML += '<ul class="pagination" id="pages"></ul>';
+                for($k=1; $k<data[data.length-1]+1; $k++)
+                {
+                    $('#pages').append('<li><a onclick="lancer_recherche(this.innerHTML)">'+$k+'</a></li>')
                 }
             },
             error:function (data) {
