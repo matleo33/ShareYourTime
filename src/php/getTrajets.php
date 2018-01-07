@@ -19,7 +19,7 @@ function getTrajets($bdd, string $id_event, $page) {
         }
         ?>
         <div class="col-sm-12" id="divCovoiturage">
-            <div class="col-sm-2">
+            <div class="col-xs-12 col-sm-12 col-lg-2">
                 <?php if ($donneesTrajet['lien_photo'] == NULL) { ?>
                     <img class="photoProfilTrajet" src="../img/imageProfil2.PNG" alt="photoProfil" />
                     <?php
@@ -30,7 +30,7 @@ function getTrajets($bdd, string $id_event, $page) {
                 }
                 ?>
             </div>
-            <div class="col-sm-8 col-sm-offset-1 trajetEvenement">
+            <div class="col-lg-8 col-lg-offset-1 col-sm-12 col-xs-12 trajetEvenement">
                 <div class="col-sm-6">
                     <span class="nomChauffeurTrajetEvenement">
                         <?php
@@ -42,22 +42,41 @@ function getTrajets($bdd, string $id_event, $page) {
                     <p>Prix : <?php echo $donneesTrajet['prix_tot'] . ' €'; ?></p>
                     <p>Note chauffeur : <?php
                         if ($hasNote) {
-                            for ($i = 0; $i < $note; ++$i) {
-                                echo '★';
+                            ?>
+                            <span style="font-size:150%; color:
+                            <?php
+                            if ($note >= 9) {
+                                echo 'gold;';
+                            } else if ($note >= 7) {
+                                echo 'silver;';
+                            } else if ($note >= 5)
+                                echo '#614E1A;';
+                            else {
+                                echo 'red;';
                             }
-                            for ($j = 0; $j < 10 - $note; ++$j) {
-                                echo '☆';
-                            }
+                            ?>">
+                                      <?php
+                                      for ($i = 0; $i < $note; ++$i) {
+                                          echo '★';
+                                      }
+                                      for ($j = 0; $j < 10 - $note; ++$j) {
+                                          echo '☆';
+                                      }
+                                      ?>
+                            </span>
+                            <?php
                         } else {
                             echo 'Inconnue';
                         }
-                        ?></p>
+                        ?></span></p>
                 </div>
 
                 <div class="col-sm-2 col-sm-offset-1">
                     <?php
                     if ($donneesTrajet['autoroute']) {
-                        echo "<img class=\"logoAutoroute\" src=\"../img/autoroute.png\" alt=\"autouroute : oui\"/ />";
+                        ?>
+                        <img class="logoAutoroute" src="../img/autoroute.png" alt="autouroute : oui" />
+                        <?php
                     }
                     ?>
                 </div>

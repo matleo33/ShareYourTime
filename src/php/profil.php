@@ -72,25 +72,34 @@
                             echo $donnees2['COUNT(*)'];
                         }
                         ?></p>
-                    <p><?php
-                        echo 'Note : <span class="note">';
-                        if ($hasNote) {
-                            for ($i = 0; $i < $note; ++$i) {
-                                echo '★';
-                            }
-                            for ($j = 0; $j < 10 - $note; ++$j) {
-                                echo '☆';
-                            }
-                        } else {
-                            echo 'Inconnue';
+                    <p>Note :
+                        <span style="font-size:150%; color:
+                        <?php
+                        if ($note >= 9) {
+                            echo 'gold;';
+                        } else if ($note >= 7) {
+                            echo 'silver;';
+                        } else if ($note >= 5)
+                            echo '#614E1A;';
+                        else {
+                            echo 'red;';
                         }
-                        ?></span></p>
+                        ?>">
+                                  <?php
+                                  for ($i = 0; $i < $note; ++$i) {
+                                      echo '★';
+                                  }
+                                  for ($j = 0; $j < 10 - $note; ++$j) {
+                                      echo '☆';
+                                  }
+                                  ?>
+                        </span></p>
                     <p>Description : </p>
                     <?php
                     if (isset($_SESSION['ID_USER']) && ($_SESSION['ID_USER'] == $donnees['id_users'])) {
                         ?>
                         <form method="post" action="modifierDescription.php">
-                            <textarea maxlength="255" id="description" name="description" class="form-control" placeholder="Description" type="textarea" style="max-width: 90%" ><?php echo $donnees['biographie']; ?></textarea>
+                            <textarea maxlength="255" id="description" name="description" class="form-control" placeholder="Description" type="textarea" style="max-width: 90%; min-width: 90%; min-height: 50px;" ><?php echo $donnees['biographie']; ?></textarea>
                             <button type="submit">Editer</button>
                         </form>
                         <?php

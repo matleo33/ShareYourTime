@@ -43,29 +43,58 @@
                     $createur = $donnees['createur'];
                     ?>
                     <div class="col-sm-12">
-                        <div class="col-sm-4 col-sm-offset-1">
-                            IMAGEEVENEMENT
-                        </div>
-                        <div class="col-sm-4 col-sm-offset-1">
-                            <h1 class="text-center"><?php echo $donnees['nom'];
-                            if ($donnees['est_fini'] == true) {
-                                            echo "<br/> (Evenement terminé)";
-                                        }
-                                        ?></h1>
-                            <p class="descriptionEvenement"><?php echo $donnees['description']; ?></p>
-                            <div>
-                                <p>Adresse : <?php echo $donnees['adresse']; ?></p>
-                                <p>Date debut : <?php echo strftime("%e / %m / %Y, %H : %M", strtotime($donnees['date_debut']))?></p>
-                                <p>Date fin : <?php echo strftime("%e / %m / %Y, %H : %M", strtotime($donnees['date_fin'])); ?></p>
-                                <div class="text_right"><a href="<?php echo $donnees['lien_fb']; ?>"><img class='logo'
-                                                                                                          src='../img/facebook.png'/></a>
-                                    <a href="<?php echo $donnees['lien_billet']; ?>"><img class='logo' src='../img/ticket.png'/></a>
+                        <?php if ($donnees['lien_photo'] != NULL) { ?>
+                            <div class="col-sm-4 col-sm-offset-1">
+                                <img src="<?php echo $donnees['lien_photo']?>" alt="photo évenement" />
+                            </div>
+                            <div class="col-sm-4 col-sm-offset-1">
+                                <h1 class="text-center"><?php
+                                    echo $donnees['nom'];
+                                    if ($donnees['est_fini'] == true) {
+                                        echo "<br/> (Evenement terminé)";
+                                    }
+                                    ?></h1>
+                                <p class="descriptionEvenement"><?php echo $donnees['description']; ?></p>
+                                <div>
+                                    <p>Adresse : <?php echo $donnees['adresse']; ?></p>
+                                    <p>Date debut : <?php echo strftime("%e / %m / %Y, %H : %M", strtotime($donnees['date_debut'])) ?></p>
+                                    <p>Date fin : <?php echo strftime("%e / %m / %Y, %H : %M", strtotime($donnees['date_fin'])); ?></p>
+                                    <div class="text_right"><a href="<?php echo $donnees['lien_fb']; ?>"><img class='logo'
+                                                                                                              src='../img/facebook.png'/></a>
+                                        <a href="<?php echo $donnees['lien_billet']; ?>"><img class='logo' src='../img/ticket.png'/></a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <?php
+                        } else {
+                            ?>
+                            <div class="col-sm-12 col-lg-6 col-lg-offset-3">
+                                <h1 class="text-center"><?php
+                                    echo $donnees['nom'];
+                                    if ($donnees['est_fini'] == true) {
+                                        echo "<br/> (Evenement terminé)";
+                                    }
+                                    ?></h1>
+                                <p class="descriptionEvenement"><?php echo $donnees['description']; ?></p>
+                                <div class="col-xs-12 col-sm-6 col-lg-6">
+                                    <p>Adresse : <?php echo $donnees['adresse']; ?></p>
+                                    <p>Date debut : <?php echo strftime("%e / %m / %Y, %H : %M", strtotime($donnees['date_debut'])) ?></p>
+                                    <p>Date fin : <?php echo strftime("%e / %m / %Y, %H : %M", strtotime($donnees['date_fin'])); ?></p>
+                                </div>
+                                <div class="col-lg-4 col-lg-offset-1 col-sm-12 col-xs-12" style="float: right;">
+                                        <a href="<?php echo $donnees['lien_fb']; ?>">
+                                            <img class='logo' src='../img/facebook.png'/>
+                                        </a>
+                                        <a href="<?php echo $donnees['lien_billet']; ?>">
+                                            <img class='logo' src='../img/ticket.png'/>
+                                        </a>
+                                    </div>
+                            </div>
+                            <?php
+                        }
+                        ?>
                     </div>
                     <div class="col-sm-12" id="divTrajet">
-
                         <?php
                     }
 
@@ -73,7 +102,7 @@
 
                     getTrajets($bdd, $id_event, 0);
                     ?>
-                    <div class="text-center">
+                    <div class="text-center col-sm-12">
                         <?php
                         //Menu Nav entre trajets
                         $nbTrajets = countTrajet($bdd, $id_event);
@@ -87,25 +116,25 @@
                             <a href="./proposer_trajet.php?id_events=<?php echo $_GET['id_events']; ?>"><button>Proposez votre trajet</button></a>
                             <a href="./recherche.php"><button>Recherche détaillée</button></a>
                             <?php
-                            if (isset($_SESSION['ID_USER']) && ($createur == $_SESSION['ID_USER']) && $est_fini==FALSE) {
+                            if (isset($_SESSION['ID_USER']) && ($createur == $_SESSION['ID_USER']) && $est_fini == FALSE) {
                                 ?>
-                            </div>
-                            <div class="col-sm-6 col-sm-offset-3 text-center">
-                                <form method="post" action="terminerEvenement.php">
-                                    <input type="hidden" name="idTrajet" id="idTrajet" value="<?php echo $donnees['id_trajet']; ?>" />
-                                    <input type="hidden" name="id_event" id="id_event" value="<?php echo $id_event; ?>" />
-                                    <button type="submit">Evénement terminé</button>
-                                </form>
-                            </div>
+                                <div class="col-sm-6 col-sm-offset-3 text-center">
+                                    <form method="post" action="terminerEvenement.php">
+                                        <input type="hidden" name="idTrajet" id="idTrajet" value="<?php echo $donnees['id_trajet']; ?>" />
+                                        <input type="hidden" name="id_event" id="id_event" value="<?php echo $id_event; ?>" />
+                                        <button type="submit">Evénement terminé</button>
+                                    </form>
+                                </div>
+                                <?php
+                                $reponse->closeCursor(); // Termine le traitement de la requête
+                            }
+                        } else {
+                            ?>
+                            <h2>Nous sommes désolés, nous n'avons pas pu trouver l'événement recherché. <a href="index.php">Cliquez-ici</a> pour retrouner à la page d'accueil</h2>
                             <?php
-                            $reponse->closeCursor(); // Termine le traitement de la requête
                         }
-                    } else {
                         ?>
-                        <h2>Nous sommes désolés, nous n'avons pas pu trouver l'événement recherché. <a href="index.php">Cliquez-ici</a> pour retrouner à la page d'accueil</h2>
-                        <?php
-                    }
-                    ?>
+                    </div>
                 </div>
             </div>
         </div>
