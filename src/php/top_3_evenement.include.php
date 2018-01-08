@@ -33,15 +33,15 @@ get_three_best_event($bdd);
 //Faire fonction qui, avec les infos en parametre, affiche un évènement 
 function display_event(string $name, $lien_photo, int $nb_people, $price, string $facebook_link, string $ticketing_link, string $id_event) {
     ?>
-    <div class='important_event col-sm-12'>
-        <div class='image_top_3_event col-sm-2 col-sm-offset-2'>
+<div class='important_event col-sm-12'>
+        <div class='image_top_3_event col-sm-2 col-sm-offset-1'>
             <img class="<?php
             if ($lien_photo != NULL) {
                 echo "photoProfilEvent";
             }
-            ?>" src="../../images/<?php echo $lien_photo ?>" alt="Photo Evenement" />
+            ?>" src="../../images/<?php echo $lien_photo ?>" alt="Photo Evenement"/>
         </div>
-        <div class="informations_event col-sm-6 col-sm-offset-2 col-sm-pull-1">
+        <div class="informations_event col-sm-7 col-sm-offset-1">
             <div>
                 <div class="border">
                     <p class="text_left">
