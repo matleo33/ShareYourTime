@@ -34,7 +34,7 @@ function getTrajets($bdd, string $id_event, $page)
             </div>
             <div class="col-lg-8 col-lg-offset-1 col-sm-12 col-xs-12 trajetEvenement" style="margin-top: 30px">
                 <div class="col-sm-6">
-                    <span class="nomChauffeurTrajetEvenement" style="margin-left: 100px">
+                    <span class="nomChauffeurTrajetEvenement" style="margin-left: 14%">
                         <?php
                         echo $donneesTrajet['nom'] . ' ' . $donneesTrajet['prenom'];
                         ?>

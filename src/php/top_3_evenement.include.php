@@ -44,7 +44,7 @@ function display_event(string $name, $lien_photo, int $nb_people, $price, string
         <div class="informations_event col-sm-7 col-sm-offset-1">
             <div>
                 <div class="border">
-                    <p class="text_left">
+                    <p class="text_left" style="font-size : 150%;">
                         <?php echo $name; ?>
                     </p>
                     <?php
