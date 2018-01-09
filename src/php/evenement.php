@@ -45,7 +45,7 @@
                     <div class="col-sm-12">
                         <?php if ($donnees['lien_photo'] != NULL) { ?>
                             <div class="col-sm-4 col-sm-offset-1">
-                                <img src="<?php echo $donnees['lien_photo']?>" alt="photo évenement" />
+                                <img src="../../images_events/<?php echo $donnees['lien_photo']?>" alt="photo évenement" />
                             </div>
                             <div class="col-sm-4 col-sm-offset-1">
                                 <h1 class="text-center"><?php
