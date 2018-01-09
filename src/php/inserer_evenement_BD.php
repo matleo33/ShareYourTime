@@ -42,7 +42,7 @@ try {
         $nom_fichier = md5(uniqid(rand(), true));
         $nom_fichier .= $extension;
 
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password, array (PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
 
 
         if (move_uploaded_file($_FILES['nouvellePhoto']['tmp_name'], $dossier . $nom_fichier)) // Renvoie true en cas de succès

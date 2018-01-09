@@ -98,11 +98,11 @@
         <form id="information_trajet_form">
             <div class="col-sm-12">
                 <div class="col-sm-10 col-sm-offset-1 groupeDateLieu">
-                    <div class="col-sm-8">
+                    <div class="col-sm-6">
                         <input class="form-control" type="text" name="villeDepart" required="required" id="villeDepart"
                                placeholder="Ville de départ"/>
                     </div>
-                    <div class='col-sm-4 input-group date' id="datetimepicker_date_depart_trajet">
+                    <div class='col-sm-6 input-group date' id="datetimepicker_date_depart_trajet">
                         <input type='text' id="date_depart" name="date_depart" class="form-control" required="required"
                                placeholder="Date départ + heure"/>
                         <span class="input-group-addon">
@@ -115,7 +115,7 @@
                     </div>
                 </div>
                 <div class="col-sm-10 col-sm-offset-1 groupeDateLieu">
-                    <div class="col-sm-8">
+                    <div class="col-sm-6">
                         <input class="form-control" type="text" name="villeArrivee" required="required"
                                id="villeArrivee" placeholder="Ville d'arrivée" value="<?php
                         if ($villeEvenement != NULL) {
@@ -123,7 +123,7 @@
                         }
                         ?>"/>
                     </div>
-                    <div class='col-sm-4 input-group date' id="datetimepicker_date_arrivee_trajet">
+                    <div class='col-sm-6 input-group date' id="datetimepicker_date_arrivee_trajet">
                         <input type='text' id="date_arrivee" name="date_arrivee" class="form-control" required="required"
                                placeholder="Date arrivée + heure" value="<?php
                         if ($dateDebut != NULL) {
@@ -419,6 +419,9 @@
         document.getElementById("etape_trajet").innerHTML = '';
     }
 
+
+    //Gestion des DateTimePickers
+    //Initialisation
     $(function () {
         $('#datetimepicker_date_depart_trajet').datetimepicker({
             autoclose: true,
@@ -440,6 +443,8 @@
         });
     });
 
+    //En fonction des changements de date, on ajuste les choix des autres datetimepickers
+    //On supprime les étapes, ne correspondant pas aux nouvelles date d'arrivée ou de départ entrée
     $('#datetimepicker_date_depart_trajet').on('changeDate', function (e) {
         $('#datetimepicker_date_arrivee_trajet').datetimepicker('setStartDate', e.date);
         $('#datetimepicker_date_passage_etape').datetimepicker('setStartDate', e.date);

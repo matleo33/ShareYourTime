@@ -39,7 +39,7 @@ function display_event(string $name, $lien_photo, int $nb_people, $price, string
             if ($lien_photo != NULL) {
                 echo "photoProfilEvent";
             }
-            ?>" src="../../images/<?php echo $lien_photo ?>" alt="Photo Evenement"/>
+            ?>" src="../../images_events/<?php echo $lien_photo ?>" alt="Photo Evenement"/>
         </div>
         <div class="informations_event col-sm-7 col-sm-offset-1">
             <div>

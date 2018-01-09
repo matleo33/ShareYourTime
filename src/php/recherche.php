@@ -13,60 +13,6 @@
     <script src="../js/recherche.js"></script>
     <script src="../BootStrap/js/bootstrap.min.js"></script>
     <script src="../js/connexion.js"></script>
-
-    <style>
-        .input-symbol-euro {
-            position: relative;
-            display: inline-block;
-            width: 50%;
-        }
-        .input-symbol-euro input {
-            padding-right: 15px;
-            width: 100%;
-        }
-        .input-symbol-euro:after {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            margin: auto;
-            content:"€";
-            right: 20px;
-        }
-
-        .form-control {
-            display: block;
-            height: 34px;
-            padding: 6px 12px;
-            font-size: 14px;
-            line-height: 1.42857143;
-            color: #555;
-            background-color: #fff;
-            background-image: none;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-            -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-        }
-        .form-control:focus {
-            border-color: #66afe9;
-            outline: 0;
-            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
-            box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
-        }
-
-        .form-control[disabled],
-        .form-control[readonly],
-        fieldset[disabled] .form-control {
-            cursor: not-allowed;
-            background-color: #eee;
-            opacity: 1;
-        }
-    </style>
-
-
     <title>Share Your Time</title>
 </head>
 
@@ -225,87 +171,91 @@
             dataType:"json",
             url:"recherche_avancee_covoiturage.php",
             success:function (data) {
-                $("#select_order").css("visibility", "visible");
+
                 document.getElementById("resultForm").innerHTML = '';
-                if(data.length == 0)
+                if(data.length-1 == 0)//data.lengh-1 car la dernière valeur de data sera toujours présente
                 {
                     $("#modal_trajet_empty").modal('show');
                 }
-                for($i=0; $i<data.length-1; $i++)
+                else
                 {
-                    if(data[$i][10] != null)
+                    $("#select_order").css("visibility", "visible");
+                    for($i=0; $i<data.length-1; $i++)
                     {
-                        document.getElementById("resultForm").innerHTML += '<div class="col-xs-12 col-sm-12 col-lg-2">'+
-                            '<img class="photoProfilTrajet" src="../../images/'+data[$i][10]+'" alt="photoProfil" /></div>';
-                    }
-                    else
-                    {
-                        document.getElementById("resultForm").innerHTML += '<div class="col-xs-12 col-sm-12 col-lg-2">'+
-                            '<img class="photoProfilTrajet" src="../img/imageProfil2.PNG" alt="photoProfil" /></div>';
-                    }
-                    var id_div_trajet ="trajet" + $i;
-                    document.getElementById("resultForm").innerHTML += '<div class="col-lg-8 col-lg-offset-1 col-sm-12 col-xs-12 trajetEvenement" id="' + id_div_trajet + '" style="margin-top: 50px">' +
-                        '<div class="col-sm-6">' +
-                        '<span class="nomChauffeurTrajetEvenement">' +
-                        data[$i][0] + ' ' + data[$i][1] + '</span>' +
-                        '<p>Depart : ' + data[$i][3] + ' à ' + data[$i][4] + '</p>' +
-                        '<p>Arrivé : ' + data[$i][5] + ' à ' + data[$i][6] + '</p>' +
-                        '<p>Prix : ' + data[$i][8] + '€</p>' +
-                        '<p>Note du chauffeur : <span id="note' + $i + '" style="font-size:150%;"></span></p></div>';
-
-                    //Si la note du chauffeur est connue
-                    if(data[$i][2] != "inconnue")
-                    {
-                        for($j=0;$j<10;$j++)
+                        if(data[$i][10] != null)
                         {
-                            if($j<data[$i][2])
-                            {
-                                $("#note"+$i).append('★');
-                            }
-                            else
-                            {
-                                $("#note"+$i).append('☆');
-                            }
-                        }
-                        //On set la couleur des étoiles en fonction de la note
-                        if(data[$i][2]>=9)
-                        {
-                            $("#note"+$i).css('color', 'gold');
-
-                        }
-                        else if(data[$i][2]>=7)
-                        {
-                            $("#note"+$i).css('color', 'silver');
-                        }
-                        else if(data[$i][2]>=5)
-                        {
-                            $("#note"+$i).css('color', '614E1A');
+                            document.getElementById("resultForm").innerHTML += '<div class="col-xs-12 col-sm-12 col-lg-2">'+
+                                '<img class="photoProfilTrajet" src="../../images/'+data[$i][10]+'" alt="photoProfil" /></div>';
                         }
                         else
                         {
-                            $("#note"+$i).css('color', 'red');
+                            document.getElementById("resultForm").innerHTML += '<div class="col-xs-12 col-sm-12 col-lg-2">'+
+                                '<img class="photoProfilTrajet" src="../img/imageProfil2.PNG" alt="photoProfil" /></div>';
                         }
-                    }
-                    else
-                    {
-                        $("#note"+$i).append('Inconnue');
-                    }
-                    
+                        var id_div_trajet ="trajet" + $i;
+                        document.getElementById("resultForm").innerHTML += '<div class="col-lg-8 col-lg-offset-1 col-sm-12 col-xs-12 trajetEvenement" id="' + id_div_trajet + '" style="margin-top: 50px">' +
+                            '<div class="col-sm-6">' +
+                            '<span class="nomChauffeurTrajetEvenement">' +
+                            data[$i][0] + ' ' + data[$i][1] + '</span>' +
+                            '<p>Depart : ' + data[$i][3] + ' à ' + data[$i][4] + '</p>' +
+                            '<p>Arrivé : ' + data[$i][5] + ' à ' + data[$i][6] + '</p>' +
+                            '<p>Prix : ' + data[$i][8] + '€</p>' +
+                            '<p>Note du chauffeur : <span id="note' + $i + '" style="font-size:150%;"></span></p></div>';
 
-                    if(data[$i][7] == 1)
-                    {
-                        $("#"+id_div_trajet).append('<div class="col-sm-2 col-sm-offset-1">' +
-                            '<img class="logoAutoroute" src="../img/autoroute.png" alt="autouroute : oui" />' +
-                            '</div>');
+                        //Si la note du chauffeur est connue
+                        if(data[$i][2] != "inconnue")
+                        {
+                            for($j=0;$j<10;$j++)
+                            {
+                                if($j<data[$i][2])
+                                {
+                                    $("#note"+$i).append('★');
+                                }
+                                else
+                                {
+                                    $("#note"+$i).append('☆');
+                                }
+                            }
+                            //On set la couleur des étoiles en fonction de la note
+                            if(data[$i][2]>=9)
+                            {
+                                $("#note"+$i).css('color', 'gold');
+
+                            }
+                            else if(data[$i][2]>=7)
+                            {
+                                $("#note"+$i).css('color', 'silver');
+                            }
+                            else if(data[$i][2]>=5)
+                            {
+                                $("#note"+$i).css('color', '614E1A');
+                            }
+                            else
+                            {
+                                $("#note"+$i).css('color', 'red');
+                            }
+                        }
+                        else
+                        {
+                            $("#note"+$i).append('Inconnue');
+                        }
+
+
+                        if(data[$i][7] == 1)
+                        {
+                            $("#"+id_div_trajet).append('<div class="col-sm-2 col-sm-offset-1">' +
+                                '<img class="logoAutoroute" src="../img/autoroute.png" alt="autouroute : oui" />' +
+                                '</div>');
+                        }
+                        $("#"+id_div_trajet).append('<div class="col-sm-2">' +
+                            '<a href="./trajet.php?id_trajet=' + data[$i][9] + '"><button>Voir détails</button></a>' +
+                            '</div> </div>');
                     }
-                    $("#"+id_div_trajet).append('<div class="col-sm-2">' +
-                        '<a href="./trajet.php?id_trajet=' + data[$i][9] + '"><button>Voir détails</button></a>' +
-                        '</div> </div>');
-                }
-                document.getElementById("resultForm").innerHTML += '<ul class="pagination" id="pages"></ul>';
-                for($k=1; $k<data[data.length-1]+1; $k++)
-                {
-                    $('#pages').append('<li><a onclick="lancer_recherche(this.innerHTML)" style="cursor: pointer">'+$k+'</a></li>')
+                    document.getElementById("resultForm").innerHTML += '<ul class="pagination" id="pages"></ul>';
+                    for($k=1; $k<data[data.length-1]+1; $k++)
+                    {
+                        $('#pages').append('<li><a onclick="lancer_recherche(this.innerHTML)" style="cursor: pointer">'+$k+'</a></li>')
+                    }
                 }
             },
             error:function (data) {
