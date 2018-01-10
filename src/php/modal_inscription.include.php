@@ -58,13 +58,6 @@
                 <div class="form-group col-sm-10 col-sm-offset-1">
                     <input type="date" id="inputBirthDate" name="inputBirthDate" class="form-control">
                 </div>
-                <!-- <div class='input-group date col-sm-10 col-sm-offset-1' id="datetimepicker_date_naissance">
-                    <input type='text' id="inputBirthDate" name="inputBirthDate" class="form-control" required="required"
-                           placeholder="Date de naissance"/>
-                    <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                </div> -->
                 <div class="modal-footer">
                     <input type="submit" class="btn btn-default center-block" value="Inscription"
                            id="inputInscription"/>

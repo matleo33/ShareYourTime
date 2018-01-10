@@ -40,8 +40,8 @@ try {
     session_start();
     $conn = null;
 
-    //$url = end($pageorigin);
-    //header("Location: " . $url);
+    $url = end($pageorigin);
+    header("Location: " . $url);
 
     /*
     $res = $stmt->fetch();
