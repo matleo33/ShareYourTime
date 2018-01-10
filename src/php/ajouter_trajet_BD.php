@@ -12,13 +12,13 @@ function donneesCorrectes($donnees) {
         return FALSE;
     } else if (!isset ($_GET['lieuDepart'])) {
         return FALSE;
-    } else if (!(isset($_GET['date_depart']) && strtotime($_GET['date_depart']) < strtotime ('now'))) {
+    } else if (!(isset($_GET['date_depart']) && strtotime($_GET['date_depart']) > strtotime ('now'))) {
         return FALSE;
     } else if (!isset ($_GET['villeArrivee'])) {
         return FALSE;
     } else if (!isset ($_GET['lieuArrivee'])) {
         return FALSE;
-    } else if (!(isset ($_GET['date_arrivee']) && strtotime($_GET['date_arrivee']) < strtotime ($_GET['date_depart']))) {
+    } else if (!(isset ($_GET['date_arrivee']) && strtotime($_GET['date_arrivee']) > strtotime ($_GET['date_depart']))) {
         return FALSE;
     } else if (!(isset ($_GET['nbPlaces']) && $_GET['nbPlaces'] > 0)) {
         return FALSE;
