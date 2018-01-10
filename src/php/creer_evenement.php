@@ -50,6 +50,7 @@
                 -->
                 <div class="form-group">
                     <?php
+                    //Si l'utilisateur est connecté on lui permet de compléter le formulaire
                     if (isset($_SESSION["ID_USER"])) {
                         ?>
                         <input class="form-control" type="text" name="eventName" required="required" id="eventName" 
@@ -69,6 +70,7 @@
                 </div>
 
                 <input <?php
+                //Si l'utilisateur n'est pas connecté, on disabled le bouton suivant
                 if (!isset($_SESSION['ID_USER'])) {
                     echo "disabled";
                 }
@@ -125,6 +127,8 @@
 
         <!-- TODO Déplacer l'autocompletion GoogleMaps dans un fichier js -->
         <script>
+            //Gestion de l'autocompletion de l'adresse GoogleMaps
+            //Voir doc API google maps
             function initializeAutocomplete(id) {
                 var element = document.getElementById(id);
                 if (element) {

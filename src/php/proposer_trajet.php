@@ -265,7 +265,7 @@
                 <input type="submit" class="btn btn-default center-block" value="Proposer un retour"
                        id="proposer_retour_button"/>
                 <input type="submit" class="btn btn-default center-block" value="Acceuil"
-                       id="redirection_acceuil_button"/>
+                       id="redirection_accueil_button"/>
             </div>
         </div>
 
@@ -278,21 +278,22 @@
 </html>
 
 <script>
-    var etape = [];
-    var compteur = 0;
+    var etape = [];//Va contenir des tableaux de newEtape
+    var compteur = 0;//Permet de définir un id unique pour chaque etape
     function afficherModalAjoutEtape() {
         $("#modalAjoutEtape").modal('show');
     }
 
     $("#formEtape").submit(function () {
-        var newEtape = [];
+        var newEtape = [];//Contient les infos d'une etape
 
-        newEtape.push(document.getElementById("ville_depart").value, document.getElementById("lieuPassage").value, document.getElementById("date_passage").value)
+        newEtape.push(document.getElementById("ville_depart").value, document.getElementById("lieuPassage").value, document.getElementById("date_passage").value);
         etape.push(newEtape);
+        //On affiche l'étape entrée dans notre code html
         document.getElementById("tableau_etape").innerHTML += '<tr id="tr' + compteur + '"><td>' + document.getElementById("ville_depart").value +
             '</td><td>' + document.getElementById("lieuPassage").value +
             '</td><td>' + document.getElementById("date_passage").value + '</td><td>' +
-            '<input type="button" onclick="supprimer_etape(' + compteur + ');"/></td></tr>';
+            '<input type="button" onclick="supprimer_etape(' + compteur + ');"/></td></tr>';//TODO un vrai button
 
         document.getElementById("ville_depart").value = '';
         document.getElementById("lieuPassage").value = '';
@@ -303,7 +304,11 @@
         return false;
     });
 
+    /**
+     * On rempli la div "etape_trajet" du modal "modalChoixPrixTrajet" à l'aide des informations du trajet principal et des étapes entrées
+     */
     $("#information_trajet_form").submit(function () {
+        //Trajet principal
         document.getElementById("etape_trajet").innerHTML += '<div class="form-group col-sm-10" style="margin-top: 5px">' +
             '<div class="col-sm-8">' +
             '<input class="form-control" type="text" name="trajet" required="required" readonly id="trajet" value="' +
@@ -313,7 +318,9 @@
             '<input type="text" name="prix_tot" required id="prix_tot" class="form-control bfh-number" data-min="1" >' +
             '</div>' +
             '</div>';
+        //Pour chaque étapes
         for (var i = 0; i < etape.length; i++) {
+            //Si la valeur du tableau n'est pas vide (si une étape n'a pas été supprimée lors de la création)
             if (!jQuery.isEmptyObject(etape[i])) {
                 document.getElementById("etape_trajet").innerHTML += '<div class="form-group col-sm-10" style="margin-top: 5px">' +
                     '<div class="col-sm-8">' +
@@ -324,35 +331,42 @@
                     '</div>' +
                     '</div>';
 
-                etape[i].push()
+                //etape[i].push()
             }
         }
 
-        $("#modalChoixPrixTrajet").modal('show');
+        $("#modalChoixPrixTrajet").modal('show');//On affiche le modal
         return false;
     });
 
-
+    /**
+     * Appeler lors du click sur le bouton de suppression d'une étape dans le tableau html
+     * @param id
+     */
     function supprimer_etape(id) {
         var obj = document.getElementById("tableau_etape");
         var old = document.getElementById("tr" + id);
 
-        obj.removeChild(old);
-        delete etape[id];
+        obj.removeChild(old);//On le supprime du code html
+        delete etape[id];//On le supprime du tableau des étapes : la case correspondante sera égale à null
     }
 
+    /**
+     * Appeler lors du clique sur le bouton suivant après avoir entrée le nom de l'événement pour lequel on veut proposer un trajet
+     */
     function verification_event() {
         $(document).ready(function (e) {
             $("#formTrajet").submit(function () {
                 $.get("rechercheEvenement.php", $(this).serialize(), function (id) {
                     if (id != '') {
-                        $("#divInfoTrajet").css("visibility", "visible");
+                        $("#divInfoTrajet").css("visibility", "visible");//On affiche la suite du formulaire
                         $("#eventName").attr("disabled", "disabled");//TODO Faire avec readonly au lieu de disabled
                         eventName = $("#eventName").val();
 
+                        //On supprime le bouton suivant
                         document.getElementById("formTrajet").removeChild(document.getElementById("submitEventName"));
                     }
-                    else {
+                    else {//Si l'événement n'existe pas, on amène l'utilisateur sur la page de création de l'évenement avec le nom entré
                         var currentLocation = document.location.href;
                         currentLocation = currentLocation.substring(0, currentLocation.lastIndexOf("src"));
                         currentLocation += 'src/php/creer_evenement.php?nom_event=' + $("#eventName").val();
@@ -364,9 +378,14 @@
             });
         });
     }
+    /**
+     * Premier appel ajax permettant de créer le trajet et uniquement lorsque cet appel est terminé, un autre appel ajax est effectué
+     * pour ajouter les étapes entrées au trajet créé
+     */
     $("#form_model_choix_prix").submit(function () {
         $.get("ajouter_trajet_BD.php", $("#information_trajet_form").serialize() + "&nom_event=" + $("#eventName").val() + "&prix_tot=" + $("#prix_tot").val()).done(function (id_trajet) {
-            etape.push(new Array(id_trajet));
+            etape.push(new Array(id_trajet));//On ajoute l'id du trajet créé au tableau
+            //Pour chaque etape, on ajoute le prix que l'utilisateur à entré
             for (var i = 0; i < etape.length - 1; i++) {
                 if (!jQuery.isEmptyObject(etape[i])) {
                     etape[i].push(document.getElementById("prix" + i).value);
@@ -377,15 +396,18 @@
                 data: {mesEtapes: JSON.stringify(etape)},
                 type: 'POST',
                 success: function (response) {
-                    $("#modalChoixPrixTrajet").modal('hide');
-                    $("#modalProposerRetour").modal('show');
+                    $("#modalChoixPrixTrajet").modal('hide');//On cache le modal du choix des prix
+                    $("#modalProposerRetour").modal('show');//On affiche le modal pour permettre à l'utilisateur de proposer un retour
                 }
             });
         });
         return false; // permet de ne pas recharger la page
     });
 
-    $("#redirection_acceuil_button").click(function () {
+    /**
+     * Renvoie à l'accueil
+     */
+    $("#redirection_accueil_button").click(function () {
         var currentLocation = document.location.href;
         currentLocation = currentLocation.substring(0, currentLocation.lastIndexOf("src"));
         currentLocation += 'src/php/index.php';
@@ -396,6 +418,7 @@
         $("#modalProposerRetour").modal('hide');
 
         //On enlève les valeurs qui sont modifiés lorsque l'on va proposer un retour
+        //et on inverse les villes de départ et arrivée
         var temp = document.getElementById("villeDepart").value;
         document.getElementById("villeDepart").value = document.getElementById("villeArrivee").value;
         document.getElementById("villeArrivee").value = temp;

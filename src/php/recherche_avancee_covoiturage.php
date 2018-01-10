@@ -7,16 +7,17 @@
  */
 session_start();
 include 'getNote.php';
-$covoit_event = array();
-$compt = 1;
-$evenementParPage=3;
-$conditionsRequete = "";
+$covoit_event = array();//tableau qui va contenir tout les valeurs des evenement et que l'on va retourner à notre méthode ajax
+$compt = 1; //compteur permettant d'incrementer les valeurs dans le tableau
+$evenementParPage=3;//Nombre d'événement que l'on veut afficher par page
+$conditionsRequete = "";//Contient la partie de la requete correspondant au WHERE
 try
 {
-    $bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'root', '');
+    $bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'root', '');//Connexion à la BDD
 
     $requete = "SELECT DISTINCT evenement, chauffeur, ville_depart, date_depart, ville_arrivee, date_arrivee, autoroute, prix_tot, id_trajet FROM trajet INNER JOIN covoiturage ";
 
+    //GESTION DES CONDITIONS
     if($_GET['optpeageradio'] == 'pasimportantpeage')
     {
         $conditionsRequete .='WHERE 1 ';
@@ -99,13 +100,14 @@ try
             break;
     }
 
+    //GESTION DE LA PAGINATION
     $retour_total = "SELECT DISTINCT COUNT(*) AS total FROM trajet ";
-    $retour_total.= $conditionsRequete;
+    $retour_total.= $conditionsRequete;//On compte le nombre total de trajet avec les condtions récupérées précédemment
     $result = $bdd->query($retour_total);
     $donnees_total = $result->fetch();
-    $total=$donnees_total['total'];
+    $total=$donnees_total['total'];//Contient de le nombre de trajet
 
-    $nombreDePages=ceil($total/$evenementParPage);
+    $nombreDePages=ceil($total/$evenementParPage);//Calcul le nombre de pages nécessaire pour la pagination
 
     if(isset($_GET['page'])) // Si la variable $_GET['page'] existe...
     {
@@ -128,23 +130,27 @@ try
 
     $reponse = $bdd->query($requete);
 
+    //On parcours les résultats de la requete
     while ($donnees = $reponse->fetch()) {
 
-        $$compt = array();
+        $$compt = array();//On créé un nouveau tableau qui a pour nom la valeur du compteur
         $requete2 = "SELECT users.nom, prenom, id_users, lien_photo FROM users WHERE id_users = ".$donnees["chauffeur"];
         $reponse2 = $bdd->query($requete2);
 
         $donnees_user = $reponse2->fetch();
 
+        //On récupére la note de l'utilisateur
+        //Si pas de note, la valeur va être égale à "inconnue"
         $note_chauffeur = "inconnue";
         if(getHasNote($bdd,$donnees_user["id_users"])==TRUE)
         {
             $note_chauffeur = getNote($bdd,$donnees_user["id_users"]);
         }
 
-
+        //Si la requete pour récupérer les valeurs de l'utilisateur fonctionne
         if($donnees_user)
         {
+            //On push dans le tableau les valeurs permettant d'afficher tout les informations liées au trajet et au chauffeur
             array_push($$compt, $donnees_user[0],
                 $donnees_user["prenom"],
                 $note_chauffeur);
@@ -158,14 +164,14 @@ try
                 $donnees["prix_tot"],
                 $donnees["id_trajet"],
                 $donnees_user["lien_photo"]);
-            array_push($covoit_event,$$compt);
-            $compt++;
+            array_push($covoit_event,$$compt);//On ajoute se tableau à notre tableau d'événement
+            $compt++;//On incremente le compteur
         }
 
 
     }
-    array_push($covoit_event,$nombreDePages);
-    echo json_encode(array_values($covoit_event));
+    array_push($covoit_event,$nombreDePages);//La derniere valeur de notre tableau des trajets va contenir le nombre de page pourla pagination
+    echo json_encode(array_values($covoit_event));//On renvoir le tableau sous forme de json
 }
 catch (Exception $e)
 {

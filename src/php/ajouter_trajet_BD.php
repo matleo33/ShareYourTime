@@ -6,8 +6,12 @@
  * Time: 19:14
  */
 session_start();
-
-function donneesCorrectes($donnees) {
+/**
+ * On vérifie que les données du formulaire envoyées sont correctes
+ * @param $donnees
+ * @return bool
+ */
+function donneesCorrectes() {
     if (!isset($_GET['villeDepart'])) {
         return FALSE;
     } else if (!isset ($_GET['lieuDepart'])) {
@@ -33,12 +37,13 @@ function donneesCorrectes($donnees) {
 try{
     $bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'root', '');
 
+    //On récupére l'id de notre event pour le lier au trajet
     $reponse = $bdd->query('SELECT id_events '
         . 'FROM events '
         . 'WHERE nom=\'' .$_GET['nom_event'] . '\'');
     $donnees = $reponse->fetch();
 
-    if($donnees && donneesCorrectes($donnees))
+    if($donnees && donneesCorrectes())
     {
         $requete = $bdd->prepare('INSERT INTO trajet(ville_depart, lieu_depart,date_depart,ville_arrivee,lieu_arrive,date_arrivee,nb_place,retard,autoroute,prix_tot,est_fini,evenement,chauffeur)
               VALUES(:ville_depart, :lieu_depart, :date_depart, :ville_arrivee, :lieu_arrivee, :date_arrivee, :nb_place, :retard, :autoroute, :prix_tot, :est_fini, :evenement, :chauffeur)');
@@ -53,11 +58,11 @@ try{
             'retard' => htmlspecialchars($_GET['retardTolere']),
             'autoroute' => htmlspecialchars($_GET['autoroute']),
             'prix_tot' => htmlspecialchars($_GET['prix_tot']),
-            'est_fini' => '0',
+            'est_fini' => '0',//Init à 0 quand on le créé
             'evenement' => htmlspecialchars($donnees[0]),
-        'chauffeur' => $_SESSION["ID_USER"]));//TODO Recupèrer l'id de l'utilisateur connecté
+        'chauffeur' => $_SESSION["ID_USER"]));
 
-        echo $bdd->lastInsertId();
+        echo $bdd->lastInsertId();//On renvoie l'id du trajet créé
     }
 
 }

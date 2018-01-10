@@ -4,7 +4,7 @@
  //language : 'fr' //TODO Insertion ne marche pas si la date est au format FR
  });
  });*/
-
+//DateTimePicker de la page creer_evenement.php
 $(function () {
     $('#datetimepicker_date_fin').datetimepicker({
         autoclose: true,

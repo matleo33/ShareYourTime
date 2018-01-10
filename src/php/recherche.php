@@ -149,7 +149,13 @@
 </body>
 </html>
 <script>
+    /**
+     * Fonction appeller lors de la recherche de trajet et de la sélection d'une page
+     * @param innerhtml correspond à la valeur de la page sélectionné sinon elle est égale à null
+     * @returns {boolean}
+     */
     function lancer_recherche(innerhtml) {
+        //On crée la data que l'on va envoyé via la requete ajax
         var nom_event = $("#nom_event").val();
         var data_get = $("#optionAvanceeForm").serialize();
         if(nom_event != '')
@@ -173,13 +179,15 @@
             success:function (data) {
 
                 document.getElementById("resultForm").innerHTML = '';
+                //Si il y a des trajets
                 if(data.length-1 == 0)//data.lengh-1 car la dernière valeur de data sera toujours présente
                 {
                     $("#modal_trajet_empty").modal('show');
                 }
-                else
+                else //Sinon
                 {
-                    $("#select_order").css("visibility", "visible");
+                    $("#select_order").css("visibility", "visible");//On affiche l'input de tri
+                    //Pour chaque trajets, on va ajouter le html avec les valeurs de la data dans la div "resultForm"
                     for($i=0; $i<data.length-1; $i++)
                     {
                         if(data[$i][10] != null)
@@ -251,6 +259,8 @@
                             '<a href="./trajet.php?id_trajet=' + data[$i][9] + '"><button>Voir détails</button></a>' +
                             '</div> </div>');
                     }
+
+                    //Ajout de la pagination
                     document.getElementById("resultForm").innerHTML += '<ul class="pagination col-lg-12 col-sm-12" id="pages"></ul>';
                     for($k=1; $k<data[data.length-1]+1; $k++)
                     {
@@ -267,6 +277,9 @@
 
 </script>
 <script>
+    /**
+     * Fonction appeler lors du clique sur Option avancee
+     */
     function activerOptionAvancee() {
         if(document.getElementById("optionAvanceeForm").style.display == "none")
         {
@@ -282,16 +295,22 @@
 <script>
     $(document).ready(function(e) {
         //e.preventDefault();
+        /**
+         * Appeler lors du clique sur le bouton de recherche evenement
+         * On récupére l'id de l'evenement entré et on va sur la page permettant d'afficher les informations de cet evenement
+         */
         $("#recherche_evenement").click(function () {
             $.get("rechercheEvenement.php","eventName="+$("#nom_event").val(),function(id){
+                //id = l'id de l'event
                 if(id != '')
                 {
+                    //Deplacement vers la page evenement
                     var currentLocation =  document.location.href;
                     currentLocation = currentLocation.substring( 0 ,currentLocation.lastIndexOf( "src" ) );
                     currentLocation += 'src/php/evenement.php?id_events=' + id;
                     window.location.href = currentLocation ;
                 }
-                else
+                else //Sinon on affiche que l'event n'existe pas
                 {
                     $("#myModal").modal('show');
                 }

@@ -1,5 +1,6 @@
 //à renommer de façon plus cohérente
 
+//Gestion de l'input de l'image de l'événement
 $(document).on('click', '#close-preview', function(){
     $('.image-preview').popover('hide');
     // Hover befor close the preview
@@ -59,7 +60,10 @@ $(function() {
         reader.readAsDataURL(file);
     });
 });
-
+/**
+ * Deplacement vers la page de l'événement correspond à l'id entré
+ * @param id
+ */
 function goToEvent(id)
 {
     var currentLocation =  document.location.href;
@@ -73,12 +77,12 @@ $(document).ready(function(e) {
     //e.preventDefault();
     $("#formRecherche").submit(function () {
         $.get("rechercheEvenement.php",$(this).serialize(),function(id){
+            //Si l'événement existe, on va sur la page correspondante
             if(id != '')
             {
                 goToEvent(id);
-                //window.location.href = 'http://localhost:63342/ShareYourTime/src/php/evenement.php?id_events=' + texte;
             }
-            else
+            else //Sinon on affiche la suite du formulaire
             {
                 $("#containerCreation").css("visibility", "visible");
                 $("#eventName").attr("disabled","disabled");//TODO Faire avec readonly au lieu de disabled
