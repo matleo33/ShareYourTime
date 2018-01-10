@@ -79,15 +79,15 @@ function getTrajets($bdd, string $id_event, $page)
                     <?php
                     if ($donneesTrajet['autoroute']) {
                         ?>
-                        <img class="logoAutoroute" src="../img/autoroute.png" alt="autouroute : oui"/>
+                    <img id="logoAutorouteTrajet" class="logoAutoroute" src="../img/autoroute.png" alt="autouroute : oui"/>
                         <?php
                     }
                     ?>
                 </div>
                 <div class="col-sm-2 col-sm-offset-1">
-                    <a class="boutonDetailEvenement"
+                    <a class="boutonDetailEvenement" 
                        href="./trajet.php?id_trajet=<?php echo $donneesTrajet['id_trajet'] ?>">
-                        <button>Voir détails</button>
+                        <button id='buttonDetailTrajet'>Voir détails</button>
                     </a>
                 </div>
                 <?php getEtapes($bdd, $donneesTrajet['id_trajet']); ?>

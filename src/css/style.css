@@ -648,3 +648,19 @@ label.star:before {
         font-size:20px !important;
     }
 }
+
+#logoAutorouteTrajet {
+        margin-top: 5px;
+    }
+    #buttonDetailTrajet {
+        margin-top: 5px;
+    }
+
+@media (min-width : 768px) {
+    #logoAutorouteTrajet {
+        margin-top: 40px !important;
+    }
+    #buttonDetailTrajet {
+        margin-top: 50px !important;
+    }
+}
