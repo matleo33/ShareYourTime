@@ -70,7 +70,7 @@
                                         <?php if ($donnees['est_fini'] == FALSE) { ?>
                                             <form method="post" action="trajetFini.php" style="display:inline">
                                                 <input hidden name="id_trajet" id="id_trajet" value="<?php echo $donnees['id_trajet']; ?>" />
-                                                <input style="background-color : rgb(69, 164, 247);" type="submit" class="btn btn-primary" value="Trajet terminé" />
+                                                <input style="background-color : rgb(69, 164, 247);" type="submit" class="btn btn-primary" value="Trajet terminé" disabled/>
                                             </form>
                                             <?php
                                         }
