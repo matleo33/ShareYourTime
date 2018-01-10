@@ -14,12 +14,6 @@
     <script src="../js/chercher_adresse.js"></script>
     <script src="../js/connexion.js"></script>
 
-    <!-- Library DateTimePicker -->
-    <link href="../BootStrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
-    <script type="text/javascript" src="../BootStrap/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-    <script type="text/javascript" src="../BootStrap/js/locales/bootstrap-datetimepicker.fr.js"
-            charset="UTF-8"></script>
-
     <title>Share Your Time</title>
 </head>
 
@@ -32,7 +26,6 @@
 <?php include 'footer.include.php'; ?>
 
 <script src="../BootStrap/js/bootstrap.min.js"></script>
-<script src="../js/datetimepicker.js"></script>
 </body>
 
 

@@ -19,13 +19,6 @@ $(function () {
     });
 });
 
-$(function () {
-    $('#datetimepicker_date_naissance').datetimepicker({
-        autoclose: true,
-        startDate: new Date() //TODO Insertion ne marche pas si la date est au format FR
-    });
-});
-
 $('#datetimepicker_date_debut').on('changeDate', function (e) {
     $('#datetimepicker_date_fin').datetimepicker('setStartDate', e.date);
 });
