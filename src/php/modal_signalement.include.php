@@ -2,8 +2,9 @@
 <div class="modal fade" id="modalSignalement" role="dialog">
     <div class="modal-dialog modal-md">
 
-        <!-- Modal content-->
+        <!-- Contenu du modal -->
         <div class="modal-content">
+            <!-- Formulaire d'envoi d'un signalement -->
             <form method="post" id="formSignalement" action="traiter_signalement.php">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>

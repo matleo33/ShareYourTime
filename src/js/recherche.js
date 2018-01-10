@@ -2,6 +2,7 @@ $(function () {
 
     var availableTags = [];
 
+    // On remplit le tableau avec tous les nom d'événements existants dans la base de données
     $(document).ready(function () {
         //e.preventDefault();
         $.get("get_events.php", $(this).serialize(), function (texte) {
@@ -10,9 +11,10 @@ $(function () {
                 availableTags.push(arrayOfStrings[i]);
             }
         });
-        return false; // permet de ne pas recharger la page
+        return false; // Permet de ne pas recharger la page
     });
 
+    // Sélection des noms qui correspondent aux entrées de l'utilisateur
     $("#tags").autocomplete({
         source: function (request, response) {
             var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(request.term), "i");
@@ -23,10 +25,7 @@ $(function () {
     });
 });
 
-window.onresize = function () {
-    $("#tags").autocomplete("close");
-}
-
+// Réalisation de l'autocomplétion sur la page
 $(document).ready(function(e) {
     //e.preventDefault();
     $("#formRechercheNavbar").submit(function () {
@@ -43,6 +42,10 @@ $(document).ready(function(e) {
             }
             window.location.href = currentLocation ;
         });
-        return false; // permet de ne pas recharger la page
+        return false; // Permet de ne pas recharger la page
     });
 });
+
+window.onresize = function () {
+    $("#tags").autocomplete("close");
+}
