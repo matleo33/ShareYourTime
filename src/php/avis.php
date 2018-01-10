@@ -78,7 +78,7 @@
                                                     <input hidden id="cible" name="recepteur" value="<?php echo $donnees['id_users']; ?>" />
                                                 </div>
                                                 <div class="col">
-                                                    <textarea maxlength="255" id="description" name="description" class="form-control" placeholder="Avis" type="textarea"></textarea>
+                                                    <textarea maxlength="255" id="description" name="description" class="form-control" placeholder="Avis" type="textarea" style="width: 100%; max-width: none; resize: none;"></textarea>
                                                 </div>
                                             </div>
                                             <div class="row">
