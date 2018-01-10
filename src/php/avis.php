@@ -26,21 +26,21 @@
         if (isset($_SESSION['ID_USER'])) {
             if (isset($_GET['id_trajet'])) {
                 ?>
-                <div class="container-fluid col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2" style="color:white; text-align: center; background-color:rgb(69,164,247); border-radius: 5px;">
-                    <h1>Avis conducteur</h1>
-                    <div class="voyageurAvis col-sm-12">
-                        <?php
-                        try {
-                            $bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'root', '');
-                        } catch (Exception $e) {
-                            die('Erreur : ' . $e->getMessage());
-                        }
-                        $reponse = $bdd->query('SELECT * '
-                                . 'FROM covoiturage INNER JOIN trajet on trajet.id_trajet=covoiturage.trajet INNER JOIN users on trajet.chauffeur=users.id_users '
-                                . 'WHERE trajet.chauffeur!= '. $_SESSION['ID_USER']. ' AND users='. $_SESSION['ID_USER'] .' AND trajet = '. $_GET['id_trajet']);
-                        while ($donnees = $reponse->fetch()) {
-                            if ($donnees['id_users'] != $_SESSION['ID_USER']) {
-                                ?>
+                <?php
+                try {
+                    $bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'root', '');
+                } catch (Exception $e) {
+                    die('Erreur : ' . $e->getMessage());
+                }
+                $reponse = $bdd->query('SELECT * '
+                        . 'FROM covoiturage INNER JOIN trajet on trajet.id_trajet=covoiturage.trajet INNER JOIN users on trajet.chauffeur=users.id_users '
+                        . 'WHERE trajet.chauffeur!= ' . $_SESSION['ID_USER'] . ' AND users=' . $_SESSION['ID_USER'] . ' AND trajet = ' . $_GET['id_trajet']);
+                while ($donnees = $reponse->fetch()) {
+                    if ($donnees['id_users'] != $_SESSION['ID_USER']) {
+                        ?>
+                        <div class="container-fluid col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2" style="color:white; text-align: center; background-color:rgb(69,164,247); border-radius: 5px;">
+                            <h1>Avis conducteur</h1>
+                            <div class="voyageurAvis col-sm-12">
                                 <div class="col-sm-3">
                                     <div class="col-sm-12">
                                         <?php if ($donnees['lien_photo'] == NULL) { ?>
@@ -97,7 +97,7 @@
                             </div>
 
                             <?php
-                        } 
+                        }
                     }
                 } else {
                     echo "<p>Désolé, le trajet que vous recherchez n'existe pas</p>";

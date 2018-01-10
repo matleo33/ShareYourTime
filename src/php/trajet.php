@@ -22,6 +22,7 @@
         <?php include 'navbar.include.php'; ?>
         <?php include 'modal_connexion.include.php' ?>
         <?php include 'modal_inscription.include.php' ?>
+        <?php include 'modal_signalement.include.php' ?>
         <?php
         include 'getPlacesRestantesTrajet.php';
         include 'getNote.php';
@@ -97,6 +98,7 @@
                                         </div>
                                     </div>
                                     <?php
+                                    //Affichage des étapes
                                     for ($i = 0; $i < $donnees['COUNT(*)']; ++$i) {
                                         ?>
                                         <div class="col-sm-12">
@@ -135,7 +137,9 @@
                                     ?>
                                 </div>
                                 <div class="col-sm-4">
-                                    <?php if ($placesRestantes == 0)
+                                    <?php 
+                                    //Affichage du nombre de places restantes
+                                    if ($placesRestantes == 0) 
                                     {
                                         ?> Il n'y a plus de places
                                        <?php 
@@ -162,7 +166,7 @@
                                     </div>
 
                                     <div class="col-sm-2">
-                                        <a href="#"><button class="btn btn-default">Signaler</button></a>
+                                        <input type="button" class="btn btn-default" data-toggle="modal" data-target="#modalSignalement" value="Signaler"/>
                                     </div>
                                     <?php
                                 }
@@ -171,7 +175,7 @@
                         </div>
                     </div>
                     <?php
-                } else {
+                } else { //Valable pour quelque problème que ce soit
                     ?>
         <div class="text-center nomTrajet">
                 <h2>Désolé, nous n'avons pas pu trouver le trajet en question, merci de vous rediriger vers la page d'accueil.</h2>
@@ -180,7 +184,7 @@
         <?php
                 }
             }
-        } else {
+        } else { //Si le trajet demandé n'existe pas
             ?>
             <div class="text-center nomTrajet">
                 <h2>Désolé, nous n'avons pas pu trouver le trajet en question, merci de vous rediriger vers la page d'accueil.</h2>
@@ -193,10 +197,3 @@
         <?php include 'footer.include.php'; ?>
     </body>
 </html>
-<?php
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
