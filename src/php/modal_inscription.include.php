@@ -24,9 +24,10 @@
                 <div class="form-group col-sm-10 col-sm-offset-1">
                     <input type="password" class="form-control" id="inputCheckPassword" name="inputCheckPassword" placeholder="Répétez votre mot de passe" required>
                 </div>
+                <!--
                 <div class="form-group col-sm-10 col-sm-offset-1">
                     <input type="number" min="0" class="form-control" id="inputAge" name="inputAge" placeholder="Âge" required>
-                </div>
+                </div>-->
                 <div class="form-group col-sm-4 col-sm-offset-1">
                     <input type="text" class="form-control" id="inputNumber" name="inputNumber" placeholder="N°" required>
                 </div>
@@ -44,6 +45,13 @@
                 </div>
                 <div class="form-group col-sm-10 col-sm-offset-1">
                     <input type="tel" class="form-control" id="inputPhoneNumber" name="inputPhoneNumber" placeholder="Numéro de téléphone" required>
+                </div>
+                <div class='input-group date col-sm-10 col-sm-offset-1' id="datetimepicker_date_naissance">
+                    <input type='number' id="date_naissance" name="date_naissance" class="form-control" required="required"
+                           placeholder="Date de naissance"/>
+                    <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
                 </div>
                 <div class="modal-footer">
                     <input type="submit" class="btn btn-default center-block" value="Inscription" id="inputInscription"/>
