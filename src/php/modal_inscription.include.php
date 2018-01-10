@@ -2,12 +2,13 @@
 <div class="modal fade" id="modalInscription" role="dialog">
     <div class="modal-dialog modal-sm">
 
-        <!-- Modal content-->
+        <!-- Contenu du modal -->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Inscription</h4>
             </div>
+            <!-- Formulaire d'inscription -->
             <form method="post" action="traiter_inscription.php">
                 <div class="form-group col-sm-10 col-sm-offset-1" id="divFirstName">
                     <input type="text" class="form-control" id="inputFirstName" name="inputFirstName"
@@ -28,10 +29,6 @@
                     <input type="password" class="form-control" id="inputCheckPassword" name="inputCheckPassword"
                            placeholder="Répétez votre mot de passe" required>
                 </div>
-                <!--
-                <div class="form-group col-sm-10 col-sm-offset-1">
-                    <input type="number" min="0" class="form-control" id="inputAge" name="inputAge" placeholder="Âge" required>
-                </div>-->
                 <div class="form-group col-sm-4 col-sm-offset-1">
                     <input type="text" class="form-control" id="inputNumber" name="inputNumber" placeholder="N°"
                            required>
@@ -63,8 +60,6 @@
                            id="inputInscription"/>
                 </div>
             </form>
-
         </div>
-
     </div>
 </div>
