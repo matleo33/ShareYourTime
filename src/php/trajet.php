@@ -18,6 +18,7 @@
     </head>
 
     <body>
+    <div class="container-fluid">
         <?php include 'navbar.include.php'; ?>
         <?php include 'modal_connexion.include.php' ?>
         <?php include 'modal_inscription.include.php' ?>
@@ -188,6 +189,7 @@
             <?php
         }
         ?>
+    </div>
         <?php include 'footer.include.php'; ?>
     </body>
 </html>
