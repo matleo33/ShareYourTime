@@ -30,6 +30,7 @@
         <div class="container-fluid">
             <?php
             $cpt = 0;
+            $vide = TRUE;
             include 'navbar.include.php';
             if (isset($_SESSION['ID_USER'])) {
                 include 'getNbReservants.php';
@@ -45,6 +46,7 @@
                             . 'FROM trajet INNER JOIN users on trajet.chauffeur=users.id_users INNER JOIN events on events.id_events = trajet.evenement '
                             . 'WHERE users.id_users = ' . $_SESSION['ID_USER']);
                     while ($donnees = $reponse->fetch()) {
+                        $vide = FALSE;
                         ?>
                         <table class="table table-bordered table-hover">
                             <thead>
@@ -148,6 +150,15 @@
                         </table>    
                         <?php
                     }
+                    if ($vide == TRUE) {
+                        ?>
+                    <h1 class="text-center">Désolé, mais vous n'avez pas encore effectué de trajet avec Share Your Time, peut-être devriez vous en organiser un ;)</h1>
+                    <?php
+                    }
+                } else {
+                    ?>
+                    <h1 class="text-center">Désolé, mais vous devez être connecté pour accéder à cette page.</h1>
+                    <?php
                 }
                 ?>
             </div>
