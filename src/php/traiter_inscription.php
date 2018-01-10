@@ -25,7 +25,7 @@ $city = htmlspecialchars($_POST["inputCity"]);
 $phoneNumber = htmlspecialchars($_POST["inputPhoneNumber"]);
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password, array (PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
 
     $stmt = $conn->prepare("INSERT INTO `users` (`nom`, `prenom`, `mail`, `mot_de_passe`, `age`,
  `numero_adresse`, `type_adresse`, `nom_adresse`, `cp`, `ville`, `num_telephone`) 

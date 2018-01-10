@@ -16,7 +16,7 @@ $email = htmlspecialchars($_GET["inputEmailConnexion"]);
 $pass = htmlspecialchars($_GET["inputPasswordConnexion"]);
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password, array (PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
 
     $stmt = $conn->prepare("SELECT id_users, prenom FROM users WHERE mail= ? AND  mot_de_passe= ?");
     $stmt->execute(array($email, $pass));
