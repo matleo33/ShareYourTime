@@ -15,7 +15,7 @@ try{
     $compteur_num_etape = 1;
     for($i=0;$i<$taillejson-1;$i++)
     {
-        if($jsondecode[$i] != null)
+        if($jsondecode[$i] != null && $jsondecode[$i][3]>=0)
         {
             $requete = $bdd->prepare('INSERT INTO etape(num_etape,trajet,ville,lieu,date,prix)
               VALUES(:num_etape,:trajet,:ville,:lieu,:date_etape,:prix)');
