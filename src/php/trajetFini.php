@@ -2,6 +2,9 @@
 
 session_start();
 
+
+// Cette fonction sert à vérifier si l'utilisateur est le conducteur du trajet ou non.
+// En effet, seul le chauffeur peut dire si  un trajet est fini ou non
 function checkUserIsDriver($bdd) {
     $query = 'SELECT * FROM trajet WHERE id_trajet=' . $_POST['id_trajet'];
     echo $query;
@@ -18,10 +21,10 @@ try {
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
+// La requête va permettre de modifier l'état du trajet
 $query = 'UPDATE trajet '
         . 'SET est_fini=TRUE '
         . 'WHERE id_trajet=' . $_POST['id_trajet'];
-echo $query;
 if (checkUserIsDriver($bdd)) {
     $bdd->exec($query);
 }
