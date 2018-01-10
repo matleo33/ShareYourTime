@@ -251,7 +251,7 @@
                             '<a href="./trajet.php?id_trajet=' + data[$i][9] + '"><button>Voir détails</button></a>' +
                             '</div> </div>');
                     }
-                    document.getElementById("resultForm").innerHTML += '<ul class="pagination" id="pages"></ul>';
+                    document.getElementById("resultForm").innerHTML += '<ul class="pagination col-lg-12 col-sm-12" id="pages"></ul>';
                     for($k=1; $k<data[data.length-1]+1; $k++)
                     {
                         $('#pages').append('<li><a onclick="lancer_recherche(this.innerHTML)" style="cursor: pointer">'+$k+'</a></li>')
