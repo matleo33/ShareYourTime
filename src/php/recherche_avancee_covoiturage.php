@@ -101,7 +101,7 @@ try
     }
 
     //GESTION DE LA PAGINATION
-    $retour_total = "SELECT DISTINCT COUNT(*) AS total FROM trajet ";
+    $retour_total = "SELECT DISTINCT COUNT(DISTINCT trajet.id_trajet) AS total FROM trajet INNER JOIN covoiturage ";
     $retour_total.= $conditionsRequete;//On compte le nombre total de trajet avec les condtions récupérées précédemment
     $result = $bdd->query($retour_total);
     $donnees_total = $result->fetch();
