@@ -9,7 +9,7 @@ if(end($pageorigin) == "") {
 $servername = "localhost";
 $dbname = "shareyourtime";
 $username = "root";
-$password = "";
+$password = "D0nald&Ch@uve";
 
 $choix = $_POST["exampleRadios"];
 $message = htmlspecialchars($_POST["message"]);

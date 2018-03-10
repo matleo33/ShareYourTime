@@ -13,7 +13,7 @@ $evenementParPage=3;//Nombre d'événement que l'on veut afficher par page
 $conditionsRequete = "";//Contient la partie de la requete correspondant au WHERE
 try
 {
-    $bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'root', '');//Connexion à la BDD
+    $bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'root', 'D0nald&Ch@uve');//Connexion à la BDD
 
     $requete = "SELECT DISTINCT evenement, chauffeur, ville_depart, date_depart, ville_arrivee, date_arrivee, autoroute, prix_tot, id_trajet FROM trajet INNER JOIN covoiturage ";
 

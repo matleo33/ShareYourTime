@@ -11,7 +11,7 @@ session_start();
 $servername = "localhost";
 $dbname = "shareyourtime";
 $username = "root";
-$password = "";
+$password = "D0nald&Ch@uve";
 $email = htmlspecialchars($_GET["inputEmailConnexion"]);
 $pass = htmlspecialchars($_GET["inputPasswordConnexion"]);
 

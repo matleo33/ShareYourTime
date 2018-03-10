@@ -37,7 +37,7 @@ try {
         $servername = "localhost";
         $dbname = "shareyourtime";
         $username = "root";
-        $password = "";
+        $password = "D0nald&Ch@uve";
 
         $nom_fichier = md5(uniqid(rand(), true));
         $nom_fichier .= $extension;

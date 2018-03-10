@@ -1,7 +1,7 @@
 <?php
 //Faire fonction qui retourne les 3 plus gros évènements
 try {
-    $bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'root', '');
+    $bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'root', 'D0nald&Ch@uve');
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }

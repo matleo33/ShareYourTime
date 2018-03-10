@@ -9,7 +9,7 @@ session_start();
 $servername = "localhost";
 $dbname = "shareyourtime";
 $username = "root";
-$password = "";
+$password = "D0nald&Ch@uve";
 $email = $_GET["inputReinitEmail"];
 
 try {

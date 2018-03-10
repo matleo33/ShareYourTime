@@ -26,7 +26,7 @@ if (!isset($erreur)) //S'il n'y a pas d'erreur, on ex
     $servername = "localhost";
     $dbname = "shareyourtime";
     $username = "root";
-    $password = "";
+    $password = "D0nald&Ch@uve";
 
     //Modification du nom du fichier (pour éviter les répétitions de nom)
     $nom_fichier = md5(uniqid(rand(), true));
