@@ -28,14 +28,17 @@ $birthDate = htmlspecialchars($_POST["inputBirthDate"]);
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
 
-    $stmt = $conn->prepare("INSERT INTO `users` (`nom`, `prenom`, `mail`, `mot_de_passe`, `date_naissance`,
+    $date_us = date('Y-m-d', strtotime(str_replace('/', '-', $birthDate)));
+    $age = (time() - strtotime($date_us)) / 3600 / 24 / 365;
+
+    $stmt = $conn->prepare("INSERT INTO `users` (`nom`, `prenom`, `mail`, `mot_de_passe`, `age`,
  `numero_adresse`, `type_adresse`, `nom_adresse`, `cp`, `ville`, `num_telephone`) 
   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
-    $stmt->execute(array($name, $firstName, $email, $pass, $birthDate, $number, $type, $address, $pc, $city, $phoneNumber));
+    $stmt->execute(array($name, $firstName, $email, $pass, $age, $number, $type, $address, $pc, $city, $phoneNumber));
 
-    echo("INSERT INTO `users` (`nom`, `prenom`, `mail`, `mot_de_passe`, `date_naissance`,
+    echo("INSERT INTO `users` (`nom`, `prenom`, `mail`, `mot_de_passe`, `age`,
  `numero_adresse`, `type_adresse`, `nom_adresse`, `cp`, `ville`, `num_telephone`) 
-  VALUES (" . $name . ", " . $firstName . ", " . $email . ", " . $pass . ", " . $birthDate . ", " . $number . ", " . $type . ", " . $address . ", " . $pc . ", " . $city . ", " . $phoneNumber . ");");
+  VALUES (" . $name . ", " . $firstName . ", " . $email . ", " . $pass . ", " . $age . ", " . $number . ", " . $type . ", " . $address . ", " . $pc . ", " . $city . ", " . $phoneNumber . ");");
 
     session_start();
     $conn = null;
