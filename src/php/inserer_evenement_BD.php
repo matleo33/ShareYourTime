@@ -9,6 +9,8 @@ session_start();
 try {
     $dossier = '../../images_events/';
     $fichier = basename($_FILES['nouvellePhoto']['name']);
+    echo "Fichier \n";
+    echo $fichier;
     $extensions = array('.png', '.jpg', '.jpeg', '.PNG', '.JPG', '.JPEG');
     $extension = strrchr($_FILES['nouvellePhoto']['name'], '.');
     $taille_maxi = 10000000;
@@ -25,12 +27,19 @@ try {
     $id_user = $_SESSION["ID_USER"];
 
 //Début des vérifications de sécurité...
-    if (!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
-    {
-        $erreur = 'Vous devez uploader un fichier de type png, jpg ou jpeg.';
-    }
-    if ($taille > $taille_maxi) {
-        $erreur = 'Le fichier est trop gros';
+    if ($fichier != "") {
+        echo "Fichier";
+        if (!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
+        {
+            $erreur = 'Vous devez uploader un fichier de type png, jpg ou jpeg.';
+        }
+        if ($taille > $taille_maxi) {
+            $erreur = 'Le fichier est trop gros';
+        }
+        $nom_fichier = md5(uniqid(rand(), true));
+        $nom_fichier .= $extension;
+    } else {
+        $nom_fichier = "";
     }
 
     if (!isset($erreur)) {
@@ -39,22 +48,23 @@ try {
         $username = "root";
         $password = "D0nald&Ch@uve";
 
-        $nom_fichier = md5(uniqid(rand(), true));
-        $nom_fichier .= $extension;
-
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password, array (PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
 
 
-        if (move_uploaded_file($_FILES['nouvellePhoto']['tmp_name'], $dossier . $nom_fichier)) // Renvoie true en cas de succès
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
+
+
+        if (move_uploaded_file($_FILES['nouvellePhoto']['tmp_name'], $dossier . $nom_fichier) || !is_null($fichier)) // Renvoie true en cas de succès
         {
             $stmt = $conn->prepare("INSERT INTO events(nom, description,lien_photo,date_debut,date_fin,adresse,lien_fb,lien_billet,est_fini,createur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, ?)");
         }
+
         $stmt->execute(array($nom_event, $description, $nom_fichier, $date_debut, $date_fin, $adresse, $adresse_facebook, $lien_billeterie, $id_user));
         echo 'Upload effectué avec succès !';
 
     } else //Sinon la fonction renvoie FALSE
     {
         echo 'Echec de l\'upload !';
+        echo $erreur;
     }
 
     $reponse = $conn->query('SELECT id_events '
@@ -66,7 +76,7 @@ try {
         echo $id_event;
 
         $conn = null;
-        header('Location: evenement.php?id_events=' . $id_event);
+        //header('Location: evenement.php?id_events=' . $id_event);
 
         break;
 
