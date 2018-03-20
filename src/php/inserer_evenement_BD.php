@@ -76,7 +76,7 @@ try {
         echo $id_event;
 
         $conn = null;
-        //header('Location: evenement.php?id_events=' . $id_event);
+        header('Location: evenement.php?id_events=' . $id_event);
 
         break;
 
