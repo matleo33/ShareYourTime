@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include("ftp.php"); //TODO inclure le fichier contentant les variables de connexion au ftp
+//include("ftp.php"); //TODO inclure le fichier contentant les variables de connexion au ftp
 
 // Initialisation des variables à propos de la photo
 $dossier = '../../images/';
@@ -63,6 +63,6 @@ if (!isset($erreur)) //S'il n'y a pas d'erreur, on ex
     echo $erreur;
 }
 
-ftp_close($ftp);
+//ftp_close($ftp);
 
 ?>
