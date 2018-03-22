@@ -260,7 +260,7 @@
                     <div class="modal-footer">
                         <input type="submit" class="btn btn-default center-block" value="Proposer un retour"
                                id="proposer_retour_button"/>
-                        <input type="submit" class="btn btn-default center-block" value="Acceuil"
+                        <input type="submit" class="btn btn-default center-block" value="Accueil"
                                id="redirection_accueil_button"/>
                     </div>
                 </div>
