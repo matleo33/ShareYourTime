@@ -13,8 +13,26 @@ try {
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
+if ($_POST['animaux'] == 'Non') {
+    $animaux = 'false';
+} else {
+    $animaux = 'true';
+}
+
+if ($_POST['fumeur'] == 'Non') {
+    $fumeur = 'false';
+} else {
+    $fumeur = 'true';
+}
+
+if ($_POST['musique'] == 'Non') {
+    $musique = 'false';
+} else {
+    $musique = 'true';
+}
+
 $query = 'UPDATE users '
-        . 'SET animaux=\''. $_POST['animaux'] .'\', fumeur=\''.$_POST['fumeur'].'\', musique=\''. $_POST['musique'] . '\' '
+        . 'SET animaux=\'' . $animaux . '\', fumeur=\'' . $fumeur . '\', musique=\'' . $musique . '\' '
         . 'WHERE id_users=' . $_SESSION['ID_USER'];
 echo $query;
 $bdd->exec($query);
