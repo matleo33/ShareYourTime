@@ -152,14 +152,14 @@
                                 </select>
                             </p>
                             <p>Fumeurs autorisés : 
-                                <select name="fumeurs">
+                                <select name="fumeur">
                                     <option <?php
                                     if ($donnees['fumeur'] == TRUE) {
                                         echo "selected";
                                     }
                                     ?>>Oui</option>
                                     <option <?php
-                                    if ($donnees['animaux'] == FALSE) {
+                                    if ($donnees['fumeur'] == FALSE) {
                                         echo "selected";
                                     }
                                     ?>>Non</option>
@@ -173,7 +173,7 @@
                                     }
                                     ?>>Oui</option>
                                     <option <?php
-                                    if ($donnees['animaux'] == FALSE) {
+                                    if ($donnees['musique'] == FALSE) {
                                         echo "selected";
                                     }
                                     ?>>Non</option>

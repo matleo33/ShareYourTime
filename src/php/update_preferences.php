@@ -14,7 +14,7 @@ try {
     die('Erreur : ' . $e->getMessage());
 }
 $query = 'UPDATE users '
-        . 'SET animaux=\''. $_POST['animaux'] .'\', fumeurs=\''.$_POST['fumeurs'].'\', musique=\''. $_POST['musique'] . '\' '
+        . 'SET animaux=\''. $_POST['animaux'] .'\', fumeur=\''.$_POST['fumeur'].'\', musique=\''. $_POST['musique'] . '\' '
         . 'WHERE id_users=' . $_SESSION['ID_USER'];
 echo $query;
 $bdd->exec($query);
