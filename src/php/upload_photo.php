@@ -63,6 +63,6 @@ if (!isset($erreur)) //S'il n'y a pas d'erreur, on ex
     echo $erreur;
 }
 
-//ftp_close($ftp);
+ftp_close($ftp);
 
 ?>
