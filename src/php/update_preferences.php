@@ -14,21 +14,21 @@ try {
     die('Erreur : ' . $e->getMessage());
 }
 if ($_POST['animaux'] == 'Non') {
-    $animaux = 'false';
+    $animaux = '0';
 } else {
-    $animaux = 'true';
+    $animaux = '1';
 }
 
 if ($_POST['fumeur'] == 'Non') {
-    $fumeur = 'false';
+    $fumeur = '0';
 } else {
-    $fumeur = 'true';
+    $fumeur = '1';
 }
 
 if ($_POST['musique'] == 'Non') {
-    $musique = 'false';
+    $musique = '0';
 } else {
-    $musique = 'true';
+    $musique = '1';
 }
 
 $query = 'UPDATE users '
