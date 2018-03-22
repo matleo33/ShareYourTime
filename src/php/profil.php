@@ -133,33 +133,87 @@
 
                         </div>
                     </div>
-                    <p>Animaux autorisés : 
-                        <?php
-                        if ($donnees['animaux'] == TRUE) {
-                            echo "Oui";
-                        } else {
-                            echo "Non";
-                        }
+                    <?php
+                    if (isset($_SESSION['ID_USER'])) {
                         ?>
-                    </p>
-                    <p>Fumeurs autorisés : 
+                        <form method="post" action="update_preferences.php">
+                            <p>Animaux autorisés : 
+                                <select name="animaux">
+                                    <option <?php
+                                    if ($donnees['animaux'] == TRUE) {
+                                        echo " selected ";
+                                    }
+                                    ?>>Oui</option>
+                                    <option <?php
+                                    if ($donnees['animaux'] == FALSE) {
+                                        echo " selected ";
+                                    }
+                                    ?>>Non</option>
+                                </select>
+                            </p>
+                            <p>Fumeurs autorisés : 
+                                <select name="fumeurs">
+                                    <option <?php
+                                    if ($donnees['fumeur'] == TRUE) {
+                                        echo "selected";
+                                    }
+                                    ?>>Oui</option>
+                                    <option <?php
+                                    if ($donnees['animaux'] == FALSE) {
+                                        echo "selected";
+                                    }
+                                    ?>>Non</option>
+                                </select>
+                            </p>
+                            <p>Musique autorisée :
+                                <select name="musique">
+                                    <option <?php
+                                    if ($donnees['musique'] == TRUE) {
+                                        echo "selected";
+                                    }
+                                    ?>>Oui</option>
+                                    <option <?php
+                                    if ($donnees['animaux'] == FALSE) {
+                                        echo "selected";
+                                    }
+                                    ?>>Non</option>
+                                </select>
+                            </p>
+                            <button type="submit">Valider préférences</button>
+                        </form>
                         <?php
-                        if ($donnees['fumeur'] == TRUE) {
-                            echo "Oui";
-                        } else {
-                            echo "Non";
-                        }
+                    } else {
                         ?>
-                    </p>
-                    <p>Musique autorisée :
+                        <p>Animaux autorisés : 
+                            <?php
+                            if ($donnees['animaux'] == TRUE) {
+                                echo "Oui";
+                            } else {
+                                echo "Non";
+                            }
+                            ?>
+                        </p>
+                        <p>Fumeurs autorisés : 
+                            <?php
+                            if ($donnees['fumeur'] == TRUE) {
+                                echo "Oui";
+                            } else {
+                                echo "Non";
+                            }
+                            ?>
+                        </p>
+                        <p>Musique autorisée :
+                            <?php
+                            if ($donnees['musique'] == TRUE) {
+                                echo "Oui";
+                            } else {
+                                echo "Non";
+                            }
+                            ?>
+                        </p>
                         <?php
-                        if ($donnees['musique'] == TRUE) {
-                            echo "Oui";
-                        } else {
-                            echo "Non";
-                        }
-                        ?>
-                    </p>
+                    }
+                    ?>
                     <h1>Derniers Avis</h1>
                     <?php
                     include 'derniers_avis.php';
