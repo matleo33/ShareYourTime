@@ -22,7 +22,7 @@
                            placeholder="prenom.nom@etu.u-bordeaux.fr" required>
                 </div>
                 <div class="form-group col-sm-10 col-sm-offset-1">
-                    <input type="password" class="form-control" id="inputPassword" name="inputPassword" pattern='^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#_-$%&? "]).*$'
+                    <input type="password" class="form-control" id="inputPassword" name="inputPassword" pattern='^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&?"]).*$'
                            placeholder="Mot de passe" required>
                 </div>
                 <div class="form-group col-sm-10 col-sm-offset-1">
