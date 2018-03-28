@@ -6,6 +6,6 @@
  * and open the template in the editor.
  */
 
-$ftp = ftp_ssl_connect("http://shareyourtime.u-bordeaux.fr", 21);
-ftp_login($ftp, "root", "D0nald&Ch@uve");
+$ftp = ftp_ssl_connect("ftp://shareyourtime.u-bordeaux.fr", 21);
+ftp_login($ftp, "Administrateur", "D0nald&Ch@uve");
 ?>
