@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-//include("ftp.php"); //TODO inclure le fichier contentant les variables de connexion au ftp
+include("ftp.php"); //TODO inclure le fichier contentant les variables de connexion au ftp
 
 // Initialisation des variables à propos de la photo
-$dossier = '../../images/';
+$dossier = './images/';
 $fichier = basename($_FILES['nouvellePhoto']['name']);
 $extensions = array('.png', '.jpg', '.jpeg', '.PNG', '.JPG', '.JPEG');
 $extension = strrchr($_FILES['nouvellePhoto']['name'], '.');
@@ -40,7 +40,7 @@ if (!isset($erreur)) //S'il n'y a pas d'erreur, on ex
 
     //Si une photo existe déjà, on la supprime
     if ($res[0]) {
-        unlink("../../images/" . $res[0] . "");
+        unlink("./images/" . $res[0] . "");
     }
 
     $stmt = $conn->prepare("UPDATE users SET lien_photo = ? WHERE id_users = ?");
@@ -63,6 +63,6 @@ if (!isset($erreur)) //S'il n'y a pas d'erreur, on ex
     echo $erreur;
 }
 
-//ftp_close($ftp);
+ftp_close($ftp);
 
 ?>

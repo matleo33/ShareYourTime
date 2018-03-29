@@ -65,7 +65,13 @@
                     <h1><?php echo $donnees['nom'] . ' ' . $donnees['prenom'] ?></h1>
                     <p>Mail : <?php echo $donnees['mail']; ?></p>
                     <p>Tel : <?php echo $donnees['num_telephone']; ?></p>
-                    <p>Contact préférentiel : <?php echo $donnees['contact_pref']; ?></p>
+                    <p>Contact préférentiel : <?php 
+                                            if (isset($donnees['contact_pref'])) {
+                                    echo $donnees['contact_pref'];
+                                } else {
+                                    echo "Aucun";
+                                }
+                                ?></p>
                     <p>Nombre de trajets en tant que conducteur : <?php echo $donnees['COUNT(trajet.id_trajet)'] ?></p>
                     <p>Nombre d'événements organisés : <?php
                         while ($donnees2 = $reponse2->fetch()) {
