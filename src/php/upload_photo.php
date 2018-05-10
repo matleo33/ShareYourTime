@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 session_start();
 
 include("ftp.php"); //TODO inclure le fichier contentant les variables de connexion au ftp
-
+echo "Coucou";
 // Initialisation des variables à propos de la photo
 $dossier = './images/';
 $fichier = basename($_FILES['nouvellePhoto']['name']);
