@@ -18,9 +18,9 @@ echo "Erreur" . $e->getMessage();
 echo "Coucou";
 if (ftp_login($ftp, "Administrateur", "D0nald&Ch@uve"))
 {
-	echo "Connecté";
+	echo "ConnectÃ©";
 } else
 {
-echo "Pas connecté";
+echo "Pas connectÃ©";
 }
 ?>

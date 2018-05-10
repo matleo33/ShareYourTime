@@ -70,7 +70,7 @@
                                 <div class = "col-sm-3">
                                     <p><?php echo $donnees['prenom'] . ' ' . $donnees['nom'];
                         ?></p>
-                                    <p><?php echo $donnees['num_telephone']; ?></p>
+                                    <p><?php //echo $donnees['num_telephone']; ?></p>
                                     <p><?php echo $donnees['mail']; ?></p>
                                     <p><?php
                             if ($hasNote) {
@@ -94,7 +94,7 @@
                                         </div>
                                         <div class="col-sm-8">
                                             <p><?php echo $donnees['lieu_depart']; ?></p>
-                                            <p><?php echo strftime("%e / %m / %Y, <br /> %H : %M", strtotime($donnees['date_depart'])); ?></p>
+                                            <p><?php echo strftime("%e / %m / %Y <br /> %H : %M", strtotime($donnees['date_depart'])); ?></p>
                                         </div>
                                     </div>
                                     <?php
@@ -108,7 +108,7 @@
                                             </div>
                                             <div class="col-sm-8">
                                                 <p><?php echo $donnees['lieu']; ?></p>
-                                                <p><?php echo strftime("%e / %m / %Y, <br /> %H : %M", strtotime($donnees['date'])); ?></p>
+                                                <p><?php echo strftime("%e / %m / %Y <br /> %H : %M", strtotime($donnees['date'])); ?></p>
                                             </div>
                                         </div>
                                     <?php } ?>

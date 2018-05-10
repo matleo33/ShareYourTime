@@ -79,7 +79,7 @@
                                         $cpt++;
                                         echo $cpt;
                                         ?>" data-toggle="collapse" data-target="#tabody<?php echo $cpt; ?>, #tabody2<?php echo $cpt; ?>" class="btn btn-primary" style="background-color : rgb(69, 164, 247);">
-                                            +
+                                            Détail
                                         </button>
                                     </th>
                                 </tr>
