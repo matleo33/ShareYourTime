@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="modalInscription" role="dialog">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-md">
 
         <!-- Contenu du modal -->
         <div class="modal-content">
@@ -48,14 +48,14 @@
                 <div class="form-group col-sm-6">
                     
                         <div class="col-sm-1" style="color:#F62">*</div>
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                         <input type="text" class="form-control" id="inputNumber" name="inputNumber" placeholder="N°"
                                required>
                     </div>
                 </div>
                 <div class="form-group col-sm-6">
                     <div class="col-sm-1" style="color:#F62">*</div>
-                    <div class="col-sm-10">
+                    <div class="col-sm-8">
                         <input type="text" class="form-control" id="inputType" name="inputType" placeholder="Type rue"
                                required>
                     </div>
@@ -70,13 +70,13 @@
                 </div>
                 <div class="form-group col-sm-6">
                     <div class="col-sm-1" style="color:#F62">*</div>
-                    <div class="col-sm-10">
+                    <div class="col-sm-8">
                     <input type="text" class="form-control" id="inputPC" name="inputPC" placeholder="CP" required>
                     </div>
                 </div>
                 <div class="form-group col-sm-6">
                     <div class="col-sm-1" style="color:#F62">*</div>
-                    <div class="col-sm-10">
+                    <div class="col-sm-8">
                         <input type="text" class="form-control" id="inputCity" name="inputCity" placeholder="Ville"
                                required>
                     </div>
