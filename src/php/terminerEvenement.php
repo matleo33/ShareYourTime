@@ -22,6 +22,6 @@ if (verificationConditions($bdd)) {
 
     echo $query;
     $bdd->exec($query);
-    header('Location: evenement?id_events=' . $_POST['id_event']);
+    header('Location: evenement.php?id_events=' . $_POST['id_event']);
     exit();
 }
