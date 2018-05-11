@@ -10,18 +10,18 @@
             </div>
             <!-- Formulaire d'inscription -->
             <form method="post" action="traiter_inscription.php">
-                <div class="form-group col-sm-10 col-sm-offset-1" id="divFirstName">
+                <div class="form-group col-sm-12" id="divFirstName">
                     <div class="col-sm-1" style="color:#F62">*</div>
                     <div class="col-sm-10">
                     <input type="text" class="form-control" id="inputFirstName" name="inputFirstName"
                            placeholder="Prénom" required>
                 </div>
                 </div>
-                <div class="form-group col-sm-10 col-sm-offset-1">
+                <div class="form-group col-sm-12">
                     <div class="col-sm-1" style="color:#F62">*</div>
                     <div class="col-sm-10"><input type="text" class="form-control col-sm-10" id="inputName" name="inputName" placeholder="Nom" required></div>
                 </div>
-                <div class="form-group col-sm-10 col-sm-offset-1">
+               <div class="form-group col-sm-12">
                     
                         <div class="col-sm-1" style="color:#F62">*</div>
                         <div class="col-sm-10">
@@ -29,7 +29,7 @@
                                placeholder="prenom.nom@etu.u-bordeaux.fr" required>
                     </div>
                 </div>
-                <div class="form-group col-sm-10 col-sm-offset-1">
+                <div class="form-group col-sm-12">
                     
                         <div class="col-sm-1" style="color:#F62">*</div>
                         <div class="col-sm-10">
@@ -37,7 +37,7 @@
                                placeholder="Mot de passe" required>
                     </div>
                 </div>
-                <div class="form-group col-sm-10 col-sm-offset-1">
+               <div class="form-group col-sm-12">
                     
                         <div class="col-sm-1" style="color:#F62">*</div>
                         <div class="col-sm-10">
@@ -45,7 +45,7 @@
                                placeholder="Répétez votre mot de passe" required>
                     </div>
                 </div>
-                <div class="form-group col-sm-4 col-sm-offset-1">
+                <div class="form-group col-sm-12">
                     
                         <div class="col-sm-1" style="color:#F62">*</div>
                         <div class="col-sm-10">
@@ -60,7 +60,7 @@
                                required>
                     </div>
                 </div>
-                <div class="form-group col-sm-10 col-sm-offset-1">
+                <div class="form-group col-sm-12">
                     
                         <div class="col-sm-1" style="color:#F62">*</div>
                     <div class="col-sm-10">
@@ -68,7 +68,7 @@
                                required>
                     </div>
                 </div>
-                <div class="form-group col-sm-4 col-sm-offset-1">
+                <div class="form-group col-sm-6">
                     <div class="col-sm-1" style="color:#F62">*</div>
                     <div class="col-sm-10">
                     <input type="text" class="form-control" id="inputPC" name="inputPC" placeholder="CP" required>
@@ -81,7 +81,7 @@
                                required>
                     </div>
                 </div>
-                <div class="form-group col-sm-10 col-sm-offset-1">
+                <div class="form-group col-sm-12">
                     <div class="col-sm-1" style="color:#F62">*</div>
                     <div class="col-sm-10">
                         <input type="tel" class="form-control" id="inputPhoneNumber" name="inputPhoneNumber"
