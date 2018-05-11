@@ -45,7 +45,7 @@
                                placeholder="Répétez votre mot de passe" required>
                     </div>
                 </div>
-                <div class="form-group col-sm-12">
+                <div class="form-group col-sm-6">
                     
                         <div class="col-sm-1" style="color:#F62">*</div>
                         <div class="col-sm-10">
