@@ -14,8 +14,9 @@
                     <input type="text" class="form-control" id="inputFirstName" name="inputFirstName"
                            placeholder="Prénom" required>
                 </div>
-                <div class="form-group col-sm-9 col-sm-offset-1"><span class="col-sm-2" style="color:#F62">*</span>
-                    <input type="text" class="form-control col-sm-10" id="inputName" name="inputName" placeholder="Nom" required>
+                <div class="form-group col-sm-9 col-sm-offset-1">
+                    <div class="col-sm-2" style="color:#F62">*</div>
+                    <div class="col-sm-10"><input type="text" class="form-control col-sm-10" id="inputName" name="inputName" placeholder="Nom" required></div>
                 </div>
                 <div class="form-group col-sm-10 col-sm-offset-1"><span style="color:#F62">*</span>
                     <input type="email" class="form-control" id="inputMail" name="inputMail"
