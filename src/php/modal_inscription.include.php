@@ -12,19 +12,19 @@
             <form method="post" action="traiter_inscription.php">
                 <div class="form-group col-sm-10 col-sm-offset-1" id="divFirstName">
                     <div class="col-sm-1" style="color:#F62">*</div>
-                    <div class="col-sm-11">
+                    <div class="col-sm-10">
                     <input type="text" class="form-control" id="inputFirstName" name="inputFirstName"
                            placeholder="Prénom" required>
                 </div>
                 </div>
                 <div class="form-group col-sm-10 col-sm-offset-1">
                     <div class="col-sm-1" style="color:#F62">*</div>
-                    <div class="col-sm-11"><input type="text" class="form-control col-sm-10" id="inputName" name="inputName" placeholder="Nom" required></div>
+                    <div class="col-sm-10"><input type="text" class="form-control col-sm-10" id="inputName" name="inputName" placeholder="Nom" required></div>
                 </div>
                 <div class="form-group col-sm-10 col-sm-offset-1">
                     
                         <div class="col-sm-1" style="color:#F62">*</div>
-                        <div class="col-sm-11">
+                        <div class="col-sm-10">
                         <input type="email" class="form-control" id="inputMail" name="inputMail"
                                placeholder="prenom.nom@etu.u-bordeaux.fr" required>
                     </div>
@@ -32,7 +32,7 @@
                 <div class="form-group col-sm-10 col-sm-offset-1">
                     
                         <div class="col-sm-1" style="color:#F62">*</div>
-                        <div class="col-sm-11">
+                        <div class="col-sm-10">
                         <input type="password" class="form-control" id="inputPassword" name="inputPassword" pattern='^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&?"]).*$'
                                placeholder="Mot de passe" required>
                     </div>
@@ -40,7 +40,7 @@
                 <div class="form-group col-sm-10 col-sm-offset-1">
                     
                         <div class="col-sm-1" style="color:#F62">*</div>
-                        <div class="col-sm-11">
+                        <div class="col-sm-10">
                         <input type="password" class="form-control" id="inputCheckPassword" name="inputCheckPassword"
                                placeholder="Répétez votre mot de passe" required>
                     </div>
@@ -48,14 +48,14 @@
                 <div class="form-group col-sm-4 col-sm-offset-1">
                     
                         <div class="col-sm-1" style="color:#F62">*</div>
-                        <div class="col-sm-11">
+                        <div class="col-sm-10">
                         <input type="text" class="form-control" id="inputNumber" name="inputNumber" placeholder="N°"
                                required>
                     </div>
                 </div>
                 <div class="form-group col-sm-6">
                     <div class="col-sm-1" style="color:#F62">*</div>
-                    <div class="col-sm-11">
+                    <div class="col-sm-10">
                         <input type="text" class="form-control" id="inputType" name="inputType" placeholder="Type rue"
                                required>
                     </div>
@@ -63,27 +63,27 @@
                 <div class="form-group col-sm-10 col-sm-offset-1">
                     
                         <div class="col-sm-1" style="color:#F62">*</div>
-                    <div class="col-sm-11">
+                    <div class="col-sm-10">
                         <input type="text" class="form-control" id="inputAddress" name="inputAddress" placeholder="Adresse"
                                required>
                     </div>
                 </div>
                 <div class="form-group col-sm-4 col-sm-offset-1">
                     <div class="col-sm-1" style="color:#F62">*</div>
-                    <div class="col-sm-11">
+                    <div class="col-sm-10">
                     <input type="text" class="form-control" id="inputPC" name="inputPC" placeholder="CP" required>
                     </div>
                 </div>
                 <div class="form-group col-sm-6">
                     <div class="col-sm-1" style="color:#F62">*</div>
-                    <div class="col-sm-11">
+                    <div class="col-sm-10">
                         <input type="text" class="form-control" id="inputCity" name="inputCity" placeholder="Ville"
                                required>
                     </div>
                 </div>
                 <div class="form-group col-sm-10 col-sm-offset-1">
                     <div class="col-sm-1" style="color:#F62">*</div>
-                    <div class="col-sm-11">
+                    <div class="col-sm-10">
                         <input type="tel" class="form-control" id="inputPhoneNumber" name="inputPhoneNumber"
                                placeholder="Numéro de téléphone" required>
                     </div>
