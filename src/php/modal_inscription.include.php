@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="modalInscription" role="dialog">
-    <div class="modal-dialog modal-md">
+    <div class="modal-dialog modal-md" style="width:500px;">
 
         <!-- Contenu du modal -->
         <div class="modal-content">
