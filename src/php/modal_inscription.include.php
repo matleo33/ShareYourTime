@@ -33,7 +33,7 @@
                     
                         <div class="col-sm-1" style="color:#F62">*</div>
                         <div class="col-sm-10">
-                        <input type="password" class="form-control" id="inputPassword" name="inputPassword" pattern='^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&?"]).*$'
+                        <input type="password" class="form-control" data-toggle="tooltip" data-placement="left" title="Ecris ce quy'il faut" id="inputPassword" name="inputPassword" pattern='^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&?"]).*$'
                                placeholder="Mot de passe" required>
                     </div>
                 </div>
@@ -100,3 +100,8 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
