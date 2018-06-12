@@ -11,6 +11,7 @@ echo $ftp_server;
 try
 {
 $ftp = ftp_connect($ftp_server);
+echo "Pas de soucis";
 } catch (Exception $e) {
 echo "Erreur" . $e->getMessage();
 }
