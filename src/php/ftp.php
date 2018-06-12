@@ -11,7 +11,7 @@ echo $ftp_server;
 try
 {
     echo "avant";
-$ftp = ftp_connect($ftp_server);
+$ftp = ftp_connect($ftp_server) or die("Impossible de se connecter");
 echo "après";
 echo "Pas de soucis";
 } catch (Exception $e) {
