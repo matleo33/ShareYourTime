@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-ini_set('display_errors',1);
+phpinfo();
 $ftp_server = "147.210.216.23";
 echo $ftp_server;
 try
