@@ -6,11 +6,13 @@
  * and open the template in the editor.
  */
 
-$ftp_server = "ftp://shareyourtime.u-bordeaux.fr";
+$ftp_server = "shareyourtime.u-bordeaux.fr";
 echo $ftp_server;
 try
 {
+    echo "avant";
 $ftp = ftp_connect($ftp_server);
+echo "après";
 echo "Pas de soucis";
 } catch (Exception $e) {
 echo "Erreur" . $e->getMessage();
