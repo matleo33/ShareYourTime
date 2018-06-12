@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-$ftp_server = "shareyourtime.u-bordeaux.fr";
+$ftp_server = "ftp://shareyourtime.u-bordeaux.fr";
 echo $ftp_server;
 try
 {
