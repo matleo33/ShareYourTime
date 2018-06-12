@@ -11,7 +11,6 @@ if ($mysqli->connect_errno) {
     echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 }
 echo $mysqli->host_info . "\n";
-
 /*$ftp_server = "147.210.216.23";
 echo $ftp_server;
 try

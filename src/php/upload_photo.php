@@ -57,11 +57,9 @@ if (!isset($erreur)) //S'il n'y a pas d'erreur, on ex
 
     $pdo = null;
     $url = "profil.php?id_profil=".$user;
-    header("Location: " . $url);
+//    header("Location: " . $url);
 } else {
     echo $erreur;
 }
-
-ftp_close($ftp);
 
 ?>
