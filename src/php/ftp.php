@@ -5,8 +5,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-phpinfo();
-$ftp_server = "147.210.216.23";
+
+$mysqli = new mysqli("147.210.216.23", "ShareFTP", "D0nald&M@l", "shareyourtime");
+if ($mysqli->connect_errno) {
+    echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+}
+echo $mysqli->host_info . "\n";
+
+/*$ftp_server = "147.210.216.23";
 echo $ftp_server;
 try
 {
