@@ -6,13 +6,13 @@
  * and open the template in the editor.
  */
 
-$mysqli = new mysqli("147.210.216.23", "root", "D0nald&M@l", "shareyourtime");
+$mysqli = new mysqli("147.210.216.23", "root", "D0nald&Ch@uve", "shareyourtime");
 if ($mysqli->connect_errno) {
     echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 }
-echo "Coucou";
+
 echo $mysqli->host_info . "\n";
-echo "Coucou";
+
 /*$ftp_server = "147.210.216.23";
 echo $ftp_server;
 try
