@@ -22,7 +22,7 @@ if ($taille > $taille_maxi) {
 }
 if (!isset($erreur)) //S'il n'y a pas d'erreur, on ex
 {
-    $servername = "localhost";
+    $servername = "147.210.216.23";
     $dbname = "shareyourtime";
     $username = "root";
     $password = "D0nald&Ch@uve";
@@ -57,7 +57,7 @@ if (!isset($erreur)) //S'il n'y a pas d'erreur, on ex
 
     $pdo = null;
     $url = "profil.php?id_profil=".$user;
-//    header("Location: " . $url);
+    header("Location: " . $url);
 } else {
     echo $erreur;
 }
