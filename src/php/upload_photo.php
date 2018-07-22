@@ -46,12 +46,11 @@ if (!isset($erreur)) //S'il n'y a pas d'erreur, on ex
     $stmt->execute(array($nom_fichier, $user));
 
     //Mise en ligne de la photo
-    if (move_uploaded_file($_FILES['nouvellePhoto']['tmp_name'], $dossier . $nom_fichier))
-    {
-        echo 'Upload effectué avec succès !';
-    } else
-    {
-        echo 'Echec de l\'upload !';
+    try {
+        move_uploaded_file($_FILES['nouvellePhoto']['tmp_name'], $dossier . $nom_fichier);
+    } catch (Exception $e) {
+        echo "Echec de l'upload";
+        die('Erreur : ' . $e->getMessage());
     }
 
 
