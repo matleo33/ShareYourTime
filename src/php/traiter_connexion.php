@@ -10,7 +10,7 @@ session_start();
 
 $servername = "localhost";
 $dbname = "shareyourtime";
-$username = "root";
+$username = "jmcbordeaux_root";
 $password = "D0nald&Ch@uve";
 
 $email = htmlspecialchars($_GET["inputEmailConnexion"]);

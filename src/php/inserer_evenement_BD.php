@@ -45,7 +45,7 @@ try {
     if (!isset($erreur)) {
         $servername = "localhost";
         $dbname = "shareyourtime";
-        $username = "root";
+        $username = "jmcbordeaux_root";
         $password = "D0nald&Ch@uve";
 
 

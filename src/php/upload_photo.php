@@ -4,7 +4,7 @@ session_start();
 function upload($id, $path, $mysqli) {
     $path = $mysqli->real_escape_string($path);
 
-    $sql = "UPDATE `users` SET `pic` = '$pic' WHERE `id` = $id";
+    $sql = "UPDATE `users` SET `lien_photo` = '$pic' WHERE `id` = $id";
     $result = $mysqli->query($sql);
 
     return $result; // returns true or false
