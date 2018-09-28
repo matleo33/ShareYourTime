@@ -2,7 +2,7 @@
 session_start();
 try
 {
-    $bdd = new PDO('mysql:host=localhost;dbname=shareyourtime;charset=utf8', 'jmcbordeaux_root', 'D0nald&Ch@uve');
+    $bdd = new PDO('mysql:host=localhost;dbname=jmcbordeaux_shareyourtime;charset=utf8', 'jmcbordeaux_root', 'D0nald&Ch@uve');
 }
 catch (Exception $e)
 {

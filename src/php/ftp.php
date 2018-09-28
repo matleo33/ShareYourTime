@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-$mysqli = new mysqli("147.210.216.23", "root", "D0nald&Ch@uve", "shareyourtime");
+$mysqli = new mysqli("147.210.216.23", "jmcbordeaux_root", "D0nald&Ch@uve", "jmcbordeaux_shareyourtime");
 if ($mysqli->connect_errno) {
     echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 }

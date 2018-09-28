@@ -12,7 +12,7 @@ function upload($id, $path, $mysqli) {
 
 $user = $_SESSION["ID_USER"];
 $path = './images/' . $_FILES['nouvellePhoto']['name'];
-$mysqli = new mysqli("147.210.216.23", "root", "D0nald&Ch@uve", "shareyourtime");
+$mysqli = new mysqli("147.210.216.23", "root", "D0nald&Ch@uve", "jmcbordeaux_shareyourtime");
 if (move_uploaded_file($_FILES["nouvellePhoto"]["tmp_name"], $path)) {
 
     if (upload($user, $path, $mysqli)) {

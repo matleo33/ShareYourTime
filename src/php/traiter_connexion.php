@@ -9,7 +9,7 @@ $url=end($pageorigin);
 session_start();
 
 $servername = "localhost";
-$dbname = "shareyourtime";
+$dbname = "jmcbordeaux_shareyourtime";
 $username = "jmcbordeaux_root";
 $password = "D0nald&Ch@uve";
 
